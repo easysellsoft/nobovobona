@@ -45,13 +45,8 @@ const Routing = () => {
       <Box
         sx={[
           {
-            height:
-              window.innerHeight >= 500
-              && "calc(100vh - 54px)",
-                // : "calc(100vh - 50px)",
-            "@media screen and (max-width: 768px)": {
-              height: "calc(100vh - 50px)",
-            },
+            // height: window.innerHeight >= 500 && "calc(100vh - 54px)",
+            // : "calc(100vh - 50px)",
           },
         ]}
       >
@@ -83,13 +78,25 @@ const Routing = () => {
               margin: "2rem",
               backgroundColor: "#fff",
               fontSize: "1.5rem",
+              border: "none",
+              borderRadius: "50%",
+              padding: "0.5rem",
+              cursor: "pointer",
             }}
           >
             <BsFillArrowUpCircleFill />
           </button>
         </div>
       </Box>
-      <Footer />
+      <Box sx={[{
+        position: "fixed",
+        bottom: 0,
+        width: "100%",
+        height: "50px",
+        zIndex: "999",
+      }]}>
+        <Footer />
+      </Box>
     </>
   );
 };

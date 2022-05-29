@@ -423,7 +423,7 @@ const Message = () => {
           />
         </Grid>
         {/* {Object.keys(singleMsgUser)?.length > 0 ? ( */}
-        <>
+        
           <Grid
             item
             xs={12}
@@ -779,8 +779,9 @@ const Message = () => {
           >
             <DetailsComp userDetails={userDetails} />
           </Grid>
-        </>
+     
       </Grid>
+
     </div>
   );
 };

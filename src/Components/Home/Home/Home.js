@@ -173,7 +173,7 @@ function Home() {
           >
             Admin
           </Typography>
-          
+
           {/* <Box sx={{ flexGrow: 1 }} /> */}
 
           {/* <TextField
@@ -322,7 +322,7 @@ function Home() {
                 </Tooltip>
                 <Tooltip title="Dashboard" arrow placement="right-start">
                   <NavLink
-                    to="investorDashboard"
+                    to="AdminDashboard"
                     style={({ isActive }) =>
                       isActive ? { color: "#ff0000" } : { color: "#000" }
                     }
@@ -409,7 +409,7 @@ function Home() {
                 </Tooltip>
                 <Tooltip title="Suppliers" arrow placement="right-start">
                   <NavLink
-                    to="message"
+                    to=""
                     style={({ isActive }) =>
                       isActive ? { color: "#ff0000" } : { color: "#000" }
                     }
@@ -426,7 +426,7 @@ function Home() {
                 </Tooltip>
                 <Tooltip title="Support" arrow placement="right-start">
                   <NavLink
-                    to="settings"
+                    to="message"
                     style={({ isActive }) =>
                       isActive ? { color: "#ff0000" } : { color: "#000" }
                     }
