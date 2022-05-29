@@ -171,7 +171,7 @@ function Home() {
               navigate("/");
             }}
           >
-            Admin
+            Investor
           </Typography>
           {/* <Box sx={{ flexGrow: 1 }} /> */}
 
@@ -273,14 +273,13 @@ function Home() {
         <List>
           {[
             "Home", //0
-            "Dashboard", //1
+            "Investor(Dashboard)", //1
             "Inbox", //2
-            "Project", //3
-            "Rate", //4
-            "Investor", //5
-            "Suppliers", //6
-            "Support", //7
-            "Accounts", //8
+            "Investor(all projects/packages)", //3
+            "Report", //4
+            "Investor Account", //5
+            "Help Center", //6
+            "Settings", //7
           ].map((text, index) => (
             <ListItem
               Button
@@ -397,7 +396,7 @@ function Home() {
                     }
                   >
                     {index === 5 && (
-                      <AiOutlineRise
+                      <RiAccountBoxLine
                         style={{
                           fontSize: "1.5rem",
                         }}
