@@ -171,8 +171,9 @@ function Home() {
               navigate("/");
             }}
           >
-            Investor
+            Admin
           </Typography>
+          
           {/* <Box sx={{ flexGrow: 1 }} /> */}
 
           {/* <TextField
