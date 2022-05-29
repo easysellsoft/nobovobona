@@ -15,17 +15,19 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { MdDashboard, MdHelp } from "react-icons/md";
-import { RiSettings4Fill, RiAccountBoxLine } from "react-icons/ri";
+import { MdDashboard } from "react-icons/md";
 import { GoProject } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
 import { GiBatteryPackAlt } from "react-icons/gi";
+import { GrSupport } from "react-icons/gr";
+import { HiSupport, HiLockOpen } from "react-icons/hi";
+import { RiAccountBoxLine } from "react-icons/ri";
 import { BiLogOutCircle } from "react-icons/bi";
 import { FaRegEnvelope } from "react-icons/fa";
 import { HiHome, HiOutlineDocumentReport } from "react-icons/hi";
 import { NavLink, Outlet } from "react-router-dom";
 import axios from "axios";
-import { Avatar, Chip, ListItem, Menu, Tooltip } from "@mui/material";
+import { Avatar, Chip, ListItem, Tooltip } from "@mui/material";
 //start
 // import Badge from "@mui/material/Badge";
 
@@ -122,7 +124,7 @@ function Home() {
   //get user information from localStorage
   const user = JSON.parse(localStorage.getItem("user"));
 
-  // get data or object from context authprovider
+  // get data or object from context auth provider
   const { pageRefresh, setPageRefresh } = useAuth();
 
   return (
@@ -270,13 +272,14 @@ function Home() {
         <List>
           {[
             "Home", //0
-            "Investor(Dashboard)", //1
+            "Dashboard", //1
             "Inbox", //2
-            "Investor(all projects/packages)", //3
-            "Report", //4
-            "Investor Account", //5
-            "Help Center", //6
-            "Settings", //7
+            "Project", //3
+            "Rate", //4
+            "Investor", //5
+            "Suppliers", //6
+            "Support", //7
+            "Accounts", //8
           ].map((text, index) => (
             <ListItem
               Button
@@ -315,11 +318,7 @@ function Home() {
                     )}
                   </NavLink>
                 </Tooltip>
-                <Tooltip
-                  title="Investor(Dashboard)"
-                  arrow
-                  placement="right-start"
-                >
+                <Tooltip title="Dashboard" arrow placement="right-start">
                   <NavLink
                     to="investorDashboard"
                     style={({ isActive }) =>
@@ -353,11 +352,7 @@ function Home() {
                     )}
                   </NavLink>
                 </Tooltip>
-                <Tooltip
-                  title="Investor(all projects/packages)"
-                  arrow
-                  placement="right-start"
-                >
+                <Tooltip title="Project" arrow placement="right-start">
                   <NavLink
                     to="investorProjects"
                     style={({ isActive }) =>
@@ -376,7 +371,7 @@ function Home() {
                     )}
                   </NavLink>
                 </Tooltip>
-                <Tooltip title="Report" arrow placement="right-start">
+                <Tooltip title="Rate" arrow placement="right-start">
                   <NavLink
                     to="timesheet"
                     style={({ isActive }) =>
@@ -393,7 +388,7 @@ function Home() {
                     )}
                   </NavLink>
                 </Tooltip>
-                <Tooltip title="Investor Account" arrow placement="right-start">
+                <Tooltip title="Investor" arrow placement="right-start">
                   <NavLink
                     to="timesheet"
                     style={({ isActive }) =>
@@ -410,7 +405,7 @@ function Home() {
                     )}
                   </NavLink>
                 </Tooltip>
-                <Tooltip title="Help Center" arrow placement="right-start">
+                <Tooltip title="Suppliers" arrow placement="right-start">
                   <NavLink
                     to="message"
                     style={({ isActive }) =>
@@ -418,7 +413,7 @@ function Home() {
                     }
                   >
                     {index === 6 && (
-                      <MdHelp
+                      <GrSupport
                         style={{
                           fontSize: "1.5rem",
                         }}
@@ -427,7 +422,7 @@ function Home() {
                     )}
                   </NavLink>
                 </Tooltip>
-                <Tooltip title="Settings" arrow placement="right-start">
+                <Tooltip title="Support" arrow placement="right-start">
                   <NavLink
                     to="settings"
                     style={({ isActive }) =>
@@ -435,7 +430,24 @@ function Home() {
                     }
                   >
                     {index === 7 && (
-                      <RiSettings4Fill
+                      <HiSupport
+                        style={{
+                          fontSize: "1.5rem",
+                        }}
+                        onClick={handleDrawerClose}
+                      />
+                    )}
+                  </NavLink>
+                </Tooltip>
+                <Tooltip title="Accounts" arrow placement="right-start">
+                  <NavLink
+                    to="settings"
+                    style={({ isActive }) =>
+                      isActive ? { color: "#ff0000" } : { color: "#000" }
+                    }
+                  >
+                    {index === 8 && (
+                      <HiLockOpen
                         style={{
                           fontSize: "1.5rem",
                         }}
