@@ -67,6 +67,7 @@ const Routing = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
+        {/* scrolling back to top  */}
         <div>
           <button
             id="topButton"
@@ -88,6 +89,7 @@ const Routing = () => {
           </button>
         </div>
       </Box>
+      {/* footer  */}
       <Box sx={[{
         position: "fixed",
         bottom: 0,
