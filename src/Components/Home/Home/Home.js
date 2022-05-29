@@ -45,6 +45,7 @@ const openedMixin = (theme) => ({
   overflowX: "hidden",
 });
 
+
 const closedMixin = (theme) => ({
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
