@@ -7,17 +7,17 @@ const Footer = () => {
     <Box
       sx={{
         display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
+        justifyContent: "flex-end",
+        alignItems: "end",
         padding: "1rem",
-        backgroundColor: "#1BB096",
-        color: "#fff",
+        // backgroundColor: "#1BB096",
+        color: "#000",
         fontSize: "1.5rem",
+        flexDirection: "column",
+        borderTop: "1px solid #ccc",
       }}
     >
-      <Typography variant="subtitle2" align="center" sx={{
-        ml: "4rem",
-      }}>
+      <Typography variant="subtitle2" align="center" >
         &copy; 2018 ghorami.com. All rights reserved.
       </Typography>
       <Typography variant="subtitle2" F align="center">

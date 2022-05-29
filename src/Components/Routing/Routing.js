@@ -92,7 +92,7 @@ const Routing = () => {
         position: "fixed",
         bottom: 0,
         width: "100%",
-        height: "50px",
+        // height: "50px",
         zIndex: "999",
       }]}>
         <Footer />

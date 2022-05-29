@@ -45,7 +45,6 @@ const openedMixin = (theme) => ({
   overflowX: "hidden",
 });
 
-
 const closedMixin = (theme) => ({
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
@@ -105,6 +104,7 @@ const Drawer = styled(MuiDrawer, {
 function Home() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [nestedNavOpen, setNestedNavOpen] = React.useState(false);
   const [battery, setBattery] = React.useState(0);
   //show battery level
   navigator.getBattery().then(function (battery) {
@@ -120,8 +120,11 @@ function Home() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+    setNestedNavOpen(false);
   };
-
+  const handleOpenNestedNav = () => {
+    setNestedNavOpen(true);
+  };
   //get user information from localStorage
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -443,18 +446,23 @@ function Home() {
                 </Tooltip>
                 <Tooltip title="Accounts" arrow placement="right-start">
                   <NavLink
-                    to="settings"
-                    style={({ isActive }) =>
-                      isActive ? { color: "#ff0000" } : { color: "#000" }
-                    }
+                    to=""
+                    // style={({ isActive }) =>
+                    //   isActive ? { color: "#ff0000" } : { color: "#000" }
+                    // }
                   >
                     {index === 8 && (
                       <HiLockOpen
                         style={{
                           fontSize: "1.5rem",
                         }}
-                        onClick={handleDrawerClose}
-                      />
+                        onClick={() => {
+                          // handleDrawerClose();
+                          handleOpenNestedNav();
+                          handleDrawerOpen();
+                          // handleCloseNestedNav();
+                        }}
+                      ></HiLockOpen>
                     )}
                   </NavLink>
                 </Tooltip>
@@ -464,6 +472,94 @@ function Home() {
             </ListItem>
           ))}
         </List>
+        {/* //nested  */}
+        {nestedNavOpen && (
+          <List
+            sx={[
+              {
+              
+                width: "100%",
+                backgroundColor: "#fff",
+                boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
+                borderRadius: "0px 0px 10px 10px",
+                zIndex: 1,
+                padding: "0px 0px 0px 0px",
+                overflow: "hidden",
+                transition: "all 0.3s ease-in-out",
+                transform: "translateY(0px)",
+                opacity: 1,
+               
+              },
+            ]}
+          >
+            {["Investment", "Roles"].map((text, index) => (
+              <ListItem
+                key={text}
+                sx={{
+                  minHeight: 48,
+                  justifyContent: nestedNavOpen ? "initial" : "center",
+                  opacity: nestedNavOpen ? 1 : 0,
+                  fontWeight: "bold",
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: nestedNavOpen ? 3 : "auto",
+                    justifyContent: "center",
+                  }}
+                >
+                  {/* route setup  */}
+                  {/* active link */}
+                  {/* // select active style  */}
+                  <Tooltip title="Accounts" arrow placement="right-start">
+                    <NavLink
+                      to=""
+                      style={({ isActive }) =>
+                        isActive ? { color: "#ff0000" } : { color: "#000" }
+                      }
+                    >
+                      {index === 0 && (
+                        <HiLockOpen
+                          style={{
+                            fontSize: "1.5rem",
+                          }}
+                          onClick={handleDrawerClose}
+                        />
+                      )}
+                    </NavLink>
+                  </Tooltip>
+                  <Tooltip title="Accounts" arrow placement="right-start">
+                    <NavLink
+                      to=""
+                      style={({ isActive }) =>
+                        isActive ? { color: "#ff0000" } : { color: "#000" }
+                      }
+                    >
+                      {index === 1 && (
+                        <HiLockOpen
+                          style={{
+                            fontSize: "1.5rem",
+                          }}
+                          onClick={handleDrawerClose}
+                        />
+                      )}
+                    </NavLink>
+                  </Tooltip>
+                </ListItemIcon>
+                <ListItemText
+                  primary={text}
+                  sx={{
+                    opacity: nestedNavOpen ? 1 : 0,
+                  }}
+                />
+              </ListItem>
+            ))}
+          </List>
+        )}
+        <Divider />
+
         <Divider />
         <List>
           {["LogOut"].map((text, index) => (
