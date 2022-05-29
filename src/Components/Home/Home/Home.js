@@ -21,7 +21,7 @@ import { useNavigate } from "react-router-dom";
 import { GiBatteryPackAlt } from "react-icons/gi";
 import { GrSupport } from "react-icons/gr";
 import { HiSupport, HiLockOpen } from "react-icons/hi";
-import { AiOutlineRise } from "react-icons/ai";
+import { RiAccountBoxLine } from "react-icons/ri";
 import { BiLogOutCircle } from "react-icons/bi";
 import { FaRegEnvelope } from "react-icons/fa";
 import { HiHome, HiOutlineDocumentReport } from "react-icons/hi";
@@ -171,7 +171,7 @@ function Home() {
               navigate("/");
             }}
           >
-            Investor
+            Admin
           </Typography>
           {/* <Box sx={{ flexGrow: 1 }} /> */}
 
@@ -273,13 +273,14 @@ function Home() {
         <List>
           {[
             "Home", //0
-            "Investor(Dashboard)", //1
+            "Dashboard", //1
             "Inbox", //2
-            "Investor(all projects/packages)", //3
-            "Report", //4
-            "Investor Account", //5
-            "Help Center", //6
-            "Settings", //7
+            "Project", //3
+            "Rate", //4
+            "Investor", //5
+            "Suppliers", //6
+            "Support", //7
+            "Accounts", //8
           ].map((text, index) => (
             <ListItem
               Button

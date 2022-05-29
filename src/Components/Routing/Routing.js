@@ -10,11 +10,11 @@ const Login = React.lazy(() => import("./../Authentication/Login/Login"));
 const Error = React.lazy(() => import("../Error/Error"));
 const Home = React.lazy(() => import("./../Home/Home/Home.js"));
 const Message = React.lazy(() => import("./../Home/Message/Message.js"));
-const InvestorHome = React.lazy(() =>
-  import("./../Home/InvestorHome/InvestorHome.js")
+const AdminHome = React.lazy(() =>
+  import("./../Home/AdminHome/AdminHome.js")
 );
-const InvestorDashboard = React.lazy(() =>
-  import("./../Home/InvestorDashboard/InvestorDashboard.js")
+const AdminDashboard = React.lazy(() =>
+  import("./../Home/AdminDashboard/AdminDashboard.js")
 );
 
 const Routing = () => {
@@ -65,8 +65,8 @@ const Routing = () => {
               </PrivateRoute>
             }
           >
-            <Route path="/" element={<InvestorHome />} />
-            <Route path="/investorDashboard" element={<InvestorDashboard />} />
+            <Route path="/" element={<AdminHome />} />
+            <Route path="/AdminDashboard" element={<AdminDashboard />} />
             <Route path="/message" element={<Message />} />
           </Route>
           <Route path="/login" element={<Login />} />
