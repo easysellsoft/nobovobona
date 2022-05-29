@@ -66,7 +66,7 @@ const NestedRoutes = ({ handleDrawerClose, nestedNavOpen }) => {
                   placement="right-start"
                 >
                   <NavLink
-                    to=""
+                    to="investment"
                     style={({ isActive }) =>
                       isActive ? { color: "#ff0000" } : { color: "#000" }
                     }
@@ -76,7 +76,7 @@ const NestedRoutes = ({ handleDrawerClose, nestedNavOpen }) => {
                         style={{
                           fontSize: "1.5rem",
                         }}
-                        onClick={handleDrawerClose}
+                        // onClick={handleDrawerClose}
                       />
                     )}
                   </NavLink>
@@ -89,7 +89,7 @@ const NestedRoutes = ({ handleDrawerClose, nestedNavOpen }) => {
                   placement="right-start"
                 >
                   <NavLink
-                    to=""
+                    to="suppliers"
                     style={({ isActive }) =>
                       isActive ? { color: "#ff0000" } : { color: "#000" }
                     }
@@ -99,7 +99,7 @@ const NestedRoutes = ({ handleDrawerClose, nestedNavOpen }) => {
                         style={{
                           fontSize: "1.5rem",
                         }}
-                        onClick={handleDrawerClose}
+                        // onClick={handleDrawerClose}
                       />
                     )}
                   </NavLink>
@@ -112,7 +112,7 @@ const NestedRoutes = ({ handleDrawerClose, nestedNavOpen }) => {
                   placement="right-start"
                 >
                   <NavLink
-                    to=""
+                    to="newPayment"
                     style={({ isActive }) =>
                       isActive ? { color: "#ff0000" } : { color: "#000" }
                     }
@@ -122,7 +122,7 @@ const NestedRoutes = ({ handleDrawerClose, nestedNavOpen }) => {
                         style={{
                           fontSize: "1.5rem",
                         }}
-                        onClick={handleDrawerClose}
+                        // onClick={handleDrawerClose}
                       />
                     )}
                   </NavLink>
@@ -135,7 +135,7 @@ const NestedRoutes = ({ handleDrawerClose, nestedNavOpen }) => {
                   placement="right-start"
                 >
                   <NavLink
-                    to=""
+                    to="receivedPayment"
                     style={({ isActive }) =>
                       isActive ? { color: "#ff0000" } : { color: "#000" }
                     }
@@ -145,7 +145,7 @@ const NestedRoutes = ({ handleDrawerClose, nestedNavOpen }) => {
                         style={{
                           fontSize: "1.5rem",
                         }}
-                        onClick={handleDrawerClose}
+                        // onClick={handleDrawerClose}
                       />
                     )}
                   </NavLink>
@@ -158,7 +158,7 @@ const NestedRoutes = ({ handleDrawerClose, nestedNavOpen }) => {
                   placement="right-start"
                 >
                   <NavLink
-                    to=""
+                    to="paymentMethod"
                     style={({ isActive }) =>
                       isActive ? { color: "#ff0000" } : { color: "#000" }
                     }
@@ -168,7 +168,7 @@ const NestedRoutes = ({ handleDrawerClose, nestedNavOpen }) => {
                         style={{
                           fontSize: "1.5rem",
                         }}
-                        onClick={handleDrawerClose}
+                        // onClick={handleDrawerClose}
                       />
                     )}
                   </NavLink>

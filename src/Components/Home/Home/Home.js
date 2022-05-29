@@ -118,10 +118,10 @@ function Home() {
 
   const handleDrawerClose = () => {
     setOpen(false);
-    setNestedNavOpen(false);
+    // setNestedNavOpen(false);
   };
   const handleOpenNestedNav = () => {
-    setNestedNavOpen(true);
+    setNestedNavOpen(!nestedNavOpen);
   };
   //get user information from localStorage
   const user = JSON.parse(localStorage.getItem("user"));
@@ -277,6 +277,7 @@ function Home() {
           handleDrawerClose={handleDrawerClose}
           open={open}
           handleOpenNestedNav={handleOpenNestedNav}
+          setOpen={setOpen}
           handleDrawerOpen={handleDrawerOpen}
         />
         {/* end main routes  */}

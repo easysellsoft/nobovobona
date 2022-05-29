@@ -10,11 +10,24 @@ const Login = React.lazy(() => import("./../Authentication/Login/Login"));
 const Error = React.lazy(() => import("../Error/Error"));
 const Home = React.lazy(() => import("./../Home/Home/Home.js"));
 const Message = React.lazy(() => import("./../Home/Message/Message.js"));
-const AdminHome = React.lazy(() =>
-  import("./../Home/AdminHome/AdminHome.js")
-);
+const AdminHome = React.lazy(() => import("./../Home/AdminHome/AdminHome.js"));
 const AdminDashboard = React.lazy(() =>
   import("./../Home/AdminDashboard/AdminDashboard.js")
+);
+const Investment = React.lazy(() =>
+  import("./../Home/Investment/Investment.js")
+);
+const Suppliers = React.lazy(() =>
+  import("./../Home/Home/Suppliers/Suppliers.js")
+);
+const NewPayment = React.lazy(() =>
+  import("./../Home/Home/NewPayment/NewPayment.js")
+);
+const ReceivedPayment = React.lazy(() =>
+  import("./../Home/Home/ReceivedPayment/ReceivedPayment.js")
+);
+const PaymentMethod = React.lazy(() =>
+  import("./../Home/Home/PaymentMethod/PaymentMethod.js")
 );
 
 const Routing = () => {
@@ -63,6 +76,12 @@ const Routing = () => {
             <Route path="/" element={<AdminHome />} />
             <Route path="/AdminDashboard" element={<AdminDashboard />} />
             <Route path="/message" element={<Message />} />
+            {/* nested route set  */}
+            <Route path="/investment" element={<Investment />} />
+            <Route path="/suppliers" element={<Suppliers />} />
+            <Route path="/newPayment" element={<NewPayment />} />
+            <Route path="/receivedPayment" element={<ReceivedPayment />} />
+            <Route path="/paymentMethod" element={<PaymentMethod />} />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
@@ -90,13 +109,17 @@ const Routing = () => {
         </div>
       </Box>
       {/* footer  */}
-      <Box sx={[{
-        position: "fixed",
-        bottom: 0,
-        width: "100%",
-        // height: "50px",
-        zIndex: "999",
-      }]}>
+      <Box
+        sx={[
+          {
+            position: "fixed",
+            bottom: 0,
+            width: "100%",
+            // height: "50px",
+            zIndex: "999",
+          },
+        ]}
+      >
         <Footer />
       </Box>
     </>

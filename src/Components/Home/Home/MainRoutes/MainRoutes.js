@@ -19,6 +19,7 @@ const MainRoutes = ({
   open,
   handleOpenNestedNav,
   handleDrawerOpen,
+  setOpen,
 }) => {
   return (
     <div>
@@ -204,7 +205,7 @@ const MainRoutes = ({
                     onClick={() => {
                       // handleDrawerClose();
                       handleOpenNestedNav();
-                      handleDrawerOpen();
+                      setOpen(!open);
                       // handleCloseNestedNav();
                     }}
                   />
