@@ -22,7 +22,7 @@ import { GiBatteryPackAlt } from "react-icons/gi";
 import { GrSupport } from "react-icons/gr";
 import { HiSupport, HiLockOpen } from "react-icons/hi";
 import { RiAccountBoxLine } from "react-icons/ri";
-import { BiLogOutCircle } from "react-icons/bi";
+import { BiLogOutCircle, BiCircle } from "react-icons/bi";
 import { FaRegEnvelope } from "react-icons/fa";
 import { HiHome, HiOutlineDocumentReport } from "react-icons/hi";
 import { NavLink, Outlet } from "react-router-dom";
@@ -33,6 +33,7 @@ import { Avatar, Chip, ListItem, Tooltip } from "@mui/material";
 
 import LiveClock from "../LiveClock/LiveClock";
 import useAuth from "./../../../Hooks/useAuth";
+import NestedRoutes from "./NestedRoutes/NestedRoutes";
 //end
 const drawerWidth = 240;
 
@@ -444,121 +445,34 @@ function Home() {
                     )}
                   </NavLink>
                 </Tooltip>
-                <Tooltip title="Accounts" arrow placement="right-start">
-                  <NavLink
-                    to=""
-                    // style={({ isActive }) =>
-                    //   isActive ? { color: "#ff0000" } : { color: "#000" }
-                    // }
-                  >
-                    {index === 8 && (
-                      <HiLockOpen
-                        style={{
-                          fontSize: "1.5rem",
-                        }}
-                        onClick={() => {
-                          // handleDrawerClose();
-                          handleOpenNestedNav();
-                          handleDrawerOpen();
-                          // handleCloseNestedNav();
-                        }}
-                      ></HiLockOpen>
-                    )}
-                  </NavLink>
-                </Tooltip>
+
+                {index === 8 && (
+                  <Tooltip title="Accounts" arrow placement="right-start">
+                    <HiLockOpen
+                      style={{
+                        fontSize: "1.5rem",
+                        color: "#000",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => {
+                        // handleDrawerClose();
+                        handleOpenNestedNav();
+                        handleDrawerOpen();
+                        // handleCloseNestedNav();
+                      }}
+                    />
+                  </Tooltip>
+                )}
               </ListItemIcon>
 
               <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
             </ListItem>
           ))}
         </List>
-        {/* //nested  */}
-        {nestedNavOpen && (
-          <List
-            sx={[
-              {
-              
-                width: "100%",
-                backgroundColor: "#fff",
-                boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
-                borderRadius: "0px 0px 10px 10px",
-                zIndex: 1,
-                padding: "0px 0px 0px 0px",
-                overflow: "hidden",
-                transition: "all 0.3s ease-in-out",
-                transform: "translateY(0px)",
-                opacity: 1,
-               
-              },
-            ]}
-          >
-            {["Investment", "Roles"].map((text, index) => (
-              <ListItem
-                key={text}
-                sx={{
-                  minHeight: 48,
-                  justifyContent: nestedNavOpen ? "initial" : "center",
-                  opacity: nestedNavOpen ? 1 : 0,
-                  fontWeight: "bold",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: nestedNavOpen ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  {/* route setup  */}
-                  {/* active link */}
-                  {/* // select active style  */}
-                  <Tooltip title="Accounts" arrow placement="right-start">
-                    <NavLink
-                      to=""
-                      style={({ isActive }) =>
-                        isActive ? { color: "#ff0000" } : { color: "#000" }
-                      }
-                    >
-                      {index === 0 && (
-                        <HiLockOpen
-                          style={{
-                            fontSize: "1.5rem",
-                          }}
-                          onClick={handleDrawerClose}
-                        />
-                      )}
-                    </NavLink>
-                  </Tooltip>
-                  <Tooltip title="Accounts" arrow placement="right-start">
-                    <NavLink
-                      to=""
-                      style={({ isActive }) =>
-                        isActive ? { color: "#ff0000" } : { color: "#000" }
-                      }
-                    >
-                      {index === 1 && (
-                        <HiLockOpen
-                          style={{
-                            fontSize: "1.5rem",
-                          }}
-                          onClick={handleDrawerClose}
-                        />
-                      )}
-                    </NavLink>
-                  </Tooltip>
-                </ListItemIcon>
-                <ListItemText
-                  primary={text}
-                  sx={{
-                    opacity: nestedNavOpen ? 1 : 0,
-                  }}
-                />
-              </ListItem>
-            ))}
-          </List>
-        )}
-        <Divider />
+        <NestedRoutes
+          handleDrawerClose={handleDrawerClose}
+          nestedNavOpen={nestedNavOpen}
+        />
 
         <Divider />
         <List>
