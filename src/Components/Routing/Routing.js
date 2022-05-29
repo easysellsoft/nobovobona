@@ -11,10 +11,10 @@ const Error = React.lazy(() => import("../Error/Error"));
 const Home = React.lazy(() => import("./../Home/Home/Home.js"));
 const Message = React.lazy(() => import("./../Home/Message/Message.js"));
 const InvestorHome = React.lazy(() =>
-  import("../Home/AdminHome/AdminHome.js")
+  import("./../Home/InvestorHome/InvestorHome.js")
 );
 const InvestorDashboard = React.lazy(() =>
-  import("../Home/AdminDashboard/AdminDashboard.js")
+  import("./../Home/InvestorDashboard/InvestorDashboard.js")
 );
 
 const Routing = () => {
