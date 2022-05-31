@@ -5,12 +5,14 @@ import Register from "./../Authentication/Register/Register";
 import PrivateRoute from "../PrivateRoute/PrivateRoute.js";
 import { Box } from "@mui/material";
 import Footer from "../Footer/Footer";
+import ProjectRateAdd from "../Home/ProjectRate/ProjectRateAdd/ProjectRateAdd";
 
 const Login = React.lazy(() => import("./../Authentication/Login/Login"));
 const Error = React.lazy(() => import("../Error/Error"));
 const Home = React.lazy(() => import("./../Home/Home/Home.js"));
 const Message = React.lazy(() => import("./../Home/Message/Message.js"));
 const AdminHome = React.lazy(() => import("./../Home/AdminHome/AdminHome.js"));
+
 const AdminDashboard = React.lazy(() =>
   import("./../Home/AdminDashboard/AdminDashboard.js")
 );
@@ -28,6 +30,9 @@ const ReceivedPayment = React.lazy(() =>
 );
 const PaymentMethod = React.lazy(() =>
   import("./../Home/Home/PaymentMethod/PaymentMethod.js")
+);
+const ProjectRate = React.lazy(() =>
+  import("./../Home/ProjectRate/ProjectRate.js")
 );
 
 const Routing = () => {
@@ -77,11 +82,14 @@ const Routing = () => {
             <Route path="/AdminDashboard" element={<AdminDashboard />} />
             <Route path="/message" element={<Message />} />
             {/* nested route set  */}
+            <Route path="/adminProjectRateDetails" element={<ProjectRate />} />
             <Route path="/investment" element={<Investment />} />
             <Route path="/suppliers" element={<Suppliers />} />
             <Route path="/newPayment" element={<NewPayment />} />
             <Route path="/receivedPayment" element={<ReceivedPayment />} />
             <Route path="/paymentMethod" element={<PaymentMethod />} />
+            {/* nested route set end */}
+            <Route path="/projectRateAdd" element={<ProjectRateAdd />} />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

@@ -1,12 +1,12 @@
 import React from "react";
 import {
+  Collapse,
   List,
-  ListItem,
+  ListItemButton,
   ListItemIcon,
   ListItemText,
-  Tooltip,
 } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { MdDashboard } from "react-icons/md";
 import { GoProject } from "react-icons/go";
 import { GrSupport } from "react-icons/gr";
@@ -14,211 +14,194 @@ import { HiSupport, HiLockOpen } from "react-icons/hi";
 import { RiAccountBoxLine } from "react-icons/ri";
 import { FaRegEnvelope } from "react-icons/fa";
 import { HiHome, HiOutlineDocumentReport } from "react-icons/hi";
-const MainRoutes = ({
-  handleDrawerClose,
-  open,
-  handleOpenNestedNav,
-  handleDrawerOpen,
-  setOpen,
-}) => {
+import { ExpandLess, ExpandMore } from "@material-ui/icons";
+import { BiCircle } from "react-icons/bi";
+
+const listItemNav = [
+  {
+    title: "Home",
+    icon: <HiHome />,
+    to: "/",
+    nested: false,
+  },
+  {
+    title: "Dashboard",
+    icon: <MdDashboard />,
+    to: "/adminDashboard",
+    nested: false,
+  },
+  {
+    title: "Inbox",
+    icon: <FaRegEnvelope />,
+    to: "/adminInbox",
+    nested: false,
+  },
+  {
+    title: "Project",
+    icon: <GoProject />,
+    to: "/adminProject",
+    nested: false,
+  },
+  {
+    title: "Rate",
+    icon: <HiOutlineDocumentReport />,
+    // to: "/adminRate",
+    nested: true,
+    submenu: [
+      {
+        title: "Project Rate",
+        to: "/adminProjectRateDetails",
+        icon: <BiCircle />,
+      },
+    ],
+  },
+  {
+    title: "Investor",
+    icon: <RiAccountBoxLine />,
+    to: "/adminInvestor",
+    nested: false,
+  },
+  {
+    title: "Suppliers",
+    icon: <HiSupport />,
+    to: "/adminSuppliers",
+    nested: false,
+  },
+  {
+    title: "Support",
+    icon: <HiSupport />,
+    to: "/message",
+    nested: false,
+  },
+  {
+    title: "Accounts",
+    icon: <HiLockOpen />,
+    to: "/adminAccounts",
+    nested: true,
+    submenu: [
+      {
+        title: "Investment",
+        to: "/Investment",
+        icon: <BiCircle />,
+      },
+      {
+        title: "Suppliers",
+        to: "/suppliers",
+        icon: <BiCircle />,
+      },
+      {
+        title: "New Payment",
+        to: "/newPayment",
+        icon: <BiCircle />,
+      },
+      {
+        title: "Received Payment",
+        to: "/receivedPayment",
+        icon: <BiCircle />,
+      },
+      {
+        title: "Payment Method",
+        to: "/paymentMethod",
+        icon: <BiCircle />,
+      },
+    ],
+  },
+];
+
+const MainRoutes = () => {
+  const [subOpen, setSubOpen] = React.useState(false);
+  const [title, setTitle] = React.useState("");
+  const location = useLocation();
+
+  //handle subMenu open and close
+  const handleSubMenu = () => {
+    setSubOpen(!subOpen);
+  };
   return (
     <div>
-      <List>
-        {[
-          "Home", //0
-          "Dashboard", //1
-          "Inbox", //2
-          "Project", //3
-          "Rate", //4
-          "Investor", //5
-          "Suppliers", //6
-          "Support", //7
-          "Accounts", //8
-        ].map((text, index) => (
-          <ListItem
-            Button
-            key={text}
-            sx={{
-              minHeight: 48,
-              justifyContent: open ? "initial" : "center",
-              fontWeight: "bold",
-              px: 2.5,
-            }}
-          >
-            <ListItemIcon
-              sx={{
-                minWidth: 0,
-                mr: open ? 3 : "auto",
-                justifyContent: "center",
-              }}
-            >
-              {/* route setup  */}
-              {/* active link */}
-              {/* // select active style  */}
-              <Tooltip title="Home" arrow placement="right-start">
-                <NavLink
-                  to="/"
-                  style={({ isActive }) =>
-                    isActive ? { color: "#ff0000" } : { color: "#000" }
-                  }
+      <List
+        sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+        component="nav"
+        aria-labelledby="nested-list-subheader"
+      >
+        {listItemNav?.map((item, index) => {
+          return (
+            <>
+              <ListItemButton
+                key={index}
+                component={!item.nested && NavLink}
+                to={item?.nested ? null : `${item?.to}`}
+                sx={{
+                  backgroundColor:
+                    item?.to === location?.pathname ? "#C7E5F5" : "#fff",
+                  width: "100%",
+                  borderLeft:
+                    item?.to === location?.pathname && "5px solid #A3A0FB",
+                }}
+                onClick={() => {
+                  handleSubMenu();
+                  setTitle(item.title);
+                }}
+                activeClassName="active"
+                exact
+              >
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.title} />
+                {item.nested ? (
+                  item.title === title && subOpen ? (
+                    <ExpandLess />
+                  ) : (
+                    <ExpandMore />
+                  )
+                ) : null}
+              </ListItemButton>
+              {item?.nested && (
+                <Collapse
+                  in={item?.title === title ? subOpen : false}
+                  timeout="auto"
+                  unmountOnExit
                 >
-                  {index === 0 && (
-                    <HiHome
-                      style={{
-                        fontSize: "1.5rem",
-                      }}
-                      onClick={handleDrawerClose}
-                    />
-                  )}
-                </NavLink>
-              </Tooltip>
-              <Tooltip title="Dashboard" arrow placement="right-start">
-                <NavLink
-                  to="AdminDashboard"
-                  style={({ isActive }) =>
-                    isActive ? { color: "#ff0000" } : { color: "#000" }
-                  }
-                >
-                  {index === 1 && (
-                    <MdDashboard
-                      style={{
-                        fontSize: "1.5rem",
-                      }}
-                      onClick={handleDrawerClose}
-                    />
-                  )}
-                </NavLink>
-              </Tooltip>
-              <Tooltip title="Inbox" arrow placement="right-start">
-                <NavLink
-                  to="gantt"
-                  style={({ isActive }) =>
-                    isActive ? { color: "#ff0000" } : { color: "#000" }
-                  }
-                >
-                  {index === 2 && (
-                    <FaRegEnvelope
-                      style={{
-                        fontSize: "1.5rem",
-                      }}
-                      onClick={handleDrawerClose}
-                    />
-                  )}
-                </NavLink>
-              </Tooltip>
-              <Tooltip title="Project" arrow placement="right-start">
-                <NavLink
-                  to="investorProjects"
-                  style={({ isActive }) =>
-                    isActive ? { color: "#ff0000" } : { color: "#000" }
-                  }
-                >
-                  {index === 3 && (
-                    <GoProject
-                      style={{
-                        fontSize: "1.5rem",
-                      }}
-                      onClick={() => {
-                        handleDrawerClose();
-                      }}
-                    />
-                  )}
-                </NavLink>
-              </Tooltip>
-              <Tooltip title="Rate" arrow placement="right-start">
-                <NavLink
-                  to="timesheet"
-                  style={({ isActive }) =>
-                    isActive ? { color: "#ff0000" } : { color: "#000" }
-                  }
-                >
-                  {index === 4 && (
-                    <HiOutlineDocumentReport
-                      style={{
-                        fontSize: "1.5rem",
-                      }}
-                      onClick={handleDrawerClose}
-                    />
-                  )}
-                </NavLink>
-              </Tooltip>
-              <Tooltip title="Investor" arrow placement="right-start">
-                <NavLink
-                  to="timesheet"
-                  style={({ isActive }) =>
-                    isActive ? { color: "#ff0000" } : { color: "#000" }
-                  }
-                >
-                  {index === 5 && (
-                    <RiAccountBoxLine
-                      style={{
-                        fontSize: "1.5rem",
-                      }}
-                      onClick={handleDrawerClose}
-                    />
-                  )}
-                </NavLink>
-              </Tooltip>
-              <Tooltip title="Suppliers" arrow placement="right-start">
-                <NavLink
-                  to=""
-                  style={({ isActive }) =>
-                    isActive ? { color: "#ff0000" } : { color: "#000" }
-                  }
-                >
-                  {index === 6 && (
-                    <GrSupport
-                      style={{
-                        fontSize: "1.5rem",
-                      }}
-                      onClick={handleDrawerClose}
-                    />
-                  )}
-                </NavLink>
-              </Tooltip>
-              <Tooltip title="Support" arrow placement="right-start">
-                <NavLink
-                  to="message"
-                  style={({ isActive }) =>
-                    isActive ? { color: "#ff0000" } : { color: "#000" }
-                  }
-                >
-                  {index === 7 && (
-                    <HiSupport
-                      style={{
-                        fontSize: "1.5rem",
-                      }}
-                      onClick={handleDrawerClose}
-                    />
-                  )}
-                </NavLink>
-              </Tooltip>
+                  <List
+                    component="div"
+                    disablePadding
+                    sx={{
+                      width: "100%",
 
-              {index === 8 && (
-                <Tooltip title="Accounts" arrow placement="right-start">
-                  <HiLockOpen
-                    style={{
-                      fontSize: "1.5rem",
-                      color: "#000",
-                      cursor: "pointer",
+                      bgcolor: "background.paper",
                     }}
-                    onClick={() => {
-                      // handleDrawerClose();
-                      handleOpenNestedNav();
-                      setOpen(!open);
-                      // handleCloseNestedNav();
-                    }}
-                  />
-                </Tooltip>
+                  >
+                    {item?.submenu?.map((subItem, subIndex) => {
+                      return (
+                        <ListItemButton
+                          key={subIndex}
+                          button
+                          component={NavLink}
+                          to={subItem.to}
+                          activeClassName="active"
+                          sx={[
+                            {
+                              backgroundColor:
+                                subItem.to === location.pathname
+                                  ? "#C7E5F5"
+                                  : "#fff",
+                            },
+                          ]}
+                          exact
+                        >
+                          <ListItemIcon>{subItem.icon}</ListItemIcon>
+                          <ListItemText primary={subItem.title} />
+                        </ListItemButton>
+                      );
+                    })}
+                  </List>
+                </Collapse>
               )}
-            </ListItemIcon>
-
-            <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-          </ListItem>
-        ))}
+            </>
+          );
+        })}
       </List>
     </div>
   );
 };
 
-export default MainRoutes;
+export default React.memo(MainRoutes);

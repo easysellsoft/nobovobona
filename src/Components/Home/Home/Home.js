@@ -29,7 +29,6 @@ import { Avatar, Chip, ListItem, Tooltip } from "@mui/material";
 
 import LiveClock from "../LiveClock/LiveClock";
 import useAuth from "./../../../Hooks/useAuth";
-import NestedRoutes from "./NestedRoutes/NestedRoutes";
 import MainRoutes from "./MainRoutes/MainRoutes";
 //end
 const drawerWidth = 240;
@@ -101,8 +100,7 @@ const Drawer = styled(MuiDrawer, {
 
 function Home() {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-  const [nestedNavOpen, setNestedNavOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const [battery, setBattery] = React.useState(0);
   //show battery level
   navigator.getBattery().then(function (battery) {
@@ -120,14 +118,19 @@ function Home() {
     setOpen(false);
     // setNestedNavOpen(false);
   };
-  const handleOpenNestedNav = () => {
-    setNestedNavOpen(!nestedNavOpen);
-  };
+
   //get user information from localStorage
   const user = JSON.parse(localStorage.getItem("user"));
 
   // get data or object from context auth provider
   const { pageRefresh, setPageRefresh } = useAuth();
+
+  // update window innerWith every time the window is resized
+  React.useEffect(() => {
+    window.addEventListener("resize", () => {
+      window.innerWidth > 600 ? setOpen(true) : setOpen(false);
+    });
+  }, []);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -273,20 +276,9 @@ function Home() {
         </DrawerHeader>
         <Divider />
         {/* main routes  */}
-        <MainRoutes
-          handleDrawerClose={handleDrawerClose}
-          open={open}
-          handleOpenNestedNav={handleOpenNestedNav}
-          setOpen={setOpen}
-          handleDrawerOpen={handleDrawerOpen}
-        />
+        <MainRoutes />
         {/* end main routes  */}
-        {/* nested routes  */}
-        <NestedRoutes
-          handleDrawerClose={handleDrawerClose}
-          nestedNavOpen={nestedNavOpen}
-        />
-        {/* end nested routes  */}
+
         <Divider />
         <List>
           {["LogOut"].map((text, index) => (
