@@ -15,9 +15,60 @@ const WhatsappReportTable = () => {
           });
     },[])
     return (
-        <div>
-            <h1>{table.length}</h1>
+      <div>
+   
+        <h1>{table.length}</h1>
+        <div class="table-responsive">
+          <table class="table caption-top">
+            <caption>List of users</caption>
+            <thead>
+              <tr>
+                <th scope="col">Year</th>
+                <th scope="col">Month</th>
+                <th scope="col">Day</th>
+                <th scope="col">Total Send</th>
+                <th scope="col">Done</th>
+                <th scope="col">Success</th>
+                <th scope="col">Failed</th>
+                <th scope="col">Queued</th>
+                <th scope="col">Asr(%)</th>
+                <th scope="col">Avg. CR</th>
+                <th scope="col">Cost</th>
+                <th scope="col">GW.Cost</th>
+                <th scope="col">Profit</th>
+                <th scope="col">R4 Cost</th>
+                <th scope="col">R3 Cost</th>
+                <th scope="col">R1 Cost</th>
+              </tr>
+            </thead>
+            <tbody>
+              {table.map((item) => (
+                <tr>
+                  {console.log("table property", item)}
+                  <th>{item.year}</th>
+                  <th>{item.month}</th>
+                  <th>{item.day}</th>
+                  <th>{item.total_message}</th>
+                  <th>{item.deliver}</th>
+                  <th>{item.end_failed}</th>
+                  <th>{item.failed}</th>
+                  <th>{item.qued}</th>
+                  <th>{item.asr}</th>
+                  <th>{item.cr}</th>
+                  <th>{item.c1cost}</th>
+                  <th>{item.gatcost}</th>
+                  <th>{item.profit}</th>
+                  <th>{item.rs4cost}</th>
+                  <th>{item.rs3cost}</th>
+                  <th>{item.rs2cost}</th>
+                  <th>{item.rs1cost}</th>
+              
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
+      </div>
     );
 };
 

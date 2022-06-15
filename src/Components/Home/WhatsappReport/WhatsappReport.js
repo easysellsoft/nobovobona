@@ -37,6 +37,7 @@ const WhatsappReport = () => {
     const [show, setShow] = useState(false);
   const [data, setData] = useState([]);
   const [currency, setCurrency] = React.useState("");
+  const [defaultData, setDefault] = useState(true);
   const handleChange = (event) => {
     setCurrency(event.target.value);
   };
@@ -464,6 +465,7 @@ const WhatsappReport = () => {
                 control={<Checkbox />}
                 label="Year"
                 labelPlacement="top"
+                onChange={() => setDefault(!defaultData)}
               />
               <FormControlLabel
                 value="top"
@@ -567,10 +569,7 @@ const WhatsappReport = () => {
               // navigate("/projectRateAdd");
             }}
           />
-          <div
-            className="btn_prb"
-            onClick={() => setShow(!show) }
-          >
+          <div className="btn_prb" onClick={() => setShow(!show)}>
             <ButtonComp
               title="Search"
               color="info"
@@ -591,7 +590,33 @@ const WhatsappReport = () => {
         </Box>
       </Box>
 
-      <WhatsappReportTable/>
+      {defaultData ? (
+        <table class="table caption-top">
+          <caption>List of users</caption>
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Jacob</td>
+            </tr>
+          </tbody>
+        </table>
+      ) : (
+        <WhatsappReportTable />
+      )}
     </div>
   );
 };
