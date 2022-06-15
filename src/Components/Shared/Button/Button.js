@@ -9,6 +9,8 @@ import { TiExportOutline } from "react-icons/ti";
 const ButtonComp = ({
   title,
   add,
+  show,
+  setShow,
   search,
   deleteIco,
   exportIco,
@@ -17,6 +19,7 @@ const ButtonComp = ({
 }) => {
   return (
     <Button
+      onClick={()=>setShow(!show)}
       variant="outlined"
       sx={[
         {
