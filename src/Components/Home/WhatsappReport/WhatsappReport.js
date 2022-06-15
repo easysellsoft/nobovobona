@@ -38,6 +38,16 @@ const WhatsappReport = () => {
   const [data, setData] = useState([]);
   const [currency, setCurrency] = React.useState("");
   const [defaultData, setDefault] = useState(true);
+  const [filterData, setFilterData] = useState([]);
+
+
+
+
+   const [textValue, setTextValue] = useState("");
+
+
+
+
   const handleChange = (event) => {
     setCurrency(event.target.value);
   };
@@ -54,12 +64,53 @@ const WhatsappReport = () => {
       });
   }, []);
 
-  // const eventHandler = () => {
-  //   console.log("clicked")
-  //   setShow(!show);
-  //   console.log(show)
-  // }
-  console.log(show)
+  const toggleHandler = (click) => {
+    
+   
+    if (filterData.includes(click)) {
+      // let deleting = filterData.filter((e) => e !== click);
+      // setFilterData(deleting)
+      let deleting = filterData.indexOf(click);
+      console.log(deleting)
+      if (deleting !== -1) {
+        filterData.splice(deleting, 1)
+      }
+      setFilterData([...filterData]);
+       console.log("after deleting  filter", filterData);
+
+    }
+  
+    else {
+      filterData.push(click);
+         setFilterData([...filterData]);
+        console.log("update filter", filterData);
+        if (filterData.length > 0) {
+          setDefault(false);
+        } else {
+          setDefault(!defaultData);
+      }
+      
+    }
+    
+    
+  }
+  useEffect(() => {
+     console.log("main filter", filterData);
+  }, [filterData])
+
+
+
+  
+  const onTextChange = (e) => {
+    e.preventDefault();
+    let input = e.target.value;
+    console.log(input)
+    // setTextValue(e.target.value);
+  }
+  console.log(textValue)
+ 
+
+
   return (
     <div className="mb-5">
       <h3>length: {data?.length}</h3>
@@ -94,6 +145,7 @@ const WhatsappReport = () => {
                     <TextField
                       id="outlined-password-input"
                       // label="Form Date"
+                      onChange={onTextChange}
                       type="date"
                       autoComplete="current-date"
                     />
@@ -465,70 +517,81 @@ const WhatsappReport = () => {
                 control={<Checkbox />}
                 label="Year"
                 labelPlacement="top"
-                onChange={() => setDefault(!defaultData)}
+                // onChange={() => setDefault(!defaultData)}
+                onChange={() => toggleHandler("year")}
               />
               <FormControlLabel
                 value="top"
                 control={<Checkbox />}
                 label="Month"
                 labelPlacement="top"
+                onChange={() => toggleHandler("month")}
               />
               <FormControlLabel
                 value="top"
                 control={<Checkbox />}
                 label="Day"
                 labelPlacement="top"
+                onChange={() => toggleHandler("day")}
               />
               <FormControlLabel
                 value="top"
                 control={<Checkbox />}
                 label="Hour"
                 labelPlacement="top"
+                onChange={() => toggleHandler("hour")}
               />
               <FormControlLabel
                 value="top"
                 control={<Checkbox />}
                 label="CC"
                 labelPlacement="top"
+                onChange={() => toggleHandler("cc")}
               />
               <FormControlLabel
                 value="top"
                 control={<Checkbox />}
                 label="Destination"
                 labelPlacement="top"
+                onChange={() => toggleHandler("destination")}
               />
               <FormControlLabel
                 value="top"
                 control={<Checkbox />}
                 label="Service"
                 labelPlacement="top"
+                onChange={() => toggleHandler("service")}
               />
               <FormControlLabel
                 value="top"
                 control={<Checkbox />}
                 label="Service Type"
                 labelPlacement="top"
+                onChange={() => toggleHandler("service_type")}
               />
               <FormControlLabel
                 value="top"
                 control={<Checkbox />}
                 label="Client"
                 labelPlacement="top"
+                onChange={() => toggleHandler("client")}
               />
               <FormControlLabel
                 value="top"
                 control={<Checkbox />}
                 label="End"
                 labelPlacement="top"
+                onChange={() => toggleHandler("end")}
               />
               <FormControlLabel
                 value="top"
                 control={<Checkbox />}
                 label="Gateway"
                 labelPlacement="top"
+                onChange={() => toggleHandler("gateway")}
               />
             </FormGroup>
-            <button
+            {/* <button
               style={{
                 maxWidth: "100px",
                 maxHeight: "56px",
@@ -540,7 +603,7 @@ const WhatsappReport = () => {
               className="bg-secondary font-bold text-light p-3 me-4 w-22"
             >
               Search
-            </button>
+            </button> */}
           </FormControl>
         </Box>
       )}
@@ -595,27 +658,43 @@ const WhatsappReport = () => {
           <caption>List of users</caption>
           <thead>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
+              <th scope="col">No. Of SMS</th>
+              <th scope="col">Done</th>
+              <th scope="col">Success</th>
+              <th scope="col">Failed</th>
+              <th scope="col">Queued</th>
+              <th scope="col">ASR(%)</th>
+              <th scope="col">Avg.CR</th>
+              <th scope="col">Cost</th>
+              <th scope="col">GW.Cost</th>
+              <th scope="col">Profit</th>
+              <th scope="col">R4 Cost</th>
+              <th scope="col">R3 Cost</th>
+              <th scope="col">R2 Cost</th>
+              <th scope="col">R1 Cost</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
+              <td>198</td>
+              <td>97</td>
+              <td>95</td>
+              <td>2</td>
+              <td>0</td>
+              <td>47.5663636737</td>
+              <td>0</td>
+              <td>112</td>
+              <td>52.185</td>
+              <td>44</td>
+              <td>18</td>
+              <td>84</td>
+              <td>0</td>
+              <td>0</td>
             </tr>
           </tbody>
         </table>
       ) : (
-        <WhatsappReportTable />
+        <WhatsappReportTable data={data} filterData={filterData} />
       )}
     </div>
   );
