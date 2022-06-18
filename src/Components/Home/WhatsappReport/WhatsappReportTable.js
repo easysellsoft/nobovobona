@@ -1,15 +1,16 @@
+import hi from "date-fns/esm/locale/hi/index.js";
 import React, { useEffect, useState } from "react";
 
 const WhatsappReportTable = (props) => {
-  console.log("props", props.data);
-  const { filterData } = props;
-  console.log(filterData);
+  console.log("props", props.updateTable);
+  const { updateTable, arrayth } = props;
+  console.log( arrayth);
   // const { year, month, day, total_message, deliver, end_failed, failed, qued, asr, cr, c1cost, gatcost, profit, rs4cost, rs3cost, rs2cost, rs1cost } = data;
 
   // const [table, setTable] = useState([]);
   // useEffect(() => {
   //     fetch(
-  //       "http://poultrykhamarbichitra.net/admin/Record/whatsapp_record_search.php?format=format&amp;&amp;search_sms_reports_month=search_sms_reports_month"
+  //       "http://poultrykhamarbichitra.net/admin/Record/whatsapp_record_search.php"
 
   //     )
   //       .then((res) => res.json())
@@ -18,55 +19,77 @@ const WhatsappReportTable = (props) => {
   //         setTable(data);
   //       });
   // },[])
+  // const thData = ["day", "month", "service_type"];
+  const thData = arrayth;
+              
+  const dataKey = updateTable.length > 0 ? Object.keys(updateTable[0]).filter(d => thData.includes(d)) : [];
+  
   return (
     <div>
-      <h1>{props.data.length}</h1>
+      <h1>{updateTable.length}</h1>
 
       <div class="table-responsive">
         <table class="table caption-top">
           <caption>List of users</caption>
           <thead>
             <tr>
-              {filterData.includes("year") && <th scope="col">Year</th>}
-              {filterData.includes("month") && <th scope="col">Month</th>}
-              {filterData.includes("day") && <th scope="col">Day</th>}
-               <th scope="col">Total Send</th>
+              {dataKey?.map((i) => (
+                <th>{i}</th>
+              ))}
+              <th scope="col">Done</th>
+
+              {/* {updateTable.includes("year") && <th scope="col">Year</th>}
+              {updateTable.includes("month") && <th scope="col">Month</th>}
+              {updateTable.includes("day") && <th scope="col">Day</th>} */}
+              {/* <th scope="col">Total Send</th>
               <th scope="col">Done</th>
               <th scope="col">Success</th>
               <th scope="col">Failed</th>
               <th scope="col">Queued</th>
-             <th scope="col">Asr(%)</th>
-            <th scope="col">Avg. CR</th>
-            <th scope="col">Cost</th>
-            <th scope="col">GW.Cost</th>
-            <th scope="col">Profit</th>
-            <th scope="col">R4 Cost</th>
-            <th scope="col">R3 Cost</th>
-            <th scope="col">R1 Cost</th>
+              <th scope="col">Asr(%)</th>
+              <th scope="col">Avg. CR</th>
+              <th scope="col">Cost</th>
+              <th scope="col">GW.Cost</th>
+              <th scope="col">Profit</th>
+              <th scope="col">R4 Cost</th>
+              <th scope="col">R3 Cost</th>
+              <th scope="col">R1 Cost</th> */}
             </tr>
           </thead>
           <tbody>
-            {props.data.map((item) => (
-              <tr>
-                {filterData.includes("year") && <th>{item.year}</th>}
-              {  filterData.includes("month") &&<th>{item.month}</th>}
-               { filterData.includes("day") &&<th>{item.day}</th>}
-                <th>{item.total_message}</th>
-                <th>{item.deliver}</th>
-                <th>{item.end_failed}</th>
-                <th>{item.failed}</th>
-                <th>{item.qued}</th>
-               <th>{item.asr}</th>
-               <th>{item.cr}</th>
-               <th>{item.c1cost}</th>
-               <th>{item.gatcost}</th>
-               <th>{item.profit}</th>
-              <th>{item.rs4cost}</th>
-              <th>{item.rs3cost}</th>
-              <th>{item.rs2cost}</th>
-              <th>{item.rs1cost}</th>
-              </tr>
-            ))}
+            {updateTable.map((item) => {
+              return (
+                <tr>
+                  {dataKey?.map((dd) => (
+                    <td>{item[dd]}</td>
+                  ))}
+                  <td>{item.total_message}</td>
+                </tr>
+              );
+
+              //   (
+
+              //   <tr>
+              //     <td>{item.year}</td>
+              //     {updateTable.includes("month") && <td>{item.month}</td>}
+              //     {updateTable.includes("day") && <td>{item.day}</td>}
+              //     <td>{item.total_message}</td>
+              //     <td>{item.deliver}</td>
+              //     <td>{item.end_failed}</td>
+              //     <td>{item.failed}</td>
+              //     <td>{item.qued}</td>
+              //     <td>{item.asr}</td>
+              //     <td>{item.cr}</td>
+              //     <td>{item.c1cost}</td>
+              //     <td>{item.gatcost}</td>
+              //     <td>{item.profit}</td>
+              //     <td>{item.rs4cost}</td>
+              //     <td>{item.rs3cost}</td>
+              //     <td>{item.rs2cost}</td>
+              //     <td>{item.rs1cost}</td>
+              //   </tr>
+              // )
+            })}
           </tbody>
         </table>
       </div>
