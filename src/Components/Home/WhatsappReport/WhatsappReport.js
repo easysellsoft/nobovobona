@@ -86,12 +86,56 @@ const WhatsappReport = () => {
 
   return (
     <div className="mb-5 mt-5">
-      <h3>length: {data?.length}</h3>
+      <Box
+        sx={{
+          mt: 5,
+          mb:5
+        }}
+      >
+        <Box
+          sx={[
+            {
+              display: "flex",
+              justifyContent: "flex-start",
+              alignItems: "start",
+              mt: 2,
+              flexWrap: "wrap",
+            },
+          ]}
+        >
+          <ButtonComp title="Refresh" color="warning" refreshIco />
+          <ButtonComp
+            title="Add"
+            color="success"
+            add
+            onClick={() => {
+              // navigate("/projectRateAdd");
+            }}
+          />
+          <div className="btn_prb" onClick={() => setShow(!show)}>
+            <ButtonComp
+              title="Search"
+              color="info"
+              search
+              show
+              // onClick= {eventHandler}
+              // onClick={() => setShow(!show) }
+              // setShow={setShow}
+            >
+              {/* toggle: {show ? "show" : "hide"} */}
+            </ButtonComp>
+          </div>
+
+          {/* {show && <div>Hi there</div>} */}
+
+          <ButtonComp title="Delete" color="error" deleteIco />
+          <ButtonComp title="Export" color="primary" exportIco />
+        </Box>
+      </Box>
+      <h4 className="mb-3">Total Result: {data?.length}</h4>
       {show && (
         <>
-          <WhatsappReportSearch
-          
-          ></WhatsappReportSearch>
+          <WhatsappReportSearch></WhatsappReportSearch>
           {/* <FormControl className="mt-3" component="fieldset">
             <FormLabel component="legend">Group By</FormLabel>
             <FormGroup aria-label="position" row>
@@ -178,51 +222,6 @@ const WhatsappReport = () => {
         </>
       )}
 
-      <Box
-        sx={{
-          mt: 5,
-        }}
-      >
-        <Box
-          sx={[
-            {
-              display: "flex",
-              justifyContent: "flex-start",
-              alignItems: "start",
-              mt: 2,
-              flexWrap: "wrap",
-            },
-          ]}
-        >
-          <ButtonComp title="Refresh" color="warning" refreshIco />
-          <ButtonComp
-            title="Add"
-            color="success"
-            add
-            onClick={() => {
-              // navigate("/projectRateAdd");
-            }}
-          />
-          <div className="btn_prb" onClick={() => setShow(!show)}>
-            <ButtonComp
-              title="Search"
-              color="info"
-              search
-              show
-              // onClick= {eventHandler}
-              // onClick={() => setShow(!show) }
-              // setShow={setShow}
-            >
-              {/* toggle: {show ? "show" : "hide"} */}
-            </ButtonComp>
-          </div>
-
-          {/* {show && <div>Hi there</div>} */}
-
-          <ButtonComp title="Delete" color="error" deleteIco />
-          <ButtonComp title="Export" color="primary" exportIco />
-        </Box>
-      </Box>
       {/* {defaultData ? (
         <table class="table caption-top">
           <caption>List of users</caption>

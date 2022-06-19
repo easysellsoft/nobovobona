@@ -126,11 +126,19 @@ const Routing = () => {
       <Box
         sx={[
           {
-            position: "fixed",
+            position: "relative",
             bottom: 0,
             width: "100%",
-            // height: "50px",
+            // height: "100vh",
+            height: "50px",
             zIndex: "999",
+
+    //          position: "relative",
+    // width: "100%",
+    // bottom:" 0",
+    // color: "white",
+    // backgroundColor: "#202020",
+    // fontSize: "12px"
           },
         ]}
       >

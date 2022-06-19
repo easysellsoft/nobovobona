@@ -95,42 +95,40 @@ const WhatsappReportSearch = () => {
   }, []);
 
   const toggleHandler = (click) => {
-
-    console.log(click)
+    console.log(click);
     if (click === "year") {
-     setYear("year")
+      setYear("year");
     }
     if (click === "month") {
-     setMonth("month")
+      setMonth("month");
     }
     if (click === "day") {
-     setDay("day")
+      setDay("day");
     }
     if (click === "hour") {
-     setHour("hour")
+      setHour("hour");
     }
     if (click === "cc") {
-     setCc("cc")
+      setCc("cc");
     }
     if (click === "operator") {
-     setDestination1("operator")
+      setDestination1("operator");
     }
-    if (click === "sms_type") {
+    if (click === "service_type") {
       setServiceType1("sms_type");
     }
     if (click === "client_id") {
-     setClient("client_id");
+      setClient("client_id");
     }
-    if (click === "report") {
-     setEnd("report")
+    if (click === "end_reason") {
+      setEnd("report");
     }
-    if (click === "gateway_group") {
-     setGateway1("gateway_group");
+    if (click === "gateway") {
+      setGateway1("gateway_group");
     }
     // console.log('year',year)
 
     if (filterData.includes(click)) {
-
       let deleting = filterData.indexOf(click);
       console.log(deleting);
       if (deleting !== -1) {
@@ -150,20 +148,13 @@ const WhatsappReportSearch = () => {
     }
   };
 
- 
-
-
   const handelSubmit = (e) => {
     console.log(e);
     e.preventDefault();
 
-
-   
-
     // arrayTh.push((year || month))
     //   setArrayTh([...arrayTh]);
     //   console.log("update filter", arrayTh);
-
 
     setArrayTh([...filterData]);
 
@@ -277,7 +268,7 @@ const WhatsappReportSearch = () => {
 
   // let th = [
   //   year,
-   
+
   // ];
 
   // useEffect(() => {
@@ -409,8 +400,8 @@ const WhatsappReportSearch = () => {
               >
                 GW.Cost
               </FormLabel>
-              <FormControlLabel value="female" control={<Radio />} label=">" />
-              <FormControlLabel value="male" control={<Radio />} label="<" />
+              <FormControlLabel value="1" control={<Radio />} label=">" />
+              <FormControlLabel value="2" control={<Radio />} label="<" />
             </RadioGroup>
             <TextField
               label={<Box></Box>}
@@ -434,8 +425,8 @@ const WhatsappReportSearch = () => {
               >
                 Profit
               </FormLabel>
-              <FormControlLabel value="female" control={<Radio />} label=">" />
-              <FormControlLabel value="male" control={<Radio />} label="<" />
+              <FormControlLabel value="1" control={<Radio />} label=">" />
+              <FormControlLabel value="2" control={<Radio />} label="<" />
             </RadioGroup>
             <TextField
               label={<Box></Box>}
@@ -485,8 +476,8 @@ const WhatsappReportSearch = () => {
               >
                 Cost
               </FormLabel>
-              <FormControlLabel value="female" control={<Radio />} label=">" />
-              <FormControlLabel value="male" control={<Radio />} label="<" />
+              <FormControlLabel value="1" control={<Radio />} label=">" />
+              <FormControlLabel value="2" control={<Radio />} label="<" />
             </RadioGroup>
 
             <TextField
@@ -555,11 +546,11 @@ const WhatsappReportSearch = () => {
             />
 
             <FormControlLabel
-              value="sms_type"
+              value="service_type"
               control={<Checkbox />}
               label="Service"
               labelPlacement="top"
-              onChange={() => toggleHandler("sms_type")}
+              onChange={() => toggleHandler("service_type")}
               // onChange={() => setServiceType("sms_type")}
               // onChange={(e) => setServiceType1?.("sms_type")}
             />
@@ -572,19 +563,19 @@ const WhatsappReportSearch = () => {
               // onChange={(e) => setClient?.("client_id")}
             />
             <FormControlLabel
-              value="report"
+              value="end_reason"
               control={<Checkbox />}
               label="End Reason"
               labelPlacement="top"
-              onChange={() => toggleHandler("report")}
+              onChange={() => toggleHandler("end_reason")}
               // onChange={(e) => setEnd?.("report")}
             />
             <FormControlLabel
-              value="gateway_group"
+              value="gateway"
               control={<Checkbox />}
               label="End Gateway"
               labelPlacement="top"
-              onChange={() => toggleHandler("gateway_group")}
+              onChange={() => toggleHandler("gateway")}
               // onChange={(e) => setGateway1?.("gateway_group")}
             />
           </FormGroup>

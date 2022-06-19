@@ -31,7 +31,8 @@ import LiveClock from "../LiveClock/LiveClock";
 import useAuth from "./../../../Hooks/useAuth";
 import MainRoutes from "./MainRoutes/MainRoutes";
 //end
-const drawerWidth = 240;
+// const drawerWidth = 240;
+const drawerWidth = 300;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -55,7 +56,9 @@ const closedMixin = (theme) => ({
 });
 
 const DrawerHeader = styled("div")(({ theme }) => ({
+  width: "100",
   display: "flex",
+
   alignItems: "center",
   justifyContent: "flex-end",
   padding: theme.spacing(0, 1),

@@ -17,7 +17,7 @@ const Footer = () => {
         borderTop: "1px solid #ccc",
       }}
     >
-      <Typography variant="subtitle2" align="center" >
+      <Typography variant="subtitle2" align="center">
         &copy; 2018 ghorami.com. All rights reserved.
       </Typography>
       <Typography variant="subtitle2" F align="center">
