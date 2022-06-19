@@ -67,7 +67,7 @@ const WhatsappReportSearch = () => {
 
   //   const [rememberMe, setRememberMe] = useState(false);
   const [updateTable, setUpdateTable] = useState([]);
-  const [arrayth, setArrayth] = useState([]);
+  const [arrayTh, setArrayTh] = useState([]);
   const [ip, setIp] = useState("");
   //  const location = useLocation();
 
@@ -94,44 +94,93 @@ const WhatsappReportSearch = () => {
       });
   }, []);
 
-  // const toggleHandler = (click) => {
-  //   if (filterData.includes(click)) {
+  const toggleHandler = (click) => {
 
-  //     let deleting = filterData.indexOf(click);
-  //     console.log(deleting);
-  //     if (deleting !== -1) {
-  //       filterData.splice(deleting, 1);
-  //     }
-  //     setFilterData([...filterData]);
-  //     console.log("after deleting  filter", filterData);
-  //   } else {
-  //     filterData.push(click);
-  //     setFilterData([...filterData]);
-  //     console.log("update filter", filterData);
-  //     if (filterData.length > 0) {
-  //       setDefault(false);
-  //     } else {
-  //       setDefault(!defaultData);
-  //     }
-  //   }
-  // };
+    console.log(click)
+    if (click === "year") {
+     setYear("year")
+    }
+    if (click === "month") {
+     setMonth("month")
+    }
+    if (click === "day") {
+     setDay("day")
+    }
+    if (click === "hour") {
+     setHour("hour")
+    }
+    if (click === "cc") {
+     setCc("cc")
+    }
+    if (click === "operator") {
+     setDestination1("operator")
+    }
+    if (click === "sms_type") {
+      setServiceType1("sms_type");
+    }
+    if (click === "client_id") {
+     setClient("client_id");
+    }
+    if (click === "report") {
+     setEnd("report")
+    }
+    if (click === "gateway_group") {
+     setGateway1("gateway_group");
+    }
+    // console.log('year',year)
+
+    if (filterData.includes(click)) {
+
+      let deleting = filterData.indexOf(click);
+      console.log(deleting);
+      if (deleting !== -1) {
+        filterData.splice(deleting, 1);
+      }
+      setFilterData([...filterData]);
+      console.log("after deleting  filter", filterData);
+    } else {
+      filterData.push(click);
+      setFilterData([...filterData]);
+      console.log("update filter", filterData);
+      // if (filterData.length > 0) {
+      //   setDefault(false);
+      // } else {
+      //   setDefault(!defaultData);
+      // }
+    }
+  };
+
+ 
+
 
   const handelSubmit = (e) => {
+    console.log(e);
     e.preventDefault();
-    
-   setArrayth([
-     year,
-     month,
-     day,
-     hour,
-     cc,
-     destination1,
-     service1,
-     serviceType1,
-     client,
-     end,
-     gateway1,
-   ]);
+
+
+   
+
+    // arrayTh.push((year || month))
+    //   setArrayTh([...arrayTh]);
+    //   console.log("update filter", arrayTh);
+
+
+    setArrayTh([...filterData]);
+
+    // setArrayTh([
+    //   year,
+    //   month,
+    //   day,
+    //   hour,
+    //   cc,
+    //   destination1,
+    //   service1,
+    //   serviceType1,
+    //   client,
+    //   end,
+    //   gateway1,
+    // ]);
+
     console.log(
       formDate,
       toDate,
@@ -318,7 +367,8 @@ const WhatsappReportSearch = () => {
               id="outlined"
               //   label="Service Type"
               label={<Box></Box>}
-              value={currency}
+              // value={currency}
+              value={textValue}
               fullWidth
               onChange={onTextChange}
               // onChange={(handleChange, onTextChange)}
@@ -460,81 +510,82 @@ const WhatsappReportSearch = () => {
               label="Year"
               labelPlacement="top"
               // onChange={() => setDefault(!defaultData)}
-              // onChange={() => toggleHandler("year")}
-              onChange={(e) => setYear?.("year")}
+              onChange={(e) => toggleHandler("year")}
+              // onChange={(e) => setYear?.("year")}
             />
             <FormControlLabel
               value="month"
               control={<Checkbox />}
               label="Month"
               labelPlacement="top"
-              // onChange={() => toggleHandler("month")}
-              onChange={(e) => setMonth?.("month")}
+              onChange={() => toggleHandler("month")}
+              // onChange={(e) => setMonth?.("month")}
             />
             <FormControlLabel
               value="day"
               control={<Checkbox />}
               label="Day"
               labelPlacement="top"
-              // onChange={() => toggleHandler("day")}
-              onChange={(e) => setDay?.("day")}
+              onChange={() => toggleHandler("day")}
+              // onChange={(e) => setDay?.("day")}
             />
             <FormControlLabel
               value="hour"
               control={<Checkbox />}
               label="Hour"
               labelPlacement="top"
-              // onChange={() => toggleHandler("hour")}
-              onChange={(e) => setHour?.("hour")}
+              onChange={() => toggleHandler("hour")}
+              // onChange={(e) => setHour?.("hour")}
             />
             <FormControlLabel
               value="cc"
               control={<Checkbox />}
               label="CC"
               labelPlacement="top"
-              // onChange={() => toggleHandler("cc")}
-              onChange={(e) => setCc?.("cc")}
+              onChange={() => toggleHandler("cc")}
+              // onChange={(e) => setCc?.("cc")}
             />
             <FormControlLabel
-              value="destiantion1"
+              value="operator"
               control={<Checkbox />}
               label="Destination"
               labelPlacement="top"
-              // onChange={() => toggleHandler("destination")}
-              onChange={(e) => setDestination1?.("operator")}
+              onChange={() => toggleHandler("operator")}
+              // onChange={(e) => setDestination1?.("operator")}
             />
 
             <FormControlLabel
-              value="serviceType1"
+              value="sms_type"
               control={<Checkbox />}
-              label="Service Type"
+              label="Service"
               labelPlacement="top"
-              // onChange={() => setServiceType("service_type")}
-              onChange={(e) => setServiceType1?.("sms_type")}
+              onChange={() => toggleHandler("sms_type")}
+              // onChange={() => setServiceType("sms_type")}
+              // onChange={(e) => setServiceType1?.("sms_type")}
             />
             <FormControlLabel
-              value="client"
+              value="client_id"
               control={<Checkbox />}
               label="Client"
               labelPlacement="top"
-              // onChange={() => toggleHandler("client")}
-              onChange={(e) => setClient?.("client_id")}
+              onChange={() => toggleHandler("client_id")}
+              // onChange={(e) => setClient?.("client_id")}
             />
             <FormControlLabel
-              value="end"
+              value="report"
               control={<Checkbox />}
               label="End Reason"
               labelPlacement="top"
-              // onChange={() => toggleHandler("end")}
-              onChange={(e) => setEnd?.("report")}
+              onChange={() => toggleHandler("report")}
+              // onChange={(e) => setEnd?.("report")}
             />
             <FormControlLabel
-              value="gateway1"
+              value="gateway_group"
               control={<Checkbox />}
               label="End Gateway"
               labelPlacement="top"
-              // onChange={() => toggleHandler("gateway")}
-              onChange={(e) => setGateway1?.("gateway_group")}
+              onChange={() => toggleHandler("gateway_group")}
+              // onChange={(e) => setGateway1?.("gateway_group")}
             />
           </FormGroup>
           {/* <button
@@ -655,7 +706,7 @@ const WhatsappReportSearch = () => {
           </tbody>
         </table>
       ) : (
-        <WhatsappReportTable updateTable={updateTable} arrayth={arrayth} />
+        <WhatsappReportTable updateTable={updateTable} arrayTh={arrayTh} />
       )}
     </div>
   );
