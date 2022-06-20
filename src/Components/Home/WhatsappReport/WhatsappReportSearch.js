@@ -16,6 +16,7 @@ import {
 import { AiTwotoneMail } from "react-icons/ai";
 import { RiLockPasswordFill } from "react-icons/ri";
 import WhatsappReportTable from "./WhatsappReportTable";
+import Loading from "../../Shared/Loading";
 const currencies = [
   {
     value: "0",
@@ -31,7 +32,8 @@ const currencies = [
   },
 ];
 
-const WhatsappReportSearch = () => {
+const WhatsappReportSearch = ({isLoading,setLoading}) => {
+
   const [currency, setCurrency] = useState("");
   const [textValue, setTextValue] = useState("");
   const [data, setData] = useState([]);
@@ -70,7 +72,6 @@ const WhatsappReportSearch = () => {
   const [arrayTh, setArrayTh] = useState([]);
   const [ip, setIp] = useState("");
   //  const location = useLocation();
-
   //  const navigate = useNavigate();
   //  const redirectUi = location.state ? location.state.from : "/";
   const formData = new FormData();
@@ -82,17 +83,19 @@ const WhatsappReportSearch = () => {
     //    console.log(input);
     setTextValue(e.target.value);
   };
-
-  useEffect(() => {
-    fetch(
-      "http://poultrykhamarbichitra.net/admin/Record/whatsapp_record_search.php?format=format&amp;&amp;search_sms_reports_month=search_sms_reports_month"
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setData(data);
-      });
-  }, []);
+ 
+    useEffect(() => {
+      fetch(
+        "http://poultrykhamarbichitra.net/admin/Record/whatsapp_record_search.php?format=format&amp;&amp;search_sms_reports_month=search_sms_reports_month"
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+    
+          // setRefresh(!refresh)
+        
+        });
+    }, []);
 
   const toggleHandler = (click) => {
     console.log(click);
@@ -172,35 +175,10 @@ const WhatsappReportSearch = () => {
     //   gateway1,
     // ]);
 
-    console.log(
-      formDate,
-      toDate,
-      userName,
-      callerId,
-      number,
-      message,
-      serviceType,
-
-      destination,
-      gwCost,
-      profit,
-      gateway,
-      endReason,
-      cost,
-      filterData,
-
-      year,
-      month,
-      day,
-      hour,
-      cc,
-      destination1,
-      service1,
-      serviceType1,
-      client,
-      end,
-      gateway1
-    );
+    // console.log(
+    //   formDate,  toDate,    userName,    callerId,    number,    message,    serviceType,     destination,    gwCost,    profit,   gateway, endReason,   cost, filterData, year,  month,  day, hour,  cc,
+    //   destination1, service1, serviceType1,  client,  end,  gateway1
+    // );
 
     formData.append("search_flexi_reports_from_date", formDate);
     formData.append("search_flexi_reports_to_date", toDate);
@@ -239,6 +217,7 @@ const WhatsappReportSearch = () => {
       .then((data) => {
         console.log(data);
         setUpdateTable(data);
+        // setLoading(!isLoading)
       });
 
     // .then((res) => {
@@ -277,6 +256,11 @@ const WhatsappReportSearch = () => {
 
   return (
     <div>
+      {/* {
+        isLoading && <Loading></Loading>
+      
+      } */}
+      {console.log("loading")}
       <form onSubmit={handelSubmit}>
         <Grid container spacing={3}>
           <Grid item lg={3} xs={6} md={4}>
@@ -578,23 +562,29 @@ const WhatsappReportSearch = () => {
               onChange={() => toggleHandler("gateway")}
               // onChange={(e) => setGateway1?.("gateway_group")}
             />
-          </FormGroup>
-          {/* <button
+            <Box
               style={{
-                maxWidth: "100px",
-                maxHeight: "56px",
-                borderRadius: "15px",
-                fontWeight: "bold",
-                letterSpacing: "1px",
-                marginTop: "12px",
+                display: "flex",
+                // justify-content: "space-between",
+                textAlign: "center",
+                marginTop: "30px",
+                marginRight: "100px",
               }}
-              className="bg-secondary font-bold text-light p-3 me-4 w-22"
             >
-              Search
-            </button> */}
+              <Button
+                variant="contained"
+                color="primary"
+                width="25%"
+                sx={{ py: 2 }}
+                type="submit"
+              >
+                Search
+              </Button>
+            </Box>
+          </FormGroup>
         </FormControl>
 
-        <Box
+        {/* <Box
           style={{
             textAlign: "center",
             marginTop: "20px",
@@ -610,7 +600,7 @@ const WhatsappReportSearch = () => {
           >
             Search
           </Button>
-        </Box>
+        </Box> */}
       </form>
       {/* {defaultData ? (
         <table class="table caption-top">

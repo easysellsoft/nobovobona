@@ -19,6 +19,7 @@ import { Box } from "@mui/system";
 import ButtonComp from "../../Shared/Button/Button";
 import WhatsappReportTable from "./WhatsappReportTable";
 import WhatsappReportSearch from "./WhatsappReportSearch";
+import Loading from './../../Shared/Loading';
 
 const currencies = [
   {
@@ -35,8 +36,10 @@ const currencies = [
   },
 ];
 const WhatsappReport = () => {
+    const [isLoading, setLoading] = useState(true);
   // const [show, setShow] = useState(true);
   const [show, setShow] = useState(false);
+  const [refresh, setRefresh] = useState(false);
   const [data, setData] = useState([]);
   const [currency, setCurrency] = useState("");
   const [defaultData, setDefault] = useState(true);
@@ -56,27 +59,27 @@ const WhatsappReport = () => {
   //     });
   // }, []);
 
-  const toggleHandler = (click) => {
-    if (filterData.includes(click)) {
+  // const toggleHandler = (click) => {
+  //   if (filterData.includes(click)) {
      
-      let deleting = filterData.indexOf(click);
-      console.log(deleting);
-      if (deleting !== -1) {
-        filterData.splice(deleting, 1);
-      }
-      setFilterData([...filterData]);
-      console.log("after deleting  filter", filterData);
-    } else {
-      filterData.push(click);
-      setFilterData([...filterData]);
-      console.log("update filter", filterData);
-      if (filterData.length > 0) {
-        setDefault(false);
-      } else {
-        setDefault(!defaultData);
-      }
-    }
-  };
+  //     let deleting = filterData.indexOf(click);
+  //     console.log(deleting);
+  //     if (deleting !== -1) {
+  //       filterData.splice(deleting, 1);
+  //     }
+  //     setFilterData([...filterData]);
+  //     console.log("after deleting  filter", filterData);
+  //   } else {
+  //     filterData.push(click);
+  //     setFilterData([...filterData]);
+  //     console.log("update filter", filterData);
+  //     if (filterData.length > 0) {
+  //       setDefault(false);
+  //     } else {
+  //       setDefault(!defaultData);
+  //     }
+  //   }
+  // };
 
   useEffect(() => {
     console.log("main filter", filterData);
@@ -86,10 +89,15 @@ const WhatsappReport = () => {
 
   return (
     <div className="mb-5 mt-5">
+ 
+      {/* {
+        isLoading && <Loading></Loading>
+      
+      } */}
       <Box
         sx={{
           mt: 5,
-          mb:5
+          mb: 5,
         }}
       >
         <Box
@@ -103,15 +111,18 @@ const WhatsappReport = () => {
             },
           ]}
         >
-          <ButtonComp title="Refresh" color="warning" refreshIco />
-          <ButtonComp
-            title="Add"
-            color="success"
-            add
+          <div
+            className="btn_prb"
             onClick={() => {
-              // navigate("/projectRateAdd");
+              setRefresh(!refresh);
+              if (show) {
+                setShow(false);
+              }
             }}
-          />
+          >
+            <ButtonComp title="Refresh" color="warning" refreshIco />
+          </div>
+
           <div className="btn_prb" onClick={() => setShow(!show)}>
             <ButtonComp
               title="Search"
@@ -128,14 +139,18 @@ const WhatsappReport = () => {
 
           {/* {show && <div>Hi there</div>} */}
 
-          <ButtonComp title="Delete" color="error" deleteIco />
           <ButtonComp title="Export" color="primary" exportIco />
         </Box>
       </Box>
       <h4 className="mb-3">Total Result: {data?.length}</h4>
-      {show && (
+      {(show && isLoading)&& (
         <>
-          <WhatsappReportSearch></WhatsappReportSearch>
+          <WhatsappReportSearch
+            refresh={refresh} 
+            isLoading={isLoading}
+            setLoading={setLoading}
+            setRefresh={setRefresh}
+          ></WhatsappReportSearch>
           {/* <FormControl className="mt-3" component="fieldset">
             <FormLabel component="legend">Group By</FormLabel>
             <FormGroup aria-label="position" row>
@@ -221,8 +236,7 @@ const WhatsappReport = () => {
           </FormControl> */}
         </>
       )}
-
-      {/* {defaultData ? (
+      {(refresh || !refresh) && (
         <table class="table caption-top">
           <caption>List of users</caption>
           <thead>
@@ -262,9 +276,7 @@ const WhatsappReport = () => {
             </tr>
           </tbody>
         </table>
-      ) : (
-        <WhatsappReportTable data={data} filterData={filterData} />
-      )} */}
+      )}
     </div>
   );
 };

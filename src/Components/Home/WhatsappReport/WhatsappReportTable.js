@@ -1,11 +1,13 @@
 import hi from "date-fns/esm/locale/hi/index.js";
 import React, { useEffect, useState } from "react";
+import Loading from './../../Shared/Loading';
 
 const WhatsappReportTable = (props) => {
   const [checkData, setCheckData] = useState([]);
   console.log("props", props.updateTable);
   console.log("props", props.arrayTh);
-  const { updateTable, arrayTh } = props;
+  const { updateTable, arrayTh, isLoading } = props;
+  console.log(isLoading)
   // console.log( arrayth);
 
   // const { year, month, day, total_message, deliver, end_failed, failed, qued, asr, cr, c1cost, gatcost, profit, rs4cost, rs3cost, rs2cost, rs1cost } = data;
@@ -56,7 +58,7 @@ const WhatsappReportTable = (props) => {
       ? Object.keys(updateTable[0]).filter((d) => thData?.includes(d))
       : [];
 
-  return (
+  return  (
     <div>
       <h1>{updateTable.length}</h1>
       <div class="table-responsive">
@@ -152,6 +154,7 @@ const WhatsappReportTable = (props) => {
       </div>
     </div>
   );
+ 
 };
 
 export default WhatsappReportTable;
