@@ -19,7 +19,7 @@ import { Box } from "@mui/system";
 import ButtonComp from "../../Shared/Button/Button";
 import WhatsappReportTable from "./WhatsappReportTable";
 import WhatsappReportSearch from "./WhatsappReportSearch";
-import Loading from './../../Shared/Loading';
+// import Loading from './../../Shared/Loading';
 
 const currencies = [
   {
@@ -36,7 +36,7 @@ const currencies = [
   },
 ];
 const WhatsappReport = () => {
-    const [isLoading, setLoading] = useState(true);
+    // const [isLoading, setLoading] = useState(true);
   // const [show, setShow] = useState(true);
   const [show, setShow] = useState(false);
   const [refresh, setRefresh] = useState(false);
@@ -143,12 +143,11 @@ const WhatsappReport = () => {
         </Box>
       </Box>
       <h4 className="mb-3">Total Result: {data?.length}</h4>
-      {(show && isLoading)&& (
+      {show && (
         <>
           <WhatsappReportSearch
             refresh={refresh} 
-            isLoading={isLoading}
-            setLoading={setLoading}
+           
             setRefresh={setRefresh}
           ></WhatsappReportSearch>
           {/* <FormControl className="mt-3" component="fieldset">
@@ -236,7 +235,7 @@ const WhatsappReport = () => {
           </FormControl> */}
         </>
       )}
-      {(refresh || !refresh) && (
+      {((refresh || !refresh) && !show) && (
         <table class="table caption-top">
           <caption>List of users</caption>
           <thead>

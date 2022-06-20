@@ -58,7 +58,7 @@ const WhatsappReportTable = (props) => {
       ? Object.keys(updateTable[0]).filter((d) => thData?.includes(d))
       : [];
 
-  return  (
+  return isLoading ? <Loading></Loading> :  (
     <div>
       <h1>{updateTable.length}</h1>
       <div class="table-responsive">
