@@ -35,8 +35,30 @@ const currencies = [
 ];
 
 const WhatsappReportSearch = () => {
-   const [isLoading, setLoading] = useState(false);
+   const [checked, setChecked] = React.useState(false);
+  //  const [checked1, setChecked1] = React.useState(true);
+  //  const [checked2, setChecked2] = React.useState(true);
 
+   const handleChange = (event) => {
+     setChecked(event.target.checked);
+     
+  };
+  //  const handleChange1 = (event) => {
+  //    setChecked1(event.target.checked);
+     
+  // };
+  //  const handleChange2 = (event) => {
+  //    setChecked2(event.target.checked);
+     
+  // };
+  console.log(checked)
+  //  const [checked, setChecked] = React.useState(true);
+
+  //  const handleChange = (event) => {
+  //    setChecked(event.target.checked);
+  //  };
+  // const [toggleYear, setToggleYear] = useState(false);
+   const [isLoading, setLoading] = useState(false);
   const [currency, setCurrency] = useState("");
   const [textValue, setTextValue] = useState("");
   const [data, setData] = useState([]);
@@ -101,8 +123,8 @@ const WhatsappReportSearch = () => {
     }, []);
 
   const toggleHandler = (click) => {
-    console.log(click);
-    if (click === "year") {
+    console.log(click.target);
+    if ((checked) && (click === "year")) {
       setYear("year");
     }
     if (click === "month") {
@@ -164,24 +186,7 @@ const WhatsappReportSearch = () => {
 
     setArrayTh([...filterData]);
 
-    // setArrayTh([
-    //   year,
-    //   month,
-    //   day,
-    //   hour,
-    //   cc,
-    //   destination1,
-    //   service1,
-    //   serviceType1,
-    //   client,
-    //   end,
-    //   gateway1,
-    // ]);
-
-    // console.log(
-    //   formDate,  toDate,    userName,    callerId,    number,    message,    serviceType,     destination,    gwCost,    profit,   gateway, endReason,   cost, filterData, year,  month,  day, hour,  cc,
-    //   destination1, service1, serviceType1,  client,  end,  gateway1
-    // );
+   
 
     formData.append("search_flexi_reports_from_date", formDate);
     formData.append("search_flexi_reports_to_date", toDate);
@@ -488,16 +493,35 @@ const WhatsappReportSearch = () => {
             <FormGroup aria-label="position" row>
               <FormControlLabel
                 value="year"
-                control={<Checkbox />}
+                control={
+                  <Checkbox
+                    checked={checked}
+                    onChange={handleChange}
+                    // onChange={(e) => toggleHandler("year")}
+                  />
+                }
+                // control={
+                //   <Checkbox
+                //     checked={checked}
+                //     onChange={handleChange}
+                //     inputProps={{ "aria-label": "controlled" }}
+                //   />
+                // }
                 label="Year"
                 labelPlacement="top"
                 // onChange={() => setDefault(!defaultData)}
+
                 onChange={(e) => toggleHandler("year")}
                 // onChange={(e) => setYear?.("year")}
               />
               <FormControlLabel
                 value="month"
-                control={<Checkbox />}
+                control={
+                  <Checkbox
+                    // checked1={checked1}
+                  // onChange={handleChange1}
+                  />
+                }
                 label="Month"
                 labelPlacement="top"
                 onChange={() => toggleHandler("month")}
@@ -505,7 +529,12 @@ const WhatsappReportSearch = () => {
               />
               <FormControlLabel
                 value="day"
-                control={<Checkbox />}
+                control={
+                  <Checkbox
+                    // checked2={checked2}
+                  // onChange={handleChange2}
+                  />
+                }
                 label="Day"
                 labelPlacement="top"
                 onChange={() => toggleHandler("day")}
@@ -513,7 +542,10 @@ const WhatsappReportSearch = () => {
               />
               <FormControlLabel
                 value="hour"
-                control={<Checkbox />}
+                control={<Checkbox
+                  // checked3={checked3}
+                  // onChange={handleChange3}
+                />}
                 label="Hour"
                 labelPlacement="top"
                 onChange={() => toggleHandler("hour")}
@@ -653,6 +685,7 @@ const WhatsappReportSearch = () => {
        
         <WhatsappReportTable data={data} filterData={filterData} />
       )} */}
+
         {/* {isLoading && <Loading></Loading>} */}
         {updateTable.length === 0 ? (
           <table class="table caption-top">
@@ -696,7 +729,11 @@ const WhatsappReportSearch = () => {
           </table>
         ) : (
           <>
-            <WhatsappReportTable isLoading={isLoading} updateTable={updateTable} arrayTh={arrayTh} />
+            <WhatsappReportTable
+              isLoading={isLoading}
+              updateTable={updateTable}
+              arrayTh={arrayTh}
+            />
           </>
         )}
       </div>
