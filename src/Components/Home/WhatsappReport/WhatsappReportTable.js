@@ -207,17 +207,19 @@ const WhatsappReportTable = (props) => {
    const handleChangeRowsPerPage = (event) => {
      setRowsPerPage(parseInt(event.target.value, 10));
      setPage(0);
-   };
+  };
+  
 
   return isLoading ? (
     <Loading></Loading>
   ) : (
-    <div>
-      <h1>{updateTable.length}</h1>
+    <div >
+      {/* <h1>{updateTable.length}</h1> */}
       {/* materaial ui start  */}
       <TableContainer
         sx={[
-          {
+            {
+            
             maxHeight: 440,
             "@media (max-width: 576px)": {
               width: "300px",
@@ -318,31 +320,40 @@ const WhatsappReportTable = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {updateTable
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((item) => {
-                return (
-                  <TableRow key={item.name}>
-                    {dataKey?.map((dd) => (
-                      <TableCell align="left">{item[dd]}</TableCell>
-                    ))}
-                    <TableCell align="left">{item.total_message}</TableCell>
-                    <TableCell align="left">{item.deliver}</TableCell>
-                    <TableCell align="left">{item.end_failed}</TableCell>
-                    <TableCell align="left">{item.failed}</TableCell>
-                    <TableCell align="left">{item.qued}</TableCell>
-                    <TableCell align="left">{item.asr}</TableCell>
-                    <TableCell align="left">{item.cr}</TableCell>
-                    <TableCell align="left">{item.c1cost}</TableCell>
-                    <TableCell align="left">{item.gatcost}</TableCell>
-                    <TableCell align="left">{item.profit}</TableCell>
-                    <TableCell align="left">{item.rs4cost}</TableCell>
-                    <TableCell align="left">{item.rs3cost}</TableCell>
-                    <TableCell align="left">{item.rs2cost}</TableCell>
-                    <TableCell align="left">{item.rs1cost}</TableCell>
-                  </TableRow>
-                );
-              })}
+            {(rowsPerPage > 0
+              ? updateTable.slice(
+                  page * rowsPerPage,
+                  page * rowsPerPage + rowsPerPage
+                )
+              : updateTable
+            ).map((item) => {
+              return (
+                <TableRow key={item.name}>
+                  {dataKey?.map((dd) => (
+                    <TableCell align="left">{item[dd]}</TableCell>
+                  ))}
+                  <TableCell align="left">{item.total_message}</TableCell>
+                  <TableCell align="left">{item.deliver}</TableCell>
+                  <TableCell align="left">{item.end_failed}</TableCell>
+                  <TableCell align="left">{item.failed}</TableCell>
+                  <TableCell align="left">{item.qued}</TableCell>
+                  <TableCell align="left">{item.asr}</TableCell>
+                  <TableCell align="left">{item.cr}</TableCell>
+                  <TableCell align="left">{item.c1cost}</TableCell>
+                  <TableCell align="left">{item.gatcost}</TableCell>
+                  <TableCell align="left">{item.profit}</TableCell>
+                  <TableCell align="left">{item.rs4cost}</TableCell>
+                  <TableCell align="left">{item.rs3cost}</TableCell>
+                  <TableCell align="left">{item.rs2cost}</TableCell>
+                  <TableCell align="left">{item.rs1cost}</TableCell>
+                </TableRow>
+              );
+            })}
+            {emptyRows > 0 && (
+              <TableRow style={{ height: 53 * emptyRows }}>
+                <TableCell colSpan={6} />
+              </TableRow>
+            )}
           </TableBody>
           <TableFooter>
             <TableRow>
@@ -380,7 +391,6 @@ const WhatsappReportTable = (props) => {
           },
         ]}
       />
-    
     </div>
   );
 };

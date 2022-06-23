@@ -19,6 +19,7 @@ import { AiTwotoneMail } from "react-icons/ai";
 import { RiLockPasswordFill } from "react-icons/ri";
 import WhatsappReportTable from "./WhatsappReportTable";
 import Loading from "../../Shared/Loading";
+import WhatsappTableDefault from './WhatsappTableDefault';
 const currencies = [
   {
     value: "0",
@@ -115,16 +116,7 @@ const WhatsappReportSearch = () => {
     setTextValue(e.target.value);
   };
 
-  useEffect(() => {
-    fetch(
-      "http://poultrykhamarbichitra.net/admin/Record/whatsapp_record_search.php?format=format&amp;&amp;search_sms_reports_month=search_sms_reports_month"
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log(data);
-        // setRefresh(!refresh)
-      });
-  }, []);
+ 
 
   const toggleHandler = (click) => {
     console.log(click);
@@ -185,20 +177,16 @@ const WhatsappReportSearch = () => {
     console.log(e);
     e.preventDefault();
     setLoading(true);
-    // arrayTh.push((year || month))
-    //   setArrayTh([...arrayTh]);
-    //   console.log("update filter", arrayTh);
+   
 
     setArrayTh([...filterData]);
 
     formData.append("search_flexi_reports_from_date", formDate);
     formData.append("search_flexi_reports_to_date", toDate);
     formData.append("search_flexi_reports_username", userName);
-    // formData.append("pass", callerId);
+  
     formData.append("search_flexi_reports_number", number);
-    // formData.append("pass", message);
-    // formData.append("pass", serviceType);
-    // formData.append("pass", destination);
+    
     formData.append("search_flexi_reports_gw_cost1", gwCost);
     formData.append("search_flexi_reports_profit1", profit);
     formData.append("search_flexi_reports_gateway", gateway);
@@ -206,14 +194,6 @@ const WhatsappReportSearch = () => {
     formData.append("search_flexi_reports_cost1", cost);
     formData.append("format", "format");
 
-    // formData.append("search_sms_reports_month", month);
-    // formData.append("search_sms_reports_day", day)
-    // formData.append("search_sms_reports_hour", hour)
-    // {
-    //   checked
-    //     ? formData.append("search_sms_reports_year", year)
-    //     : formData.append("search_sms_reports_year", "")
-    // }
     if (checked) {
       formData.append("search_sms_reports_year", year);
     } else {
@@ -265,12 +245,6 @@ const WhatsappReportSearch = () => {
       formData.append("search_sms_reports_end_gateway", "");
     }
 
-    // formData.append("search_sms_reports_cc", cc);
-    // formData.append("search_sms_reports_operator", destination1)
-    // formData.append("search_sms_reports_service_type1", serviceType1)
-    // formData.append("search_sms_reports_end_gateway", gateway1);
-    // formData.append("search_sms_reports_end_reason1", end);
-    // formData.append("search_sms_reports_client", client)
 
     fetch(
       `http://poultrykhamarbichitra.net/admin/Record/whatsapp_record_search.php`,
@@ -284,44 +258,11 @@ const WhatsappReportSearch = () => {
       .then((data) => {
         console.log(data);
         setUpdateTable(data);
-        // setLoading(!isLoading)
-
-        // setLoading(!isLoading)
+      
       });
 
-    // .then((res) => {
-    //   console.log(res);
-    //   res.json();
-    // })
-    // .then((data) => {
-    //   console.log(data);
-    //   e.target.reset();
-    // })
-    //  .catch((err) => console.log(err));
-
-    //   .catch((error) => {
-    //       console.log(error)
-    //   })
   };
-  //  useEffect(() => {
-  //    fetch(
-  //      "http://poultrykhamarbichitra.net/admin/Record/whatsapp_record_search.php"
-  //    )
-  //      .then((res) => res.json())
-  //      .then((data) => {
-  //        console.log(data);
-  //        setUpdateTable(data);
-  //      });
-  //  }, []);
-
-  // let th = [
-  //   year,
-
-  // ];
-
-  // useEffect(() => {
-  //   setArrayth(th);
-  // }, [th]);
+  
 
   useEffect(() => {
     if (updateTable.length !== 0) {
@@ -553,34 +494,25 @@ const WhatsappReportSearch = () => {
               value="year"
               control={
                 <Checkbox
-                // checked={checked}
-                // onChange={handleChange}
-                // onChange={(e) => toggleHandler("year")}
+              
                 />
               }
-              // control={
-              //   <Checkbox
-              //     checked={checked}
-              //     onChange={handleChange}
-              //     inputProps={{ "aria-label": "controlled" }}
-              //   />
-              // }
+             
               label="Year"
               labelPlacement="top"
-              // onChange={() => setDefault(!defaultData)}
+       
 
               onChange={(e) => {
                 toggleHandler("year");
                 setChecked(!checked);
               }}
-              // onChange={(e) => setYear?.("year")}
+           
             />
             <FormControlLabel
               value="month"
               control={
                 <Checkbox
-                // checked1={checked1}
-                // onChange={handleChange1}
+       
                 />
               }
               label="Month"
@@ -589,14 +521,13 @@ const WhatsappReportSearch = () => {
                 toggleHandler("month");
                 setTgMonth(!tgMonth);
               }}
-              // onChange={(e) => setMonth?.("month")}
+        
             />
             <FormControlLabel
               value="day"
               control={
                 <Checkbox
-                // checked2={checked2}
-                // onChange={handleChange2}
+          
                 />
               }
               label="Day"
@@ -605,14 +536,13 @@ const WhatsappReportSearch = () => {
                    toggleHandler("day");
                 setTgDay(!tgDay);
               }}
-              // onChange={(e) => setDay?.("day")}
+            
             />
             <FormControlLabel
               value="hour"
               control={
                 <Checkbox
-                // checked3={checked3}
-                // onChange={handleChange3}
+            
                 />
               }
               label="Hour"
@@ -621,7 +551,7 @@ const WhatsappReportSearch = () => {
                 toggleHandler("hour");
                 setTgHour(!tgHour);
               }}
-              // onChange={(e) => setHour?.("hour")}
+           
             />
             <FormControlLabel
               value="cc"
@@ -632,7 +562,7 @@ const WhatsappReportSearch = () => {
                 toggleHandler("cc");
                 setTgCc(!tgCc);
               }}
-              // onChange={(e) => setCc?.("cc")}
+            
             />
             <FormControlLabel
               value="operator"
@@ -643,7 +573,7 @@ const WhatsappReportSearch = () => {
                 toggleHandler("operator");
                 setTgDestination(!tgDestination);
               }}
-              // onChange={(e) => setDestination1?.("operator")}
+        
             />
 
             <FormControlLabel
@@ -655,8 +585,7 @@ const WhatsappReportSearch = () => {
                 toggleHandler("service_type");
                 setTgService(!tgService);
               }}
-              // onChange={() => setServiceType("sms_type")}
-              // onChange={(e) => setServiceType1?.("sms_type")}
+          
             />
             <FormControlLabel
               value="client_id"
@@ -667,7 +596,7 @@ const WhatsappReportSearch = () => {
                 toggleHandler("client_id");
                 setTgClient(!tgClient);
               }}
-              // onChange={(e) => setClient?.("client_id")}
+         
             />
             <FormControlLabel
               value="end_reason"
@@ -678,7 +607,7 @@ const WhatsappReportSearch = () => {
                 toggleHandler("end_reason");
                 setTgReason(!tgReason);
               }}
-              // onChange={(e) => setEnd?.("report")}
+    
             />
             <FormControlLabel
               value="gateway"
@@ -689,12 +618,12 @@ const WhatsappReportSearch = () => {
                 toggleHandler("gateway");
                 setTgGateway(!tgGateway);
               }}
-              // onChange={(e) => setGateway1?.("gateway_group")}
+    
             />
             <Box
               style={{
                 display: "flex",
-                // justify-content: "space-between",
+            
                 textAlign: "center",
                 marginTop: "30px",
                 marginRight: "100px",
@@ -713,110 +642,13 @@ const WhatsappReportSearch = () => {
           </FormGroup>
         </FormControl>
 
-        {/* <Box
-          style={{
-            textAlign: "center",
-            marginTop: "20px",
-            marginBottom: "20px",
-          }}
-        >
-          <Button
-            variant="contained"
-            color="primary"
-            width="25%"
-            sx={{ py: 2 }}
-            type="submit"
-          >
-            Search
-          </Button>
-        </Box> */}
-      </form>
-      {/* {defaultData ? (
-        <table class="table caption-top">
-          <caption>List of users</caption>
-          <thead>
-            <tr>
-              <th scope="col">No. Of SMS</th>
-              <th scope="col">Done</th>
-              <th scope="col">Success</th>
-              <th scope="col">Failed</th>
-              <th scope="col">Queued</th>
-              <th scope="col">ASR(%)</th>
-              <th scope="col">Avg.CR</th>
-              <th scope="col">Cost</th>
-              <th scope="col">GW.Cost</th>
-              <th scope="col">Profit</th>
-              <th scope="col">R4 Cost</th>
-              <th scope="col">R3 Cost</th>
-              <th scope="col">R2 Cost</th>
-              <th scope="col">R1 Cost</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>198</td>
-              <td>97</td>
-              <td>95</td>
-              <td>2</td>
-              <td>0</td>
-              <td>47.5663636737</td>
-              <td>0</td>
-              <td>112</td>
-              <td>52.185</td>
-              <td>44</td>
-              <td>18</td>
-              <td>84</td>
-              <td>0</td>
-              <td>0</td>
-            </tr>
-          </tbody>
-        </table>
-      ) : (
        
-        <WhatsappReportTable data={data} filterData={filterData} />
-      )} */}
+      </form>
+     
 
       {/* {isLoading && <Loading></Loading>} */}
       {updateTable.length === 0 ? (
-        <table class="table caption-top">
-          <caption>List of users</caption>
-          <thead>
-            <tr>
-              <th scope="col">No. Of SMS</th>
-              <th scope="col">Done</th>
-              <th scope="col">Success</th>
-              <th scope="col">Failed</th>
-              <th scope="col">Queued</th>
-              <th scope="col">ASR(%)</th>
-              <th scope="col">Avg.CR</th>
-              <th scope="col">Cost</th>
-              <th scope="col">GW.Cost</th>
-              <th scope="col">Profit</th>
-              <th scope="col">R4 Cost</th>
-              <th scope="col">R3 Cost</th>
-              <th scope="col">R2 Cost</th>
-              <th scope="col">R1 Cost</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>198</td>
-              <td>97</td>
-              <td>95</td>
-              <td>2</td>
-              <td>0</td>
-              <td>47.5663636737</td>
-              <td>0</td>
-              <td>112</td>
-              <td>52.185</td>
-              <td>44</td>
-              <td>18</td>
-              <td>84</td>
-              <td>0</td>
-              <td>0</td>
-            </tr>
-          </tbody>
-        </table>
+        <WhatsappTableDefault></WhatsappTableDefault>
       ) : (
         <>
           <WhatsappReportTable
@@ -830,19 +662,6 @@ const WhatsappReportSearch = () => {
   );
 };
 
-// function LinearProgressWithLabel(props) {
-//   return (
-//     <Box sx={{ display: "flex", alignItems: "center" }}>
-//       <Box sx={{ width: "100%", mr: 1 }}>
-//         <LinearProgress variant="determinate" {...props} />
-//       </Box>
-//       <Box sx={{ minWidth: 35 }}>
-//         <Typography variant="body2" color="text.secondary">{`${Math.round(
-//           props.value
-//         )}%`}</Typography>
-//       </Box>
-//     </Box>
-//   );
-// }
+
 
 export default WhatsappReportSearch;
