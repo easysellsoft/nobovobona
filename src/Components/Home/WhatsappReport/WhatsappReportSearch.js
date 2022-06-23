@@ -676,7 +676,7 @@ const WhatsappReportSearch = () => {
               labelPlacement="top"
               onChange={() => {
                 toggleHandler("end_reason");
-                setTgReason(tgReason);
+                setTgReason(!tgReason);
               }}
               // onChange={(e) => setEnd?.("report")}
             />
@@ -687,7 +687,7 @@ const WhatsappReportSearch = () => {
               labelPlacement="top"
               onChange={() => {
                 toggleHandler("gateway");
-                setTgGateway(tgGateway);
+                setTgGateway(!tgGateway);
               }}
               // onChange={(e) => setGateway1?.("gateway_group")}
             />
