@@ -35,30 +35,36 @@ const currencies = [
 ];
 
 const WhatsappReportSearch = () => {
-   const [checked, setChecked] = React.useState(false);
-  //  const [checked1, setChecked1] = React.useState(true);
-  //  const [checked2, setChecked2] = React.useState(true);
+  const [checked, setChecked] = useState(false);
+  const [tgMonth, setTgMonth] = useState(false);
+  const [tgDay, setTgDay] = useState(false);
+  const [tgHour, setTgHour] = useState(false);
+  const [tgCc, setTgCc] = useState(false);
+  const [tgDestination, setTgDestination] = useState(false);
+  const [tgService, setTgService] = useState(false);
+  const [tgClient, setTgClient] = useState(false);
+  const [tgReason, setTgReason] = useState(false);
+  const [tgGateway, setTgGateway] = useState(false);
 
-   const handleChange = (event) => {
-     setChecked(event.target.checked);
-     
-  };
+  // const handleChange = (event) => {
+  //    setChecked(event.target.checked);
+  // };
   //  const handleChange1 = (event) => {
   //    setChecked1(event.target.checked);
-     
+
   // };
   //  const handleChange2 = (event) => {
   //    setChecked2(event.target.checked);
-     
+
   // };
-  console.log(checked)
+  console.log(checked);
   //  const [checked, setChecked] = React.useState(true);
 
   //  const handleChange = (event) => {
   //    setChecked(event.target.checked);
   //  };
   // const [toggleYear, setToggleYear] = useState(false);
-   const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(false);
   const [currency, setCurrency] = useState("");
   const [textValue, setTextValue] = useState("");
   const [data, setData] = useState([]);
@@ -108,23 +114,22 @@ const WhatsappReportSearch = () => {
     //    console.log(input);
     setTextValue(e.target.value);
   };
- 
-    useEffect(() => {
-      fetch(
-        "http://poultrykhamarbichitra.net/admin/Record/whatsapp_record_search.php?format=format&amp;&amp;search_sms_reports_month=search_sms_reports_month"
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-    
-          // setRefresh(!refresh)
-        
-        });
-    }, []);
+
+  useEffect(() => {
+    fetch(
+      "http://poultrykhamarbichitra.net/admin/Record/whatsapp_record_search.php?format=format&amp;&amp;search_sms_reports_month=search_sms_reports_month"
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        // setRefresh(!refresh)
+      });
+  }, []);
 
   const toggleHandler = (click) => {
-    console.log(click.target);
-    if ((checked) && (click === "year")) {
+    console.log(click);
+    // if ((checked) && (click === "year")) {
+    if (click === "year") {
       setYear("year");
     }
     if (click === "month") {
@@ -179,14 +184,12 @@ const WhatsappReportSearch = () => {
   const handelSubmit = (e) => {
     console.log(e);
     e.preventDefault();
-  setLoading(true)
+    setLoading(true);
     // arrayTh.push((year || month))
     //   setArrayTh([...arrayTh]);
     //   console.log("update filter", arrayTh);
 
     setArrayTh([...filterData]);
-
-   
 
     formData.append("search_flexi_reports_from_date", formDate);
     formData.append("search_flexi_reports_to_date", toDate);
@@ -202,16 +205,72 @@ const WhatsappReportSearch = () => {
     formData.append("search_flexi_reports_end_reason", endReason);
     formData.append("search_flexi_reports_cost1", cost);
     formData.append("format", "format");
-    formData.append("search_sms_reports_month", month);
-    formData.append("search_sms_reports_day", day);
-    formData.append("search_sms_reports_hour", hour);
-    formData.append("search_sms_reports_year", year);
-    formData.append("search_sms_reports_cc", cc);
-    formData.append("search_sms_reports_operator", destination1);
-    formData.append("search_sms_reports_service_type1", serviceType1);
-    formData.append("search_sms_reports_end_gateway", gateway1);
-    formData.append("search_sms_reports_end_reason1", end);
-    formData.append("search_sms_reports_client", client);
+
+    // formData.append("search_sms_reports_month", month);
+    // formData.append("search_sms_reports_day", day)
+    // formData.append("search_sms_reports_hour", hour)
+    // {
+    //   checked
+    //     ? formData.append("search_sms_reports_year", year)
+    //     : formData.append("search_sms_reports_year", "")
+    // }
+    if (checked) {
+      formData.append("search_sms_reports_year", year);
+    } else {
+      formData.append("search_sms_reports_year", "");
+    }
+    if (tgMonth) {
+      formData.append("search_sms_reports_month", month);
+    } else {
+      formData.append("search_sms_reports_month", "");
+    }
+    if (tgDay) {
+      formData.append("search_sms_reports_day", day);
+    } else {
+      formData.append("search_sms_reports_day", "");
+    }
+    if (tgHour) {
+      formData.append("search_sms_reports_hour", hour);
+    } else {
+      formData.append("search_sms_reports_hour", "");
+    }
+    if (tgCc) {
+      formData.append("search_sms_reports_cc", cc);
+    } else {
+      formData.append("search_sms_reports_cc", "");
+    }
+    if (tgDestination) {
+      formData.append("search_sms_reports_operator", destination1);
+    } else {
+      formData.append("search_sms_reports_operator", "");
+    }
+    if (tgService) {
+      formData.append("search_sms_reports_service_type1", serviceType1);
+    } else {
+      formData.append("search_sms_reports_service_type1", "");
+    }
+    if (tgClient) {
+      formData.append("search_sms_reports_client", client);
+    } else {
+      formData.append("search_sms_reports_client", "");
+    }
+    if (tgReason) {
+      formData.append("search_sms_reports_end_reason1", end);
+    } else {
+      formData.append("search_sms_reports_end_reason1", "");
+    }
+    if (tgGateway) {
+      formData.append("search_sms_reports_end_gateway", gateway1);
+    } else {
+      formData.append("search_sms_reports_end_gateway", "");
+    }
+
+    // formData.append("search_sms_reports_cc", cc);
+    // formData.append("search_sms_reports_operator", destination1)
+    // formData.append("search_sms_reports_service_type1", serviceType1)
+    // formData.append("search_sms_reports_end_gateway", gateway1);
+    // formData.append("search_sms_reports_end_reason1", end);
+    // formData.append("search_sms_reports_client", client)
 
     fetch(
       `http://poultrykhamarbichitra.net/admin/Record/whatsapp_record_search.php`,
@@ -226,7 +285,7 @@ const WhatsappReportSearch = () => {
         console.log(data);
         setUpdateTable(data);
         // setLoading(!isLoading)
-        
+
         // setLoading(!isLoading)
       });
 
@@ -264,366 +323,397 @@ const WhatsappReportSearch = () => {
   //   setArrayth(th);
   // }, [th]);
 
- 
   useEffect(() => {
     if (updateTable.length !== 0) {
-      setLoading(false)
+      setLoading(false);
     }
-  },[updateTable])
-    return (
-      <div>
-        {console.log("loading")}
-        <form onSubmit={handelSubmit}>
-          <Grid container spacing={3}>
-            <Grid item lg={3} xs={6} md={4}>
-              <FormLabel className="mt-2 ms-2">Form Date</FormLabel>
-              <TextField
-                label={<Box></Box>}
-                //   variant="outlined"
-                name="formDate"
-                type="date"
-                fullWidth
-                value={formDate}
-                onChange={(e) => setFormDate?.(e.target.value)}
-              />
-            </Grid>
-            <Grid item lg={3} xs={6} md={4}>
-              <FormLabel className="mt-2 ms-2">To Date</FormLabel>
-              <TextField
-                label={<Box></Box>}
-                //   variant="outlined"
-                name="formDate"
-                type="date"
-                fullWidth
-                value={toDate}
-                onChange={(e) => setToDate?.(e.target.value)}
-              />
-            </Grid>
-            <Grid item lg={3} xs={6} md={4}>
-              <FormLabel className="mt-2 ms-2">UserName</FormLabel>
-              <TextField
-                label={<Box></Box>}
-                variant="outlined"
-                name="number"
-                type="text"
-                fullWidth
-                value={userName}
-                onChange={(e) => setUserName?.(e.target.value)}
-              />
-            </Grid>
-
-            <Grid item lg={3} xs={6} md={4}>
-              <FormLabel className="mt-2 ms-2">Caller Id</FormLabel>
-              <TextField
-                label={<Box></Box>}
-                variant="outlined"
-                name="caller-id"
-                type="text"
-                fullWidth
-                value={callerId}
-                onChange={(e) => setCallerId?.(e.target.value)}
-              />
-            </Grid>
-            <Grid item lg={3} xs={6} md={4}>
-              <FormLabel className="mt-2 ms-2">Number</FormLabel>
-              <TextField
-                label={<Box></Box>}
-                variant="outlined"
-                name="number"
-                type="text"
-                fullWidth
-                value={number}
-                onChange={(e) => setNumber?.(e.target.value)}
-              />
-            </Grid>
-            <Grid item lg={3} xs={6} md={4}>
-              <FormLabel className="mt-2 ms-2">Message</FormLabel>
-              <TextField
-                label={<Box></Box>}
-                variant="outlined"
-                name="message"
-                type="text"
-                fullWidth
-                value={message}
-                onChange={(e) => setMessage?.(e.target.value)}
-              />
-            </Grid>
-            <Grid item lg={3} xs={6} md={4}>
-              <FormLabel className="mt-2 ms-2 w-100">Service Type</FormLabel>
-              <TextField
-                id="outlined"
-                //   label="Service Type"
-                label={<Box></Box>}
-                // value={currency}
-                value={textValue}
-                fullWidth
-                onChange={onTextChange}
-                // onChange={(handleChange, onTextChange)}
-                select
-                SelectProps={{
-                  native: true,
-                }}
-                //   helperText="Please select your currency"
-              >
-                {currencies.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </TextField>
-            </Grid>
-            <Grid item lg={3} xs={6} md={4}>
-              <FormLabel className="mt-2 ms-2">Destination</FormLabel>
-              <TextField
-                label={<Box></Box>}
-                variant="outlined"
-                name="destination"
-                type="text"
-                fullWidth
-                value={destination}
-                onChange={(e) => setDestination?.(e.target.value)}
-              />
-            </Grid>
-            <Grid item lg={3} xs={6} md={4}>
-              <RadioGroup
-                row
-                aria-labelledby="demo-row-radio-buttons-group-label"
-                name="row-radio-buttons-group"
-              >
-                <FormLabel
-                  className="mt-2 me-2"
-                  id="demo-row-radio-buttons-group-label"
-                >
-                  GW.Cost
-                </FormLabel>
-                <FormControlLabel value="1" control={<Radio />} label=">" />
-                <FormControlLabel value="2" control={<Radio />} label="<" />
-              </RadioGroup>
-              <TextField
-                label={<Box></Box>}
-                variant="outlined"
-                name="gw-cost"
-                type="number"
-                fullWidth
-                value={gwCost}
-                onChange={(e) => setGwCost?.(e.target.value)}
-              />
-            </Grid>
-            <Grid item lg={3} xs={6} md={4}>
-              <RadioGroup
-                row
-                aria-labelledby="demo-row-radio-buttons-group-label"
-                name="row-radio-buttons-group"
-              >
-                <FormLabel
-                  className="mt-2 me-2"
-                  id="demo-row-radio-buttons-group-label"
-                >
-                  Profit
-                </FormLabel>
-                <FormControlLabel value="1" control={<Radio />} label=">" />
-                <FormControlLabel value="2" control={<Radio />} label="<" />
-              </RadioGroup>
-              <TextField
-                label={<Box></Box>}
-                variant="outlined"
-                name="profit"
-                type="number"
-                fullWidth
-                value={profit}
-                onChange={(e) => setProfit?.(e.target.value)}
-              />
-            </Grid>
-            <Grid item lg={3} xs={6} md={4}>
-              <FormLabel className="mt-2 ms-2">Gateway</FormLabel>
-              <TextField
-                label={<Box></Box>}
-                variant="outlined"
-                name="user-name"
-                type="text"
-                fullWidth
-                value={gateway}
-                onChange={(e) => setGateway?.(e.target.value)}
-              />
-            </Grid>
-            <Grid item lg={3} xs={6} md={4}>
-              <FormLabel className="mt-2 ms-2">End Reason</FormLabel>
-              <TextField
-                label={<Box></Box>}
-                variant="outlined"
-                name="end-reason"
-                type="text"
-                fullWidth
-                value={endReason}
-                onChange={(e) => setEndReason?.(e.target.value)}
-              />
-            </Grid>
-            <Grid item lg={3} xs={6} md={4}>
-              {/* <FormLabel className="mt-2 ms-2">End Reason</FormLabel> */}
-
-              <RadioGroup
-                row
-                aria-labelledby="demo-row-radio-buttons-group-label"
-                name="row-radio-buttons-group"
-              >
-                <FormLabel
-                  className="mt-2 me-2"
-                  id="demo-row-radio-buttons-group-label"
-                >
-                  Cost
-                </FormLabel>
-                <FormControlLabel value="1" control={<Radio />} label=">" />
-                <FormControlLabel value="2" control={<Radio />} label="<" />
-              </RadioGroup>
-
-              <TextField
-                label={<Box></Box>}
-                variant="outlined"
-                name="cost"
-                type="number"
-                fullWidth
-                value={cost}
-                onChange={(e) => setCost?.(e.target.value)}
-              />
-            </Grid>
+  }, [updateTable]);
+  return (
+    <div>
+      {console.log("loading")}
+      <form onSubmit={handelSubmit}>
+        <Grid container spacing={3}>
+          <Grid item lg={3} xs={6} md={4}>
+            <FormLabel className="mt-2 ms-2">Form Date</FormLabel>
+            <TextField
+              label={<Box></Box>}
+              //   variant="outlined"
+              name="formDate"
+              type="date"
+              fullWidth
+              value={formDate}
+              onChange={(e) => setFormDate?.(e.target.value)}
+            />
+          </Grid>
+          <Grid item lg={3} xs={6} md={4}>
+            <FormLabel className="mt-2 ms-2">To Date</FormLabel>
+            <TextField
+              label={<Box></Box>}
+              //   variant="outlined"
+              name="formDate"
+              type="date"
+              fullWidth
+              value={toDate}
+              onChange={(e) => setToDate?.(e.target.value)}
+            />
+          </Grid>
+          <Grid item lg={3} xs={6} md={4}>
+            <FormLabel className="mt-2 ms-2">UserName</FormLabel>
+            <TextField
+              label={<Box></Box>}
+              variant="outlined"
+              name="number"
+              type="text"
+              fullWidth
+              value={userName}
+              onChange={(e) => setUserName?.(e.target.value)}
+            />
           </Grid>
 
-          <FormControl className="mt-3" component="fieldset">
-            <FormLabel component="legend">Group By</FormLabel>
-            <FormGroup aria-label="position" row>
-              <FormControlLabel
-                value="year"
-                control={
-                  <Checkbox
-                    checked={checked}
-                    onChange={handleChange}
-                    // onChange={(e) => toggleHandler("year")}
-                  />
-                }
-                // control={
-                //   <Checkbox
-                //     checked={checked}
-                //     onChange={handleChange}
-                //     inputProps={{ "aria-label": "controlled" }}
-                //   />
-                // }
-                label="Year"
-                labelPlacement="top"
-                // onChange={() => setDefault(!defaultData)}
-
-                onChange={(e) => toggleHandler("year")}
-                // onChange={(e) => setYear?.("year")}
-              />
-              <FormControlLabel
-                value="month"
-                control={
-                  <Checkbox
-                    // checked1={checked1}
-                  // onChange={handleChange1}
-                  />
-                }
-                label="Month"
-                labelPlacement="top"
-                onChange={() => toggleHandler("month")}
-                // onChange={(e) => setMonth?.("month")}
-              />
-              <FormControlLabel
-                value="day"
-                control={
-                  <Checkbox
-                    // checked2={checked2}
-                  // onChange={handleChange2}
-                  />
-                }
-                label="Day"
-                labelPlacement="top"
-                onChange={() => toggleHandler("day")}
-                // onChange={(e) => setDay?.("day")}
-              />
-              <FormControlLabel
-                value="hour"
-                control={<Checkbox
-                  // checked3={checked3}
-                  // onChange={handleChange3}
-                />}
-                label="Hour"
-                labelPlacement="top"
-                onChange={() => toggleHandler("hour")}
-                // onChange={(e) => setHour?.("hour")}
-              />
-              <FormControlLabel
-                value="cc"
-                control={<Checkbox />}
-                label="CC"
-                labelPlacement="top"
-                onChange={() => toggleHandler("cc")}
-                // onChange={(e) => setCc?.("cc")}
-              />
-              <FormControlLabel
-                value="operator"
-                control={<Checkbox />}
-                label="Destination"
-                labelPlacement="top"
-                onChange={() => toggleHandler("operator")}
-                // onChange={(e) => setDestination1?.("operator")}
-              />
-
-              <FormControlLabel
-                value="service_type"
-                control={<Checkbox />}
-                label="Service"
-                labelPlacement="top"
-                onChange={() => toggleHandler("service_type")}
-                // onChange={() => setServiceType("sms_type")}
-                // onChange={(e) => setServiceType1?.("sms_type")}
-              />
-              <FormControlLabel
-                value="client_id"
-                control={<Checkbox />}
-                label="Client"
-                labelPlacement="top"
-                onChange={() => toggleHandler("client_id")}
-                // onChange={(e) => setClient?.("client_id")}
-              />
-              <FormControlLabel
-                value="end_reason"
-                control={<Checkbox />}
-                label="End Reason"
-                labelPlacement="top"
-                onChange={() => toggleHandler("end_reason")}
-                // onChange={(e) => setEnd?.("report")}
-              />
-              <FormControlLabel
-                value="gateway"
-                control={<Checkbox />}
-                label="End Gateway"
-                labelPlacement="top"
-                onChange={() => toggleHandler("gateway")}
-                // onChange={(e) => setGateway1?.("gateway_group")}
-              />
-              <Box
-                style={{
-                  display: "flex",
-                  // justify-content: "space-between",
-                  textAlign: "center",
-                  marginTop: "30px",
-                  marginRight: "100px",
-                }}
+          <Grid item lg={3} xs={6} md={4}>
+            <FormLabel className="mt-2 ms-2">Caller Id</FormLabel>
+            <TextField
+              label={<Box></Box>}
+              variant="outlined"
+              name="caller-id"
+              type="text"
+              fullWidth
+              value={callerId}
+              onChange={(e) => setCallerId?.(e.target.value)}
+            />
+          </Grid>
+          <Grid item lg={3} xs={6} md={4}>
+            <FormLabel className="mt-2 ms-2">Number</FormLabel>
+            <TextField
+              label={<Box></Box>}
+              variant="outlined"
+              name="number"
+              type="text"
+              fullWidth
+              value={number}
+              onChange={(e) => setNumber?.(e.target.value)}
+            />
+          </Grid>
+          <Grid item lg={3} xs={6} md={4}>
+            <FormLabel className="mt-2 ms-2">Message</FormLabel>
+            <TextField
+              label={<Box></Box>}
+              variant="outlined"
+              name="message"
+              type="text"
+              fullWidth
+              value={message}
+              onChange={(e) => setMessage?.(e.target.value)}
+            />
+          </Grid>
+          <Grid item lg={3} xs={6} md={4}>
+            <FormLabel className="mt-2 ms-2 w-100">Service Type</FormLabel>
+            <TextField
+              id="outlined"
+              //   label="Service Type"
+              label={<Box></Box>}
+              // value={currency}
+              value={textValue}
+              fullWidth
+              onChange={onTextChange}
+              // onChange={(handleChange, onTextChange)}
+              select
+              SelectProps={{
+                native: true,
+              }}
+              //   helperText="Please select your currency"
+            >
+              {currencies.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </TextField>
+          </Grid>
+          <Grid item lg={3} xs={6} md={4}>
+            <FormLabel className="mt-2 ms-2">Destination</FormLabel>
+            <TextField
+              label={<Box></Box>}
+              variant="outlined"
+              name="destination"
+              type="text"
+              fullWidth
+              value={destination}
+              onChange={(e) => setDestination?.(e.target.value)}
+            />
+          </Grid>
+          <Grid item lg={3} xs={6} md={4}>
+            <RadioGroup
+              row
+              aria-labelledby="demo-row-radio-buttons-group-label"
+              name="row-radio-buttons-group"
+            >
+              <FormLabel
+                className="mt-2 me-2"
+                id="demo-row-radio-buttons-group-label"
               >
-                <Button
-                  variant="contained"
-                  color="primary"
-                  width="25%"
-                  sx={{ py: 2 }}
-                  type="submit"
-                >
-                  Search
-                </Button>
-              </Box>
-            </FormGroup>
-          </FormControl>
+                GW.Cost
+              </FormLabel>
+              <FormControlLabel value="1" control={<Radio />} label=">" />
+              <FormControlLabel value="2" control={<Radio />} label="<" />
+            </RadioGroup>
+            <TextField
+              label={<Box></Box>}
+              variant="outlined"
+              name="gw-cost"
+              type="number"
+              fullWidth
+              value={gwCost}
+              onChange={(e) => setGwCost?.(e.target.value)}
+            />
+          </Grid>
+          <Grid item lg={3} xs={6} md={4}>
+            <RadioGroup
+              row
+              aria-labelledby="demo-row-radio-buttons-group-label"
+              name="row-radio-buttons-group"
+            >
+              <FormLabel
+                className="mt-2 me-2"
+                id="demo-row-radio-buttons-group-label"
+              >
+                Profit
+              </FormLabel>
+              <FormControlLabel value="1" control={<Radio />} label=">" />
+              <FormControlLabel value="2" control={<Radio />} label="<" />
+            </RadioGroup>
+            <TextField
+              label={<Box></Box>}
+              variant="outlined"
+              name="profit"
+              type="number"
+              fullWidth
+              value={profit}
+              onChange={(e) => setProfit?.(e.target.value)}
+            />
+          </Grid>
+          <Grid item lg={3} xs={6} md={4}>
+            <FormLabel className="mt-2 ms-2">Gateway</FormLabel>
+            <TextField
+              label={<Box></Box>}
+              variant="outlined"
+              name="user-name"
+              type="text"
+              fullWidth
+              value={gateway}
+              onChange={(e) => setGateway?.(e.target.value)}
+            />
+          </Grid>
+          <Grid item lg={3} xs={6} md={4}>
+            <FormLabel className="mt-2 ms-2">End Reason</FormLabel>
+            <TextField
+              label={<Box></Box>}
+              variant="outlined"
+              name="end-reason"
+              type="text"
+              fullWidth
+              value={endReason}
+              onChange={(e) => setEndReason?.(e.target.value)}
+            />
+          </Grid>
+          <Grid item lg={3} xs={6} md={4}>
+            {/* <FormLabel className="mt-2 ms-2">End Reason</FormLabel> */}
 
-          {/* <Box
+            <RadioGroup
+              row
+              aria-labelledby="demo-row-radio-buttons-group-label"
+              name="row-radio-buttons-group"
+            >
+              <FormLabel
+                className="mt-2 me-2"
+                id="demo-row-radio-buttons-group-label"
+              >
+                Cost
+              </FormLabel>
+              <FormControlLabel value="1" control={<Radio />} label=">" />
+              <FormControlLabel value="2" control={<Radio />} label="<" />
+            </RadioGroup>
+
+            <TextField
+              label={<Box></Box>}
+              variant="outlined"
+              name="cost"
+              type="number"
+              fullWidth
+              value={cost}
+              onChange={(e) => setCost?.(e.target.value)}
+            />
+          </Grid>
+        </Grid>
+
+        <FormControl className="mt-3" component="fieldset">
+          <FormLabel component="legend">Group By</FormLabel>
+          <FormGroup aria-label="position" row>
+            <FormControlLabel
+              value="year"
+              control={
+                <Checkbox
+                // checked={checked}
+                // onChange={handleChange}
+                // onChange={(e) => toggleHandler("year")}
+                />
+              }
+              // control={
+              //   <Checkbox
+              //     checked={checked}
+              //     onChange={handleChange}
+              //     inputProps={{ "aria-label": "controlled" }}
+              //   />
+              // }
+              label="Year"
+              labelPlacement="top"
+              // onChange={() => setDefault(!defaultData)}
+
+              onChange={(e) => {
+                toggleHandler("year");
+                setChecked(!checked);
+              }}
+              // onChange={(e) => setYear?.("year")}
+            />
+            <FormControlLabel
+              value="month"
+              control={
+                <Checkbox
+                // checked1={checked1}
+                // onChange={handleChange1}
+                />
+              }
+              label="Month"
+              labelPlacement="top"
+              onChange={(e) => {
+                toggleHandler("month");
+                setTgMonth(!tgMonth);
+              }}
+              // onChange={(e) => setMonth?.("month")}
+            />
+            <FormControlLabel
+              value="day"
+              control={
+                <Checkbox
+                // checked2={checked2}
+                // onChange={handleChange2}
+                />
+              }
+              label="Day"
+              labelPlacement="top"
+              onChange={() => {
+                   toggleHandler("day");
+                setTgDay(!tgDay);
+              }}
+              // onChange={(e) => setDay?.("day")}
+            />
+            <FormControlLabel
+              value="hour"
+              control={
+                <Checkbox
+                // checked3={checked3}
+                // onChange={handleChange3}
+                />
+              }
+              label="Hour"
+              labelPlacement="top"
+              onChange={() => {
+                toggleHandler("hour");
+                setTgHour(!tgHour);
+              }}
+              // onChange={(e) => setHour?.("hour")}
+            />
+            <FormControlLabel
+              value="cc"
+              control={<Checkbox />}
+              label="CC"
+              labelPlacement="top"
+              onChange={() => {
+                toggleHandler("cc");
+                setTgCc(!tgCc);
+              }}
+              // onChange={(e) => setCc?.("cc")}
+            />
+            <FormControlLabel
+              value="operator"
+              control={<Checkbox />}
+              label="Destination"
+              labelPlacement="top"
+              onChange={() => {
+                toggleHandler("operator");
+                setTgDestination(!tgDestination);
+              }}
+              // onChange={(e) => setDestination1?.("operator")}
+            />
+
+            <FormControlLabel
+              value="service_type"
+              control={<Checkbox />}
+              label="Service"
+              labelPlacement="top"
+              onChange={() => {
+                toggleHandler("service_type");
+                setTgService(!tgService);
+              }}
+              // onChange={() => setServiceType("sms_type")}
+              // onChange={(e) => setServiceType1?.("sms_type")}
+            />
+            <FormControlLabel
+              value="client_id"
+              control={<Checkbox />}
+              label="Client"
+              labelPlacement="top"
+              onChange={() => {
+                toggleHandler("client_id");
+                setTgClient(!tgClient);
+              }}
+              // onChange={(e) => setClient?.("client_id")}
+            />
+            <FormControlLabel
+              value="end_reason"
+              control={<Checkbox />}
+              label="End Reason"
+              labelPlacement="top"
+              onChange={() => {
+                toggleHandler("end_reason");
+                setTgReason(tgReason);
+              }}
+              // onChange={(e) => setEnd?.("report")}
+            />
+            <FormControlLabel
+              value="gateway"
+              control={<Checkbox />}
+              label="End Gateway"
+              labelPlacement="top"
+              onChange={() => {
+                toggleHandler("gateway");
+                setTgGateway(tgGateway);
+              }}
+              // onChange={(e) => setGateway1?.("gateway_group")}
+            />
+            <Box
+              style={{
+                display: "flex",
+                // justify-content: "space-between",
+                textAlign: "center",
+                marginTop: "30px",
+                marginRight: "100px",
+              }}
+            >
+              <Button
+                variant="contained"
+                color="primary"
+                width="25%"
+                sx={{ py: 2 }}
+                type="submit"
+              >
+                Search
+              </Button>
+            </Box>
+          </FormGroup>
+        </FormControl>
+
+        {/* <Box
           style={{
             textAlign: "center",
             marginTop: "20px",
@@ -640,8 +730,8 @@ const WhatsappReportSearch = () => {
             Search
           </Button>
         </Box> */}
-        </form>
-        {/* {defaultData ? (
+      </form>
+      {/* {defaultData ? (
         <table class="table caption-top">
           <caption>List of users</caption>
           <thead>
@@ -686,58 +776,58 @@ const WhatsappReportSearch = () => {
         <WhatsappReportTable data={data} filterData={filterData} />
       )} */}
 
-        {/* {isLoading && <Loading></Loading>} */}
-        {updateTable.length === 0 ? (
-          <table class="table caption-top">
-            <caption>List of users</caption>
-            <thead>
-              <tr>
-                <th scope="col">No. Of SMS</th>
-                <th scope="col">Done</th>
-                <th scope="col">Success</th>
-                <th scope="col">Failed</th>
-                <th scope="col">Queued</th>
-                <th scope="col">ASR(%)</th>
-                <th scope="col">Avg.CR</th>
-                <th scope="col">Cost</th>
-                <th scope="col">GW.Cost</th>
-                <th scope="col">Profit</th>
-                <th scope="col">R4 Cost</th>
-                <th scope="col">R3 Cost</th>
-                <th scope="col">R2 Cost</th>
-                <th scope="col">R1 Cost</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>198</td>
-                <td>97</td>
-                <td>95</td>
-                <td>2</td>
-                <td>0</td>
-                <td>47.5663636737</td>
-                <td>0</td>
-                <td>112</td>
-                <td>52.185</td>
-                <td>44</td>
-                <td>18</td>
-                <td>84</td>
-                <td>0</td>
-                <td>0</td>
-              </tr>
-            </tbody>
-          </table>
-        ) : (
-          <>
-            <WhatsappReportTable
-              isLoading={isLoading}
-              updateTable={updateTable}
-              arrayTh={arrayTh}
-            />
-          </>
-        )}
-      </div>
-    );
+      {/* {isLoading && <Loading></Loading>} */}
+      {updateTable.length === 0 ? (
+        <table class="table caption-top">
+          <caption>List of users</caption>
+          <thead>
+            <tr>
+              <th scope="col">No. Of SMS</th>
+              <th scope="col">Done</th>
+              <th scope="col">Success</th>
+              <th scope="col">Failed</th>
+              <th scope="col">Queued</th>
+              <th scope="col">ASR(%)</th>
+              <th scope="col">Avg.CR</th>
+              <th scope="col">Cost</th>
+              <th scope="col">GW.Cost</th>
+              <th scope="col">Profit</th>
+              <th scope="col">R4 Cost</th>
+              <th scope="col">R3 Cost</th>
+              <th scope="col">R2 Cost</th>
+              <th scope="col">R1 Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>198</td>
+              <td>97</td>
+              <td>95</td>
+              <td>2</td>
+              <td>0</td>
+              <td>47.5663636737</td>
+              <td>0</td>
+              <td>112</td>
+              <td>52.185</td>
+              <td>44</td>
+              <td>18</td>
+              <td>84</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+          </tbody>
+        </table>
+      ) : (
+        <>
+          <WhatsappReportTable
+            isLoading={isLoading}
+            updateTable={updateTable}
+            arrayTh={arrayTh}
+          />
+        </>
+      )}
+    </div>
+  );
 };
 
 // function LinearProgressWithLabel(props) {

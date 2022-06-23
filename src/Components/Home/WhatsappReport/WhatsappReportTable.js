@@ -181,14 +181,16 @@ const WhatsappReportTable = (props) => {
   console.log("props", props.updateTable);
   console.log("props", props.arrayTh);
   const { updateTable, arrayTh, isLoading } = props;
-  console.log(isLoading);
+  // console.log(isLoading);
 
   const thData = arrayTh;
+  console.log(thData)
   console.log("updateTable_th", updateTable);
   const dataKey =
     updateTable?.length > 0
       ? Object.keys(updateTable[0]).filter((d) => thData?.includes(d))
       : [];
+  console.log(dataKey)
   
   //new...
    const [page, setPage] = React.useState(0);
@@ -346,7 +348,7 @@ const WhatsappReportTable = (props) => {
             <TableRow>
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-                colSpan={6}
+                colSpan={7}
                 count={thData.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
