@@ -19,7 +19,8 @@ import { AiTwotoneMail } from "react-icons/ai";
 import { RiLockPasswordFill } from "react-icons/ri";
 import WhatsappReportTable from "./WhatsappReportTable";
 import Loading from "../../Shared/Loading";
-import WhatsappTableDefault from './WhatsappTableDefault';
+import WhatsappTableDefault from "./WhatsappTableDefault";
+import HookReportTable from "./HookReportTable";
 const currencies = [
   {
     value: "0",
@@ -35,7 +36,7 @@ const currencies = [
   },
 ];
 
-const WhatsappReportSearch = () => {
+const HookReportSearch = () => {
   const [checked, setChecked] = useState(false);
   const [tgMonth, setTgMonth] = useState(false);
   const [tgDay, setTgDay] = useState(false);
@@ -118,11 +119,11 @@ const WhatsappReportSearch = () => {
     //    console.log(input);
     setTextValue(e.target.value);
   };
-  
+
   const handleRadioClick = (e) => {
     // console.log(e)
-    setGwRadio(e)
-     };
+    setGwRadio(e);
+  };
   const handleRadioProfitClick = (e) => {
     // console.log(e);
     setProfitRadio(e);
@@ -132,7 +133,7 @@ const WhatsappReportSearch = () => {
     setCostRadio(e);
   };
 
- console.log(gwRadio);
+  console.log(gwRadio);
   console.log(profitRadio);
   console.log(costRadio);
 
@@ -196,17 +197,15 @@ const WhatsappReportSearch = () => {
     e.preventDefault();
     setLoading(true);
 
-   
-
     setArrayTh([...filterData]);
 
     formData.append("search_flexi_reports_from_date", formDate);
     formData.append("search_flexi_reports_to_date", toDate);
     formData.append("search_flexi_reports_username", userName);
-  
+
     formData.append("search_flexi_reports_number", number);
     formData.append("search_sms_reports_service_type", textValue);
-    
+
     formData.append("search_flexi_reports_gw_cost", gwCost);
     formData.append("search_flexi_reports_profit", profit);
     formData.append("search_flexi_reports_gateway", gateway);
@@ -269,7 +268,6 @@ const WhatsappReportSearch = () => {
       formData.append("search_sms_reports_end_gateway", "");
     }
 
-
     fetch(
       `http://poultrykhamarbichitra.net/admin/Record/whatsapp_record_search.php`,
       {
@@ -282,37 +280,34 @@ const WhatsappReportSearch = () => {
       .then((data) => {
         console.log(data);
         setUpdateTable(data);
-        setFormDate("")
-        setToDate("")
-        setUserName("")
-        setCallerId("")
-        setNumber("")
-        setMessage("")
-        setServiceType("")
-        setDestination("")
-        setGwCost("")
-        setProfit("")
-        setGateway("")
-        setEndReason("")
-        setCost("")
-        setYear("")
-        setMonth("")
-        setDay("")
-        setHour("")
-        setCc("")
-        setDestination1("")
-        setServiceType1("")
-        setClient("")
-        setEnd("")
-        setGateway1("")
-        setGwRadio("")
-        setProfitRadio("")
-        setCostRadio("")
-      
+        setFormDate("");
+        setToDate("");
+        setUserName("");
+        setCallerId("");
+        setNumber("");
+        setMessage("");
+        setServiceType("");
+        setDestination("");
+        setGwCost("");
+        setProfit("");
+        setGateway("");
+        setEndReason("");
+        setCost("");
+        setYear("");
+        setMonth("");
+        setDay("");
+        setHour("");
+        setCc("");
+        setDestination1("");
+        setServiceType1("");
+        setClient("");
+        setEnd("");
+        setGateway1("");
+        setGwRadio("");
+        setProfitRadio("");
+        setCostRadio("");
       });
-
   };
-  
 
   useEffect(() => {
     if (updateTable.length !== 0) {
@@ -555,7 +550,7 @@ const WhatsappReportSearch = () => {
                 className="mt-2 me-2"
                 id="demo-row-radio-buttons-group-label"
               >
-                <span style={{fontSize: "15px"}}>GW.Cost</span>
+                <span style={{ fontSize: "15px" }}>GW.Cost</span>
               </FormLabel>
               <FormControlLabel
                 // onClick=()=>handleRadioClick(value);
@@ -728,7 +723,7 @@ const WhatsappReportSearch = () => {
         <WhatsappTableDefault></WhatsappTableDefault>
       ) : (
         <>
-          <WhatsappReportTable
+          <HookReportTable
             isLoading={isLoading}
             updateTable={updateTable}
             arrayTh={arrayTh}
@@ -739,6 +734,4 @@ const WhatsappReportSearch = () => {
   );
 };
 
-
-
-export default WhatsappReportSearch;
+export default HookReportSearch;

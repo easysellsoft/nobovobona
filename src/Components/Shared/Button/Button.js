@@ -28,6 +28,7 @@ const ButtonComp = ({
           boxShadow: "3px 2px 5px 0px #DFDFDF",
           "@media screen and (max-width: 768px)": {
             mt: 1,
+            mb:2,
           },
           ...rest,
         },

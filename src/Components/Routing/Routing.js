@@ -64,6 +64,7 @@ const Routing = () => {
       <Box
         sx={[
           {
+            width: "100%",
             // height: window.innerHeight >= 500 && "calc(100vh - 54px)",
             // : "calc(100vh - 50px)",
           },
@@ -81,9 +82,7 @@ const Routing = () => {
           >
             <Route path="/" element={<AdminHome />} />
 
-
-            <Route path="/whatsapp_report" element={<WhatsappReport/>} />
-
+            <Route path="/whatsapp_report" element={<WhatsappReport />} />
 
             {/* <Route path="/AdminDashboard" element={<AdminDashboard />} />
             <Route path="/message" element={<Message />} /> */}
@@ -133,12 +132,12 @@ const Routing = () => {
             height: "50px",
             zIndex: "999",
 
-    //          position: "relative",
-    // width: "100%",
-    // bottom:" 0",
-    // color: "white",
-    // backgroundColor: "#202020",
-    // fontSize: "12px"
+            //          position: "relative",
+            // width: "100%",
+            // bottom:" 0",
+            // color: "white",
+            // backgroundColor: "#202020",
+            // fontSize: "12px"
           },
         ]}
       >

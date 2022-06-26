@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import { Box } from "@mui/system";
-import ButtonComp from "../../Shared/Button/Button";
+import ButtonComp from "../Button/Button";
 import WhatsappReportTable from "./WhatsappReportTable";
 import WhatsappReportSearch from "./WhatsappReportSearch";
 import { tr } from "date-fns/locale";
@@ -22,7 +22,7 @@ const currencies = [
     label: "CAMPAIGN",
   },
 ];
-const WhatsappReport = () => {
+const HookReport = () => {
   // const [isLoading, setLoading] = useState(true);
   // const [show, setShow] = useState(true);
   const [show, setShow] = useState(false);
@@ -34,7 +34,7 @@ const WhatsappReport = () => {
   const [textValue, setTextValue] = useState("");
   const [defaultTd, setDefaultTd] = useState([]);
 
- 
+
   useEffect(() => {
     console.log("main filter", filterData);
   }, [filterData]);
@@ -63,7 +63,6 @@ const WhatsappReport = () => {
           ]}
         >
           <div
-           
             className="btn_prb"
             onClick={() => {
               setRefresh(!refresh);
@@ -103,4 +102,4 @@ const WhatsappReport = () => {
   );
 };
 
-export default WhatsappReport;
+export default HookReport;

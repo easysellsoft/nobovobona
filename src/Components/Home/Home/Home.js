@@ -336,6 +336,8 @@ function Home() {
           flexGrow: 1,
           px: 2,
           pb: 0,
+          width: "100%",
+          overflow: "auto",
         }}
       >
         <DrawerHeader />
