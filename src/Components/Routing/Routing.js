@@ -7,6 +7,7 @@ import { Box } from "@mui/material";
 import Footer from "../Footer/Footer";
 import ProjectRateAdd from "../Home/ProjectRate/ProjectRateAdd/ProjectRateAdd";
 import WhatsappReport from "../Home/WhatsappReport/WhatsappReport";
+import OtpReport from "./../Home/OtpReport/OtpReport";
 
 const Login = React.lazy(() => import("./../Authentication/Login/Login"));
 const Error = React.lazy(() => import("../Error/Error"));
@@ -35,6 +36,8 @@ const PaymentMethod = React.lazy(() =>
 const ProjectRate = React.lazy(() =>
   import("./../Home/ProjectRate/ProjectRate.js")
 );
+
+
 
 const Routing = () => {
   //scroll to top window size
@@ -83,6 +86,7 @@ const Routing = () => {
             <Route path="/" element={<AdminHome />} />
 
             <Route path="/whatsapp_report" element={<WhatsappReport />} />
+            <Route path="/otp_record" element={<OtpReport />} />
 
             {/* <Route path="/AdminDashboard" element={<AdminDashboard />} />
             <Route path="/message" element={<Message />} /> */}

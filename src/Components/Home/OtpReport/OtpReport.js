@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import HookReport from '../../Shared/Hook/HookReport';
 
 const OtpReport = () => {
      const [defaultTd, setDefaultTd] = useState([]);
@@ -13,9 +14,10 @@ const OtpReport = () => {
            });
        }, []);
     return (
-        <div>
-            
-        </div>
+      <div>
+        {/* <h3>defaultTd: {defaultTd.length}</h3> */}
+        <HookReport defaultTd={defaultTd}></HookReport>
+      </div>
     );
 };
 

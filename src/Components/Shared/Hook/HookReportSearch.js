@@ -17,10 +17,11 @@ import {
 
 import { AiTwotoneMail } from "react-icons/ai";
 import { RiLockPasswordFill } from "react-icons/ri";
-import WhatsappReportTable from "./WhatsappReportTable";
+// import WhatsappReportTable from "./WhatsappReportTable";
 import Loading from "../../Shared/Loading";
-import WhatsappTableDefault from "./WhatsappTableDefault";
+// import WhatsappTableDefault from "./WhatsappTableDefault";
 import HookReportTable from "./HookReportTable";
+import HookTableDefault from "./HookTableDefault";
 const currencies = [
   {
     value: "0",
@@ -720,7 +721,7 @@ const HookReportSearch = () => {
 
       {/* {isLoading && <Loading></Loading>} */}
       {updateTable.length === 0 ? (
-        <WhatsappTableDefault></WhatsappTableDefault>
+        <HookTableDefault></HookTableDefault>
       ) : (
         <>
           <HookReportTable

@@ -2,42 +2,43 @@ import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import { Box } from "@mui/system";
 import ButtonComp from "../Button/Button";
-import WhatsappReportTable from "./WhatsappReportTable";
-import WhatsappReportSearch from "./WhatsappReportSearch";
+// import WhatsappReportTable from "./WhatsappReportTable";
+// import WhatsappReportSearch from "./WhatsappReportSearch";
 import { tr } from "date-fns/locale";
-import WhatsappTableDefault from "./WhatsappTableDefault";
+// import WhatsappTableDefault from "./WhatsappTableDefault";
+import HookTableDefault from "./HookTableDefault";
+import HookReportSearch from "./HookReportSearch";
 // import Loading from './../../Shared/Loading';
 
-const currencies = [
-  {
-    value: "0",
-    label: "All",
-  },
-  {
-    value: "1",
-    label: "SMS",
-  },
-  {
-    value: "2",
-    label: "CAMPAIGN",
-  },
-];
-const HookReport = () => {
+// const currencies = [
+//   {
+//     value: "0",
+//     label: "All",
+//   },
+//   {
+//     value: "1",
+//     label: "SMS",
+//   },
+//   {
+//     value: "2",
+//     label: "CAMPAIGN",
+//   },
+// ];
+const HookReport = ({defaultTd}) => {
   // const [isLoading, setLoading] = useState(true);
   // const [show, setShow] = useState(true);
   const [show, setShow] = useState(false);
   const [refresh, setRefresh] = useState(false);
-  const [data, setData] = useState([]);
-  const [currency, setCurrency] = useState("");
-  const [defaultData, setDefault] = useState(true);
-  const [filterData, setFilterData] = useState([]);
-  const [textValue, setTextValue] = useState("");
-  const [defaultTd, setDefaultTd] = useState([]);
+  // const [data, setData] = useState([]);
+  // const [currency, setCurrency] = useState("");
+  // const [defaultData, setDefault] = useState(true);
+  // const [filterData, setFilterData] = useState([]);
+  // const [textValue, setTextValue] = useState("");
+  // const [defaultTd, setDefaultTd] = useState([]);
 
-
-  useEffect(() => {
-    console.log("main filter", filterData);
-  }, [filterData]);
+  // useEffect(() => {
+  //   console.log("main filter", filterData);
+  // }, [filterData]);
 
   return (
     <div style={{ width: "100%" }} className="mb-5 mt-5">
@@ -86,17 +87,17 @@ const HookReport = () => {
           </div>
         </Box>
       </Box>
-      <h4 className="mb-3">Total Result: {data?.length}</h4>
+      {/* <h4 className="mb-3">Total Result: {data?.length}</h4> */}
       {show && (
         <>
-          <WhatsappReportSearch
+          <HookReportSearch
             refresh={refresh}
             setRefresh={setRefresh}
-          ></WhatsappReportSearch>
+          ></HookReportSearch>
         </>
       )}
       {(refresh || !refresh) && !show && (
-        <WhatsappTableDefault></WhatsappTableDefault>
+        <HookTableDefault defaultTd={defaultTd}></HookTableDefault>
       )}
     </div>
   );
