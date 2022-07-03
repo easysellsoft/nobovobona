@@ -318,8 +318,10 @@ const WhatsappReportSearch = () => {
   useEffect(() => {
     if (updateTable.length !== 0) {
       setLoading(false);
+    
     }
   }, [updateTable]);
+
   return (
     <div>
       {console.log("loading")}

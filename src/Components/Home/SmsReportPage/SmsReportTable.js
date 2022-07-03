@@ -213,182 +213,192 @@ const SmsReportTable = (props) => {
     <Loading></Loading>
   ) : (
     <div>
-      {/* <h1>{updateTable.length}</h1> */}
-      {/* materaial ui start  */}
-      <TableContainer
-        sx={[
-          {
-            maxHeight: 440,
-            "@media (max-width: 576px)": {
-              width: "300px",
-            },
-          },
-        ]}
-      >
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              {dataKey?.map((i) => (
-                <TableCell
-                  align="left"
-                  // className={classes.tableHeaderCell}
-                >
-                  {i}
-                </TableCell>
-              ))}
-              <TableCell
-                align="left"
-                // className={classes.tableHeaderCell}
-              >
-                Total Send
-              </TableCell>
-              <TableCell
-                align="left"
-                // className={classes.tableHeaderCell}
-              >
-                Done
-              </TableCell>
-              <TableCell
-                align="left"
-                // className={classes.tableHeaderCell}
-              >
-                Success
-              </TableCell>
-              <TableCell
-                align="left"
-                // className={classes.tableHeaderCell}
-              >
-                Failed
-              </TableCell>
-              <TableCell
-                align="left"
-                // className={classes.tableHeaderCell}
-              >
-                Queued
-              </TableCell>
-
-              <TableCell align="left">Asr(%)</TableCell>
-              <TableCell
-              // className={classes.tableHeaderCell}
-              >
-                Avg. CR
-              </TableCell>
-              <TableCell
-                align="left"
-                // className={classes.tableHeaderCell}
-              >
-                Cost{" "}
-              </TableCell>
-              <TableCell
-                align="left"
-                // className={classes.tableHeaderCell}
-              >
-                GW.Cost
-              </TableCell>
-              <TableCell
-                align="left"
-                // className={classes.tableHeaderCell}
-              >
-                Profit
-              </TableCell>
-              <TableCell
-                align="left"
-                // className={classes.tableHeaderCell}
-              >
-                R4 Cost
-              </TableCell>
-              <TableCell
-                align="left"
-                // className={classes.tableHeaderCell}
-              >
-                R3 Cost
-              </TableCell>
-              <TableCell
-                align="left"
-                // className={classes.tableHeaderCell}
-              >
-                R2 Cost
-              </TableCell>
-              <TableCell
-                align="left"
-                // className={classes.tableHeaderCell}
-              >
-                R1 Cost
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {(rowsPerPage > 0
-              ? updateTable.slice(
-                  page * rowsPerPage,
-                  page * rowsPerPage + rowsPerPage
-                )
-              : updateTable
-            ).map((item) => {
-              return (
-                <TableRow key={item.name}>
-                  {dataKey?.map((dd) => (
-                    <TableCell align="left">{item[dd]}</TableCell>
+      {!dataKey.length ? (
+        <h3 className="text-center text-primary mt-4">No data Found</h3>
+      ) : (
+        <>
+          {" "}
+          <TableContainer
+            sx={[
+              {
+                maxHeight: 440,
+                "@media (max-width: 576px)": {
+                  width: "300px",
+                },
+              },
+            ]}
+          >
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
+                <TableRow>
+                  {dataKey?.map((i) => (
+                    <TableCell
+                      align="left"
+                      // className={classes.tableHeaderCell}
+                    >
+                      {i}
+                    </TableCell>
                   ))}
-                  <TableCell align="left">{item.total_message}</TableCell>
-                  <TableCell align="left">{item.deliver}</TableCell>
-                  <TableCell align="left">{item.end_failed}</TableCell>
-                  <TableCell align="left">{item.failed}</TableCell>
-                  <TableCell align="left">{item.qued}</TableCell>
-                  <TableCell align="left">{item.asr}</TableCell>
-                  <TableCell align="left">{item.cr}</TableCell>
-                  <TableCell align="left">{item.c1cost}</TableCell>
-                  <TableCell align="left">{item.gatcost}</TableCell>
-                  <TableCell align="left">{item.profit}</TableCell>
-                  <TableCell align="left">{item.rs4cost}</TableCell>
-                  <TableCell align="left">{item.rs3cost}</TableCell>
-                  <TableCell align="left">{item.rs2cost}</TableCell>
-                  <TableCell align="left">{item.rs1cost}</TableCell>
+                  <TableCell
+                    align="left"
+                    // className={classes.tableHeaderCell}
+                  >
+                    Total Send
+                  </TableCell>
+                  <TableCell
+                    align="left"
+                    // className={classes.tableHeaderCell}
+                  >
+                    Done
+                  </TableCell>
+                  <TableCell
+                    align="left"
+                    // className={classes.tableHeaderCell}
+                  >
+                    Success
+                  </TableCell>
+                  <TableCell
+                    align="left"
+                    // className={classes.tableHeaderCell}
+                  >
+                    Failed
+                  </TableCell>
+                  <TableCell
+                    align="left"
+                    // className={classes.tableHeaderCell}
+                  >
+                    Queued
+                  </TableCell>
+
+                  <TableCell align="left">Asr(%)</TableCell>
+                  <TableCell
+                  // className={classes.tableHeaderCell}
+                  >
+                    Avg. CR
+                  </TableCell>
+                  <TableCell
+                    align="left"
+                    // className={classes.tableHeaderCell}
+                  >
+                    Cost{" "}
+                  </TableCell>
+                  <TableCell
+                    align="left"
+                    // className={classes.tableHeaderCell}
+                  >
+                    GW.Cost
+                  </TableCell>
+                  <TableCell
+                    align="left"
+                    // className={classes.tableHeaderCell}
+                  >
+                    Profit
+                  </TableCell>
+                  <TableCell
+                    align="left"
+                    // className={classes.tableHeaderCell}
+                  >
+                    R4 Cost
+                  </TableCell>
+                  <TableCell
+                    align="left"
+                    // className={classes.tableHeaderCell}
+                  >
+                    R3 Cost
+                  </TableCell>
+                  <TableCell
+                    align="left"
+                    // className={classes.tableHeaderCell}
+                  >
+                    R2 Cost
+                  </TableCell>
+                  <TableCell
+                    align="left"
+                    // className={classes.tableHeaderCell}
+                  >
+                    R1 Cost
+                  </TableCell>
                 </TableRow>
-              );
-            })}
-            {emptyRows > 0 && (
-              <TableRow style={{ height: 53 * emptyRows }}>
-                <TableCell colSpan={6} />
-              </TableRow>
-            )}
-          </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TablePagination
-                rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-                colSpan={7}
-                count={thData.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                SelectProps={{
-                  inputProps: {
-                    "aria-label": "rows per page",
-                  },
-                  native: true,
-                }}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-                ActionsComponent={TablePaginationActions}
-              />
-            </TableRow>
-          </TableFooter>
-        </Table>
-      </TableContainer>
-      <Pagination
-        count={10}
-        color="primary"
-        onChange={handleChange}
-        pagination={pagination}
-        sx={[
-          {
-            p: 2,
-            mt: "10px",
-            display: "flex",
-            justifyContent: "flex-end",
-          },
-        ]}
-      />
+              </TableHead>
+              <TableBody>
+                {(rowsPerPage > 0
+                  ? updateTable.slice(
+                      page * rowsPerPage,
+                      page * rowsPerPage + rowsPerPage
+                    )
+                  : updateTable
+                ).map((item) => {
+                  return (
+                    <TableRow key={item.name}>
+                      {dataKey?.map((dd) => (
+                        <TableCell align="left">{item[dd]}</TableCell>
+                      ))}
+                      <TableCell align="left">{item.total_message}</TableCell>
+                      <TableCell align="left">{item.deliver}</TableCell>
+                      <TableCell align="left">{item.end_failed}</TableCell>
+                      <TableCell align="left">{item.failed}</TableCell>
+                      <TableCell align="left">{item.qued}</TableCell>
+                      <TableCell align="left">{item.asr}</TableCell>
+                      <TableCell align="left">{item.cr}</TableCell>
+                      <TableCell align="left">{item.c1cost}</TableCell>
+                      <TableCell align="left">{item.gatcost}</TableCell>
+                      <TableCell align="left">{item.profit}</TableCell>
+                      <TableCell align="left">{item.rs4cost}</TableCell>
+                      <TableCell align="left">{item.rs3cost}</TableCell>
+                      <TableCell align="left">{item.rs2cost}</TableCell>
+                      <TableCell align="left">{item.rs1cost}</TableCell>
+                    </TableRow>
+                  );
+                })}
+                {emptyRows > 0 && (
+                  <TableRow style={{ height: 53 * emptyRows }}>
+                    <TableCell colSpan={6} />
+                  </TableRow>
+                )}
+              </TableBody>
+              <TableFooter>
+                <TableRow>
+                  <TablePagination
+                    rowsPerPageOptions={[
+                      5,
+                      10,
+                      25,
+                      { label: "All", value: -1 },
+                    ]}
+                    colSpan={7}
+                    count={thData.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    SelectProps={{
+                      inputProps: {
+                        "aria-label": "rows per page",
+                      },
+                      native: true,
+                    }}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                    ActionsComponent={TablePaginationActions}
+                  />
+                </TableRow>
+              </TableFooter>
+            </Table>
+          </TableContainer>
+          <Pagination
+            count={10}
+            color="primary"
+            onChange={handleChange}
+            pagination={pagination}
+            sx={[
+              {
+                p: 2,
+                mt: "10px",
+                display: "flex",
+                justifyContent: "flex-end",
+              },
+            ]}
+          />
+        </>
+      )}
     </div>
   );
 };

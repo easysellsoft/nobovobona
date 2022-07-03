@@ -314,6 +314,7 @@ const SmsReportSearch = () => {
       setLoading(false);
     }
   }, [updateTable]);
+    console.log(updateTable);
   return (
     <div>
       {console.log("loading")}
@@ -720,15 +721,27 @@ const SmsReportSearch = () => {
 
       {/* {isLoading && <Loading></Loading>} */}
       {updateTable.length === 0 ? (
-        // <SmsTableDefault></SmsTableDefault>
-        <h3 className="text-center text-primary mt-4">No data Found</h3>
+        <SmsTableDefault></SmsTableDefault>
+        // <h3 className="text-center text-primary mt-4">No data Found</h3>
       ) : (
         <>
-          <SmsReportTable
+          {/* <SmsReportTable
             isLoading={isLoading}
             updateTable={updateTable}
             arrayTh={arrayTh}
-          />
+          /> */}
+          {updateTable.length === 0 ? (
+            <SmsTableDefault></SmsTableDefault>
+            // <h3 className="text-center text-primary mt-4">No data Found</h3>
+          ) : (
+            <>
+              <SmsReportTable
+                isLoading={isLoading}
+                updateTable={updateTable}
+                arrayTh={arrayTh}
+              />
+            </>
+          )}
         </>
       )}
     </div>
