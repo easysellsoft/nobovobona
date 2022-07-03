@@ -81,9 +81,10 @@ const Routing = () => {
           <Route
             path="/"
             element={
-              <PrivateRoute>
-                <Home />
-              </PrivateRoute>
+              // <PrivateRoute>
+              //   <Home />
+              // </PrivateRoute>
+              <Home />
             }
           >
             <Route path="/" element={<AdminHome />} />

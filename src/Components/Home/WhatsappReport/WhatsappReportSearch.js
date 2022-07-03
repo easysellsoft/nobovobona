@@ -72,7 +72,7 @@ const WhatsappReportSearch = () => {
 
   const [defaultData, setDefault] = useState(true);
   const [filterData, setFilterData] = useState([]);
-
+  const [searchTrigger, setSearchTrigger] = useState("");
   const [formDate, setFormDate] = useState("");
   const [toDate, setToDate] = useState("");
   const [userName, setUserName] = useState("");
@@ -718,6 +718,9 @@ const WhatsappReportSearch = () => {
                 width="25%"
                 sx={{ py: 1 }}
                 type="submit"
+                onClick={() => {
+                  setSearchTrigger("yes");
+                }}
               >
                 Search
               </Button>
@@ -728,8 +731,13 @@ const WhatsappReportSearch = () => {
 
       {/* {isLoading && <Loading></Loading>} */}
       {updateTable.length === 0 ? (
-        // <WhatsappTableDefault></WhatsappTableDefault>
-        <h3 className="text-center text-primary mt-4">No data Found</h3>
+        <>
+          {searchTrigger === "yes" ? (
+            <h3 className="text-center text-primary mt-4">No data Found</h3>
+          ) : (
+            <WhatsappTableDefault></WhatsappTableDefault>
+          )}
+        </>
       ) : (
         <>
           <WhatsappReportTable

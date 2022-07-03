@@ -74,6 +74,7 @@ const SmsReportSearch = () => {
 
   const [defaultData, setDefault] = useState(true);
   const [filterData, setFilterData] = useState([]);
+  const [searchTrigger, setSearchTrigger] = useState("");
 
   const [formDate, setFormDate] = useState("");
   const [toDate, setToDate] = useState("");
@@ -278,7 +279,7 @@ const SmsReportSearch = () => {
       //  console.log(formData),
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        console.log("updateTable",data);
         setUpdateTable(data);
         setFormDate("");
         setToDate("");
@@ -314,7 +315,8 @@ const SmsReportSearch = () => {
       setLoading(false);
     }
   }, [updateTable]);
-    console.log(updateTable);
+  console.log(updateTable);
+  console.log(searchTrigger);
   return (
     <div>
       {console.log("loading")}
@@ -711,6 +713,9 @@ const SmsReportSearch = () => {
                 width="25%"
                 sx={{ py: 1 }}
                 type="submit"
+                onClick={() => {
+                  setSearchTrigger("yes");
+                }}
               >
                 Search
               </Button>
@@ -720,29 +725,22 @@ const SmsReportSearch = () => {
       </form>
 
       {/* {isLoading && <Loading></Loading>} */}
-      {updateTable.length === 0 ? (
-        <SmsTableDefault></SmsTableDefault>
-        // <h3 className="text-center text-primary mt-4">No data Found</h3>
-      ) : (
+      {!updateTable.length ? (
         <>
-          {/* <SmsReportTable
-            isLoading={isLoading}
-            updateTable={updateTable}
-            arrayTh={arrayTh}
-          /> */}
-          {updateTable.length === 0 ? (
-            <SmsTableDefault></SmsTableDefault>
-            // <h3 className="text-center text-primary mt-4">No data Found</h3>
+          {searchTrigger === "yes" ? (
+            <h3 className="text-center text-primary mt-4">No data Found</h3>
           ) : (
-            <>
-              <SmsReportTable
-                isLoading={isLoading}
-                updateTable={updateTable}
-                arrayTh={arrayTh}
-              />
-            </>
+            <SmsTableDefault></SmsTableDefault>
           )}
         </>
+      ) : (
+        //   <h2>problem</h2>
+        // )
+        <SmsReportTable
+          isLoading={isLoading}
+          updateTable={updateTable}
+          arrayTh={arrayTh}
+        />
       )}
     </div>
   );

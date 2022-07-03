@@ -87,7 +87,7 @@ const HookReport = ({defaultTd}) => {
           </div>
         </Box>
       </Box>
-      {/* <h4 className="mb-3">Total Result: {data?.length}</h4> */}
+    
       {show && (
         <>
           <HookReportSearch
