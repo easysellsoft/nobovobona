@@ -1,5 +1,5 @@
-import hi from "date-fns/esm/locale/hi/index.js";
-import React, { useEffect, useState } from "react";
+
+import React, {  useState } from "react";
 import Loading from './../../Shared/Loading';
 
 // material start
