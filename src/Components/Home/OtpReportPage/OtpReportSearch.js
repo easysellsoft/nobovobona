@@ -17,9 +17,9 @@ import {
 
 import { AiTwotoneMail } from "react-icons/ai";
 import { RiLockPasswordFill } from "react-icons/ri";
-import WhatsappReportTable from "./WhatsappReportTable";
 import Loading from "../../Shared/Loading";
-import WhatsappTableDefault from './WhatsappTableDefault';
+import OtpTableDefault from "./OtpTableDefault";
+import OtpReportTable from "./OtpReportTable";
 const currencies = [
   {
     value: "0",
@@ -35,7 +35,7 @@ const currencies = [
   },
 ];
 
-const WhatsappReportSearch = () => {
+const OtpReportSearch = () => {
   const [checked, setChecked] = useState(false);
   const [tgMonth, setTgMonth] = useState(false);
   const [tgDay, setTgDay] = useState(false);
@@ -203,9 +203,10 @@ const WhatsappReportSearch = () => {
     formData.append("search_flexi_reports_from_date", formDate);
     formData.append("search_flexi_reports_to_date", toDate);
     formData.append("search_flexi_reports_username", userName);
+  
     formData.append("search_flexi_reports_number", number);
-       formData.append("search_flexi_reports_caller_id", callerId);
-       formData.append("search_flexi_reports_message", message);
+     formData.append("search_flexi_reports_caller_id", callerId);
+     formData.append("search_flexi_reports_message", message);
     formData.append("search_sms_reports_service_type", textValue);
     
     formData.append("search_flexi_reports_gw_cost", gwCost);
@@ -272,7 +273,8 @@ const WhatsappReportSearch = () => {
 
 
     fetch(
-      `http://poultrykhamarbichitra.net/admin/Record/whatsapp_record_search.php`,
+      // `http://poultrykhamarbichitra.net/admin/Record/whatsapp_record_search.php`,
+      `http://poultrykhamarbichitra.net/admin/Record/otp_record_search.php`,
       {
         method: "POST",
         body: formData,
@@ -283,33 +285,32 @@ const WhatsappReportSearch = () => {
       .then((data) => {
         console.log(data);
         setUpdateTable(data);
-        setFormDate("")
-        setToDate("")
-        setUserName("")
-        setCallerId("")
-        setNumber("")
-        setMessage("")
-        setServiceType("")
-        setDestination("")
-        setGwCost("")
-        setProfit("")
-        setGateway("")
-        setEndReason("")
-        setCost("")
-        setYear("")
-        setMonth("")
-        setDay("")
-        setHour("")
-        setCc("")
-        setDestination1("")
-        setServiceType1("")
-        setClient("")
-        setEnd("")
-        setGateway1("")
-        setGwRadio("")
-        setProfitRadio("")
-        setCostRadio("")
-      
+        setFormDate("");
+        setToDate("");
+        setUserName("");
+        setCallerId("");
+        setNumber("");
+        setMessage("");
+        setServiceType("");
+        setDestination("");
+        setGwCost("");
+        setProfit("");
+        setGateway("");
+        setEndReason("");
+        setCost("");
+        setYear("");
+        setMonth("");
+        setDay("");
+        setHour("");
+        setCc("");
+        setDestination1("");
+        setServiceType1("");
+        setClient("");
+        setEnd("");
+        setGateway1("");
+        setGwRadio("");
+        setProfitRadio("");
+        setCostRadio("");
       });
 
   };
@@ -726,11 +727,11 @@ const WhatsappReportSearch = () => {
 
       {/* {isLoading && <Loading></Loading>} */}
       {updateTable.length === 0 ? (
-        // <WhatsappTableDefault></WhatsappTableDefault>
+        // <OtpTableDefault></OtpTableDefault>
         <h3 className="text-center text-primary mt-4">No data Found</h3>
       ) : (
         <>
-          <WhatsappReportTable
+          <OtpReportTable
             isLoading={isLoading}
             updateTable={updateTable}
             arrayTh={arrayTh}
@@ -743,4 +744,4 @@ const WhatsappReportSearch = () => {
 
 
 
-export default WhatsappReportSearch;
+export default OtpReportSearch;

@@ -338,6 +338,7 @@ function Home() {
           pb: 0,
           width: "100%",
           overflow: "auto",
+          minHeight: "90vh"
         }}
       >
         <DrawerHeader />

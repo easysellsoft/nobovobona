@@ -17,9 +17,11 @@ import {
 
 import { AiTwotoneMail } from "react-icons/ai";
 import { RiLockPasswordFill } from "react-icons/ri";
-import WhatsappReportTable from "./WhatsappReportTable";
 import Loading from "../../Shared/Loading";
-import WhatsappTableDefault from './WhatsappTableDefault';
+// import OtpTableDefault from "./OtpTableDefault";
+// import OtpReportTable from "./SmsReportTable";
+import SmsReportTable from "./SmsReportTable";
+import SmsTableDefault from "./SmsTableDefault";
 const currencies = [
   {
     value: "0",
@@ -35,7 +37,7 @@ const currencies = [
   },
 ];
 
-const WhatsappReportSearch = () => {
+const SmsReportSearch = () => {
   const [checked, setChecked] = useState(false);
   const [tgMonth, setTgMonth] = useState(false);
   const [tgDay, setTgDay] = useState(false);
@@ -118,11 +120,11 @@ const WhatsappReportSearch = () => {
     //    console.log(input);
     setTextValue(e.target.value);
   };
-  
+
   const handleRadioClick = (e) => {
     // console.log(e)
-    setGwRadio(e)
-     };
+    setGwRadio(e);
+  };
   const handleRadioProfitClick = (e) => {
     // console.log(e);
     setProfitRadio(e);
@@ -132,7 +134,7 @@ const WhatsappReportSearch = () => {
     setCostRadio(e);
   };
 
- console.log(gwRadio);
+  console.log(gwRadio);
   console.log(profitRadio);
   console.log(costRadio);
 
@@ -196,28 +198,27 @@ const WhatsappReportSearch = () => {
     e.preventDefault();
     setLoading(true);
 
-   
-
     setArrayTh([...filterData]);
 
-    formData.append("search_flexi_reports_from_date", formDate);
-    formData.append("search_flexi_reports_to_date", toDate);
-    formData.append("search_flexi_reports_username", userName);
-    formData.append("search_flexi_reports_number", number);
-       formData.append("search_flexi_reports_caller_id", callerId);
-       formData.append("search_flexi_reports_message", message);
+    formData.append("search_sms_reports_from_date", formDate);
+    formData.append("search_sms_reports_to_date", toDate);
+    formData.append("search_sms_reports_username", userName);
+
+    formData.append("search_sms_reports_number", number);
+    formData.append("search_sms_reports_caller_id", callerId);
+    formData.append("search_sms_reports_message", message);
     formData.append("search_sms_reports_service_type", textValue);
-    
-    formData.append("search_flexi_reports_gw_cost", gwCost);
-    formData.append("search_flexi_reports_profit", profit);
-    formData.append("search_flexi_reports_gateway", gateway);
-    formData.append("search_flexi_reports_end_reason", endReason);
-    formData.append("search_flexi_reports_cost", cost);
-    formData.append("search_flexi_reports_dest", destination);
+
+    formData.append("search_sms_reports_gw_cost", gwCost);
+    formData.append("search_sms_reports_profit", profit);
+    formData.append("search_sms_reports_gateway", gateway);
+    formData.append("search_sms_reports_end_reason", endReason);
+    formData.append("search_sms_reports_cost", cost);
+    formData.append("search_sms_reports_dest", destination);
     formData.append("format", "format");
-    formData.append("search_flexi_reports_gw_cost1", gwRadio);
-    formData.append("search_flexi_reports_profit1", profitRadio);
-    formData.append("search_flexi_reports_cost1", costRadio);
+    formData.append("search_sms_reports_gw_cost1", gwRadio);
+    formData.append("search_sms_reports_profit1", profitRadio);
+    formData.append("search_sms_reports_cost1", costRadio);
 
     if (checked) {
       formData.append("search_sms_reports_year", year);
@@ -270,50 +271,43 @@ const WhatsappReportSearch = () => {
       formData.append("search_sms_reports_end_gateway", "");
     }
 
-
-    fetch(
-      `http://poultrykhamarbichitra.net/admin/Record/whatsapp_record_search.php`,
-      {
-        method: "POST",
-        body: formData,
-      }
-    )
+    fetch(`http://poultrykhamarbichitra.net/admin/Record/absearch.php`, {
+      method: "POST",
+      body: formData,
+    })
       //  console.log(formData),
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
         setUpdateTable(data);
-        setFormDate("")
-        setToDate("")
-        setUserName("")
-        setCallerId("")
-        setNumber("")
-        setMessage("")
-        setServiceType("")
-        setDestination("")
-        setGwCost("")
-        setProfit("")
-        setGateway("")
-        setEndReason("")
-        setCost("")
-        setYear("")
-        setMonth("")
-        setDay("")
-        setHour("")
-        setCc("")
-        setDestination1("")
-        setServiceType1("")
-        setClient("")
-        setEnd("")
-        setGateway1("")
-        setGwRadio("")
-        setProfitRadio("")
-        setCostRadio("")
-      
+        setFormDate("");
+        setToDate("");
+        setUserName("");
+        setCallerId("");
+        setNumber("");
+        setMessage("");
+        setServiceType("");
+        setDestination("");
+        setGwCost("");
+        setProfit("");
+        setGateway("");
+        setEndReason("");
+        setCost("");
+        setYear("");
+        setMonth("");
+        setDay("");
+        setHour("");
+        setCc("");
+        setDestination1("");
+        setServiceType1("");
+        setClient("");
+        setEnd("");
+        setGateway1("");
+        setGwRadio("");
+        setProfitRadio("");
+        setCostRadio("");
       });
-
   };
-  
 
   useEffect(() => {
     if (updateTable.length !== 0) {
@@ -726,11 +720,11 @@ const WhatsappReportSearch = () => {
 
       {/* {isLoading && <Loading></Loading>} */}
       {updateTable.length === 0 ? (
-        // <WhatsappTableDefault></WhatsappTableDefault>
+        // <SmsTableDefault></SmsTableDefault>
         <h3 className="text-center text-primary mt-4">No data Found</h3>
       ) : (
         <>
-          <WhatsappReportTable
+          <SmsReportTable
             isLoading={isLoading}
             updateTable={updateTable}
             arrayTh={arrayTh}
@@ -743,4 +737,4 @@ const WhatsappReportSearch = () => {
 
 
 
-export default WhatsappReportSearch;
+export default SmsReportSearch;

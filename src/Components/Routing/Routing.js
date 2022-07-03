@@ -7,7 +7,10 @@ import { Box } from "@mui/material";
 import Footer from "../Footer/Footer";
 import ProjectRateAdd from "../Home/ProjectRate/ProjectRateAdd/ProjectRateAdd";
 import WhatsappReport from "../Home/WhatsappReport/WhatsappReport";
-import OtpReport from "./../Home/OtpReport/OtpReport";
+// import OtpReport from "./../Home/OtpReport/OtpReport";
+import OtpReportPage from "./../Home/OtpReportPage/OtpReport";
+import SmsReportPage from "./../Home/SmsReportPage/SmsReport";
+// import OtpReportPage from "./../Home/OtpReportPage/OtpReportPage";
 
 const Login = React.lazy(() => import("./../Authentication/Login/Login"));
 const Error = React.lazy(() => import("../Error/Error"));
@@ -86,7 +89,9 @@ const Routing = () => {
             <Route path="/" element={<AdminHome />} />
 
             <Route path="/whatsapp_report" element={<WhatsappReport />} />
-            <Route path="/otp_record" element={<OtpReport />} />
+            {/* <Route path="/otp_record" element={<OtpReport />} /> */}
+            <Route path="/otp_record" element={<OtpReportPage />} />
+            <Route path="/sms_reports" element={<SmsReportPage />} />
 
             {/* <Route path="/AdminDashboard" element={<AdminDashboard />} />
             <Route path="/message" element={<Message />} /> */}
