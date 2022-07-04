@@ -10,12 +10,22 @@ import WhatsappReport from "../Home/WhatsappReport/WhatsappReport";
 // import OtpReport from "./../Home/OtpReport/OtpReport";
 import OtpReportPage from "./../Home/OtpReportPage/OtpReport";
 import SmsReportPage from "./../Home/SmsReportPage/SmsReport";
-// import OtpReportPage from "./../Home/OtpReportPage/OtpReportPage";
+import Issue from "../Home/Issue/Issue";
+import Section from "./../Home/Section/Section";
+import Writer from "./../Home/Writer/Writer";
+import Menu from "./../Home/Menu/Menu";
+import Article from "./../Home/Article/Article";
+import AddPage from "../Home/AddPage/AddPage";
+import Orders from "./../Home/Orders/Orders";
+import Rate from "./../Home/Rate/Rate";
+import Payment from "./../Home/Payment/Payment";
+import Users from "./../Home/Users/Users";
+import Others from "./../Home/Others/Others";
+import Messages from "./../Home/Messages/Messages";
 
 const Login = React.lazy(() => import("./../Authentication/Login/Login"));
 const Error = React.lazy(() => import("../Error/Error"));
 const Home = React.lazy(() => import("./../Home/Home/Home.js"));
-const Message = React.lazy(() => import("./../Home/Message/Message.js"));
 const AdminHome = React.lazy(() => import("./../Home/AdminHome/AdminHome.js"));
 
 const AdminDashboard = React.lazy(() =>
@@ -39,8 +49,6 @@ const PaymentMethod = React.lazy(() =>
 const ProjectRate = React.lazy(() =>
   import("./../Home/ProjectRate/ProjectRate.js")
 );
-
-
 
 const Routing = () => {
   //scroll to top window size
@@ -88,11 +96,24 @@ const Routing = () => {
             }
           >
             <Route path="/" element={<AdminHome />} />
+            <Route path="/issue" element={<Issue />} />
+            <Route path="/section" element={<Section />} />
+            <Route path="/writer" element={<Writer />} />
+            <Route path="/menu" element={<Menu />} />
+            <Route path="/article" element={<Article />} />
+            <Route path="/add_page" element={<AddPage />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/rate" element={<Rate />} />
+            <Route path="/payment" element={<Payment />} />
+            <Route path="/messages" element={<Messages />} />
+            <Route path="/users" element={<Users />} />
+            <Route path="/others" element={<Others />} />
 
+            {/*            
             <Route path="/whatsapp_report" element={<WhatsappReport />} />
-            {/* <Route path="/otp_record" element={<OtpReport />} /> */}
+           
             <Route path="/otp_record" element={<OtpReportPage />} />
-            <Route path="/sms_reports" element={<SmsReportPage />} />
+            <Route path="/sms_reports" element={<SmsReportPage />} /> */}
 
             {/* <Route path="/AdminDashboard" element={<AdminDashboard />} />
             <Route path="/message" element={<Message />} /> */}
