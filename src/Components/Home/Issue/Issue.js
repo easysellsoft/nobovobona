@@ -15,8 +15,9 @@ import { Box } from "@mui/material";
 import ButtonComp from "./../../Shared/Button/Button";
 import SearchIssue from './SearchIssue';
 const Issue = () => {
-    const [show, setShow] = useState(false);
-    const [refresh, setRefresh] = useState(false);
+    const [prevToggle, setPrevToggle] = useState();
+  const [refreshToggle, setRefreshToggle] = useState();
+  console.log(refreshToggle)
     const columns = [
       {
         id: 0,
@@ -40,13 +41,17 @@ const Issue = () => {
         label: "Status",
         minWidth: 60,
       },
-    ];
+  ];
+  console.log(prevToggle);
     return (
       <div>
-        <AdminHome />
+        <AdminHome
+          setPrevToggle={setPrevToggle}
+          setRefreshToggle={setRefreshToggle}
+        />
         {/* <IssueTable/> */}
         {/* <TableDefault/> */}
-        <SearchIssue/>
+        {prevToggle && <SearchIssue />}
         <div>
           <Paper mt={2} pt={3} sx={{ width: "100%", mt: "40px" }}>
             <TableContainer sx={{ maxHeight: 440 }}>

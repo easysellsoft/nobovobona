@@ -15,6 +15,8 @@ import ButtonComp from "./../../Shared/Button/Button";
 import searchTable from '../Home/Hook/SearchTable';
 import SearchTable from './../Home/Hook/SearchTable';
 const Messages = () => {
+    const [prevToggle, setPrevToggle] = useState();
+    const [refreshToggle, setRefreshToggle] = useState();
       const columns = [
         { id: 0, label: "Id", minWidth: 60 },
         { id: 1, label: "Title", minWidth: 60 },
@@ -36,9 +38,12 @@ const Messages = () => {
       ];
     return (
       <div>
-        <AdminHome />
+        <AdminHome
+          setPrevToggle={setPrevToggle}
+          setRefreshToggle={setRefreshToggle}
+        />
         {/* <TableDefault /> */}
-        <SearchTable/>
+   {   prevToggle &&  <SearchTable />}
         <div>
           <Paper mt={2} pt={3} sx={{ width: "100%", mt: "40px" }}>
             <TableContainer sx={{ maxHeight: 440 }}>

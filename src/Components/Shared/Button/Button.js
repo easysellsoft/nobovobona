@@ -18,6 +18,8 @@ const ButtonComp = ({
   publishOff,
   show,
   setShow,
+  refresh,
+  setRefresh,
   search,
   deleteIco,
   exportIco,
@@ -25,9 +27,25 @@ const ButtonComp = ({
   edit,
   ...rest
 }) => {
+  // const [show, setShow] = useState(false);
+  // const [refresh, setRefresh] = useState(false);
+  const multipleState = (show, refresh) => {
+     setShow(!show);
+    setRefresh(!refresh);
+    
+   
+}
   return (
     <Button
       variant="outlined"
+      onClick={() =>
+        //  setShow(!show)
+      multipleState(show, refresh)
+        // {
+        //   setShow(!show);
+        //   setRefresh(!refresh);
+        // }
+      }
       sx={[
         {
           borderRadius: "20px",
@@ -44,12 +62,8 @@ const ButtonComp = ({
       {...rest}
     >
       {add && <MdAddCircle style={{ marginRight: "7px", fontSize: "20px" }} />}
-      {edit && (
-        <AiTwotoneEdit style={{ fontSize: "20px" }} />
-      )}
-      {publish && (
-        <MdOutlinePublic style={{  fontSize: "20px" }} />
-      )}
+      {edit && <AiTwotoneEdit style={{ fontSize: "20px" }} />}
+      {publish && <MdOutlinePublic style={{ fontSize: "20px" }} />}
       {publishOff && (
         <MdOutlinePublicOff style={{ marginRight: "7px", fontSize: "20px" }} />
       )}

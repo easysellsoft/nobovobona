@@ -14,6 +14,8 @@ import { Box } from "@mui/material";
 import ButtonComp from "./../../Shared/Button/Button";
 import SearchAddPage from './SearchAddPage';
 const AddPage = () => {
+    const [prevToggle, setPrevToggle] = useState();
+    const [refreshToggle, setRefreshToggle] = useState();
       const columns = [
         { id: 0, label: "Serial", minWidth: 60 },
         { id: 1, label: "Issue", minWidth: 60 },
@@ -35,9 +37,12 @@ const AddPage = () => {
       ];
     return (
       <div>
-        <AdminHome />
+        <AdminHome
+          setPrevToggle={setPrevToggle}
+          setRefreshToggle={setRefreshToggle}
+        />
         {/* <TableDefault /> */}
-        <SearchAddPage/>
+       {prevToggle && <SearchAddPage />}
         <div>
           <Paper mt={2} pt={3} sx={{ width: "100%", mt: "40px" }}>
             <TableContainer sx={{ maxHeight: 440 }}>

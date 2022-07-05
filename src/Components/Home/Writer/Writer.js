@@ -14,6 +14,8 @@ import { Box } from "@mui/material";
 import ButtonComp from "./../../Shared/Button/Button";
 import SearchWriter from './SearchWriter';
 const Writer = () => {
+  const [prevToggle, setPrevToggle] = useState();
+  const [refreshToggle, setRefreshToggle] = useState();
       const columns = [
         { id: 0, label: "Serial", minWidth: 60 },
         { id: 1, label: "Name", minWidth: 60 },
@@ -31,9 +33,12 @@ const Writer = () => {
       ];
     return (
       <div>
-        <AdminHome />
+        <AdminHome
+          setPrevToggle={setPrevToggle}
+          // setRefreshToggle={setRefreshToggle}
+        />
         {/* <TableDefault /> */}
-        <SearchWriter/>
+        {prevToggle && <SearchWriter />}
         <div>
           <Paper mt={2} pt={3} sx={{ width: "100%", mt: "40px" }}>
             <TableContainer sx={{ maxHeight: 440 }}>

@@ -14,6 +14,8 @@ import { Box } from "@mui/material";
 import ButtonComp from "./../../Shared/Button/Button";
 import SearchArticle from './SearchArticle';
 const Article = () => {
+   const [prevToggle, setPrevToggle] = useState();
+   const [refreshToggle, setRefreshToggle] = useState();
     const columns = [
       
         { id: 0, label: "Serial", minWidth: 60 },
@@ -62,9 +64,12 @@ const Article = () => {
       ];
     return (
       <div>
-        <AdminHome />
+        <AdminHome
+          setPrevToggle={setPrevToggle}
+          setRefreshToggle={setRefreshToggle}
+        />
         {/* <TableDefault/> */}
-        <SearchArticle/>
+       {prevToggle && <SearchArticle />}
         <div>
           <Paper mt={2} pt={3} sx={{ width: "100%", mt: "40px" }}>
             <TableContainer sx={{ maxHeight: 440 }}>
