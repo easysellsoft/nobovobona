@@ -10,7 +10,7 @@ import TableRow from "@mui/material/TableRow";
 import { useState } from "react";
 import { Box } from '@mui/material';
 import ButtonComp from './../../Shared/Button/Button';
-import EditIcon from "@mui/icons-material/Edit";
+
 const IssueTable = () => {
     // const [defaultTd, setDefaultTd] = useState([]);
 

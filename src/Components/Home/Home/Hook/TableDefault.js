@@ -12,7 +12,8 @@ import { Box } from "@mui/material";
 import ButtonComp from './../../../Shared/Button/Button';
 
 
-const TableDefault = ({props}) => {
+const TableDefault = ({ props }) => {
+  console.log(props)
   // const [defaultTd, setDefaultTd] = useState([]);
   // let columns;
    const columns = [
