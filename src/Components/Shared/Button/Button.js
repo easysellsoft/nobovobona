@@ -14,7 +14,9 @@ import { MdOutlinePublicOff } from "react-icons/md";
 const ButtonComp = ({
   title,
   add,
-  // setAdd,
+  addToggleHandler,
+  setAddToggleHandler,
+  setAdd,
   publish,
   publishOff,
   show,
@@ -28,26 +30,11 @@ const ButtonComp = ({
   edit,
   ...rest
 }) => {
-  // const [show, setShow] = useState(false);
-  // const [refresh, setRefresh] = useState(false);
-  const multipleState = (show, refresh) => {
-     setShow(!show);
-    setRefresh(!refresh);
-    // setAdd(!add);
-    
-   
-}
+  
   return (
     <Button
       variant="outlined"
-      onClick={() =>
-        //  setShow(!show)
-      multipleState(show, refresh)
-        // {
-        //   setShow(!show);
-        //   setRefresh(!refresh);
-        // }
-      }
+     
       sx={[
         {
           borderRadius: "20px",
