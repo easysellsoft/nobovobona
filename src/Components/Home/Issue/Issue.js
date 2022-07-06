@@ -14,8 +14,10 @@ import { useState } from "react";
 import { Box } from "@mui/material";
 import ButtonComp from "./../../Shared/Button/Button";
 import SearchIssue from './SearchIssue';
+import AddIssue from './AddIssue/AddIssue';
 const Issue = () => {
     const [prevToggle, setPrevToggle] = useState();
+    const [addToggle, setAddToggle] = useState();
   const [refreshToggle, setRefreshToggle] = useState();
   console.log(refreshToggle)
     const columns = [
@@ -48,7 +50,10 @@ const Issue = () => {
         <AdminHome
           setPrevToggle={setPrevToggle}
           setRefreshToggle={setRefreshToggle}
+          setAddToggle={setAddToggle}
         />
+      {addToggle && <AddIssue></AddIssue>}
+       <AddIssue></AddIssue>
         {/* <IssueTable/> */}
         {/* <TableDefault/> */}
         {prevToggle && <SearchIssue />}

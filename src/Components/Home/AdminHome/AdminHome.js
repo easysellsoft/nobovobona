@@ -3,13 +3,13 @@ import { Box } from "@mui/material";
 import ButtonComp from "./../../Shared/Button/Button";
 
 
-const AdminHome = ({ setPrevToggle, setRefreshToggle }) => {
+const AdminHome = ({ setPrevToggle, setRefreshToggle, setAddToggle }) => {
   const [show, setShow] = useState(false);
   const [refresh, setRefresh] = useState(false);
   console.log(show);
-  setPrevToggle(show)
-  setRefreshToggle(refresh)
- 
+  setPrevToggle(show);
+  setRefreshToggle(refresh);
+
   return (
     <Box
       sx={[

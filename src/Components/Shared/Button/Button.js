@@ -14,6 +14,7 @@ import { MdOutlinePublicOff } from "react-icons/md";
 const ButtonComp = ({
   title,
   add,
+  // setAdd,
   publish,
   publishOff,
   show,
@@ -32,6 +33,7 @@ const ButtonComp = ({
   const multipleState = (show, refresh) => {
      setShow(!show);
     setRefresh(!refresh);
+    // setAdd(!add);
     
    
 }
