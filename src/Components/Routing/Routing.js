@@ -22,6 +22,7 @@ import Payment from "./../Home/Payment/Payment";
 import Users from "./../Home/Users/Users";
 import Others from "./../Home/Others/Others";
 import Messages from "./../Home/Messages/Messages";
+// import Home from "../../ClientComponents/Home/Home";
 
 const Login = React.lazy(() => import("./../Authentication/Login/Login"));
 const Error = React.lazy(() => import("../Error/Error"));
@@ -92,10 +93,10 @@ const Routing = () => {
               // <PrivateRoute>
               //   <Home />
               // </PrivateRoute>
-              <Home />
+              <Home></Home>
             }
           >
-            <Route path="/" element={<AdminHome />} />
+            {/* <Route path="/" element={<AdminHome />} /> */}
             <Route path="/issue" element={<Issue />} />
             <Route path="/section" element={<Section />} />
             <Route path="/writer" element={<Writer />} />

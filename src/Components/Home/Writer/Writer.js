@@ -35,7 +35,7 @@ const Writer = () => {
       <div>
         <AdminHome
           setPrevToggle={setPrevToggle}
-          // setRefreshToggle={setRefreshToggle}
+          setRefreshToggle={setRefreshToggle}
         />
         {/* <TableDefault /> */}
         {prevToggle && <SearchWriter />}

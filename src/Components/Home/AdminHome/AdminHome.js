@@ -30,14 +30,14 @@ const AdminHome = ({ setPrevToggle, setRefreshToggle }) => {
         setRefresh={setRefresh}
       />
 
+      <ButtonComp title="Add" color="success" add />
       <ButtonComp
-        title="Add"
-        color="success"
-        add
+        title="Search"
+        color="info"
+        search
         show={show}
         setShow={setShow}
       />
-      <ButtonComp title="Search" color="info" search show />
       <ButtonComp title="Delete" color="error" deleteIco show />
       <ButtonComp title="Export" color="primary" exportIco show />
     </Box>
