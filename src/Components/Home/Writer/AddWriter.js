@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core";
 import PeopleOutlineTwoToneIcon from "@material-ui/icons/PeopleOutlineTwoTone";
 
-import PageHeader from "../components/PageHeader";
+// import PageHeader from "../components/PageHeader";
 import { Grid, TextareaAutosize } from "@mui/material";
 import { FormLabel } from "@mui/material";
 import { TextField } from "@mui/material";
@@ -10,6 +10,8 @@ import { Box } from "@mui/material";
 import { FormControl } from "@mui/material/";
 import { FormGroup } from "@mui/material/";
 import { Button } from "@mui/material";
+import PageHeader from "../Issue/components/PageHeader";
+import { SettingsInputCompositeRounded } from "@material-ui/icons";
 const useStyles = makeStyles({
   appMain: {
         paddingLeft: "10px",
@@ -18,13 +20,13 @@ const useStyles = makeStyles({
     
   },
 });
-function AddIssue() {
-  const [textValue, setTextValue] = useState("");
-  const [title, setTitle] = useState("");
-  const [title_eng, setTitle_eng] = useState("");
+function AddWriter() {
+  const [cn_details, setCn_details] = useState("");
+  const [writer, setWriter] = useState("");
+  // const [title_eng, setTitle_eng] = useState("");
   const [userId, setUserId] = useState("");
-  const [status, setStatus] = useState("");
-  const [sub_title, setSub_title] = useState("");
+  const [cn_status, setCn_status] = useState("");
+  // const [sub_title, setSub_title] = useState("");
   const [publish_date, setPublish_date] = useState("");
   const [ar_file, setAr_file] = useState(null);
   const formData = new FormData();
@@ -43,21 +45,19 @@ function AddIssue() {
     e.preventDefault();
     //    let input = e.target.value;
     //    console.log(input);
-    setStatus(e.target.value);
+    setCn_status(e.target.value);
   };
 
   const handelSubmit = (e) => {
     e.preventDefault();
     console.log(ar_file);
-    formData.append("title", title);
-    formData.append("title_eng", title_eng);
+    formData.append("writer", writer);
+    formData.append("cn_details", cn_details);
     formData.append("puser", userId);
-    formData.append("status", status);
-    formData.append("sub_title", sub_title);
-    formData.append("publish_date", publish_date);
+    formData.append("cn_status", cn_status);
     formData.append("ar_file", ar_file);
     //   formData.append(" ", );
-    fetch(`http://nobovabna.com/webapi/mIssue_new.php`, {
+    fetch(`http://nobovabna.com/webapi/writer_new.php`, {
       method: "POST",
       body: formData,
     })
@@ -100,7 +100,7 @@ function AddIssue() {
             spacing={2}
           >
             <Grid item sm={12} md={6}>
-              <FormLabel className="mt-2 ms-2">Bangla Name</FormLabel>
+              <FormLabel className="mt-2 ms-2">Writer Name</FormLabel>
               <TextField
                 style={{ margin: "7px" }}
                 label={<Box></Box>}
@@ -108,11 +108,11 @@ function AddIssue() {
                 type="text"
                 fullWidth
                 // value={formDate}
-                onChange={(e) => setTitle?.(e.target.value)}
+                onChange={(e) => setWriter(e.target.value)}
               />
             </Grid>
             <Grid item sm={12} md={6}>
-              <FormLabel className="mt-2 ms-2">English Name</FormLabel>
+              <FormLabel className="mt-2 ms-2">Writer Info</FormLabel>
               <TextField
                 style={{ margin: "7px" }}
                 label={<Box></Box>}
@@ -121,7 +121,7 @@ function AddIssue() {
                 type="text"
                 fullWidth
                 // value={toDate}
-                onChange={(e) => setTitle_eng(e.target.value)}
+                onChange={(e) => setCn_details(e.target.value)}
               />
             </Grid>
             <Grid item sm={12} md={6}>
@@ -136,7 +136,7 @@ function AddIssue() {
                 onChange={(e) => setUserId(e.target.value)}
               />
             </Grid>
-          
+
             <Grid item sm={12} md={6}>
               <FormLabel className="mt-2 ms-2">Publish Status</FormLabel>
               <TextField
@@ -145,7 +145,7 @@ function AddIssue() {
                 label={<Box></Box>}
                 // value={currency}
                 // value={textValue}
-                value={status}
+                value={cn_status}
                 fullWidth
                 onChange={onTextChange}
                 // onChange={(handleChange, onTextChange)}
@@ -162,39 +162,9 @@ function AddIssue() {
                 ))}
               </TextField>
             </Grid>
+
             <Grid item sm={12} md={6}>
-              <FormLabel className="mt-2 ms-2">Text</FormLabel>
-              <TextField
-                style={{ margin: "7px" }}
-                label={<Box></Box>}
-                name="background"
-                type="text"
-                fullWidth
-                // value={userName}
-                onChange={(e) => setSub_title(e.target.value)}
-              />
-              {/* <TextareaAutosize
-                style={{ margin: "7px", width: 200 }}
-                label={<Box></Box>}
-                aria-label="minimum height"
-                minRows={3}
-                // placeholder="Minimum 3 rows"
-              /> */}
-            </Grid>
-            <Grid item sm={12} md={6}>
-              <FormLabel className="mt-2 ms-2">Date</FormLabel>
-              <TextField
-                style={{ margin: "7px" }}
-                label={<Box></Box>}
-                name="background"
-                type="date"
-                fullWidth
-                // value={userName}
-                onChange={(e) => setPublish_date(e.target.value)}
-              />
-            </Grid>
-            <Grid item sm={12} md={6}>
-              {/* <FormLabel className="mt-2 ms-2">File</FormLabel> */}
+              <FormLabel className="mt-2 ms-2">Writer Pic</FormLabel>
               <TextField
                 style={{ margin: "7px" }}
                 id="filled-basic"
@@ -206,12 +176,10 @@ function AddIssue() {
                 // value={userName}
                 onChange={(e) => setAr_file(e.target?.files[0])}
               />
-            
             </Grid>
           </Grid>
 
           <FormControl className="mt-3" component="fieldset">
-         
             <FormGroup aria-label="position" row>
               <Box
                 style={{
@@ -228,16 +196,16 @@ function AddIssue() {
                   variant="contained"
                   color="primary"
                   width="25%"
-                  sx={{ py: 1 , mr:3}}
+                  sx={{ py: 1, mr: 3 }}
                   type="submit"
                 >
                   Add
                 </Button>
-                 <Button
-                           
+                <Button
                   variant="contained"
                   color="primary"
-                  width="25%"F
+                  width="25%"
+                  F
                   sx={{ py: 1 }}
                   type="submit"
                 >
@@ -252,4 +220,4 @@ function AddIssue() {
   );
 }
 
-export default AddIssue;
+export default AddWriter;
