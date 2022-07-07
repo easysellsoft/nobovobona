@@ -3,13 +3,14 @@ import { makeStyles } from "@material-ui/core";
 import PeopleOutlineTwoToneIcon from "@material-ui/icons/PeopleOutlineTwoTone";
 
 import PageHeader from "../components/PageHeader";
-import { Grid, TextareaAutosize } from "@mui/material";
+import { Grid, InputAdornment, TextareaAutosize } from "@mui/material";
 import { FormLabel } from "@mui/material";
 import { TextField } from "@mui/material";
 import { Box } from "@mui/material";
 import { FormControl } from "@mui/material/";
 import { FormGroup } from "@mui/material/";
 import { Button } from "@mui/material";
+import Visibility from "@mui/icons-material/Visibility";
 const useStyles = makeStyles({
   appMain: {
         paddingLeft: "10px",
@@ -29,6 +30,7 @@ function AddIssue() {
   const [ar_file, setAr_file] = useState(null);
   const formData = new FormData();
   const classes = useStyles();
+   const [showPassword, setShowPassword] = useState(false);
   const currencies = [
     {
       value: "0",
@@ -124,19 +126,36 @@ function AddIssue() {
                 onChange={(e) => setTitle_eng(e.target.value)}
               />
             </Grid>
+            {/* <Grid item sm={12} md={6} className="d-flex">
+              <div className="idToggle">
+                <FormLabel className="mt-2 ms-2">User Id</FormLabel>
+                <TextField
+                  style={{ margin: "7px" }}
+                  label={<Box></Box>}
+                  name="background"
+                  type="Number"
+                  fullWidth
+                  // value={userName}
+                  onChange={(e) => setUserId(e.target.value)}
+                />
+              </div>
+              <Button>Visible</Button>
+            </Grid> */}
             <Grid item sm={12} md={6}>
               <FormLabel className="mt-2 ms-2">User Id</FormLabel>
-              <TextField
-                style={{ margin: "7px" }}
+              <IconTextField
                 label={<Box></Box>}
-                name="background"
-                type="Number"
+                // type="number"
+                type={showPassword ? "text" : "password"}
+                // type="text"
+                showPassword={showPassword}
+                setShowPassword={setShowPassword}
                 fullWidth
-                // value={userName}
+                iconEnd={<Visibility />}
                 onChange={(e) => setUserId(e.target.value)}
               />
             </Grid>
-          
+
             <Grid item sm={12} md={6}>
               <FormLabel className="mt-2 ms-2">Publish Status</FormLabel>
               <TextField
@@ -206,12 +225,10 @@ function AddIssue() {
                 // value={userName}
                 onChange={(e) => setAr_file(e.target?.files[0])}
               />
-            
             </Grid>
           </Grid>
 
           <FormControl className="mt-3" component="fieldset">
-         
             <FormGroup aria-label="position" row>
               <Box
                 style={{
@@ -228,16 +245,16 @@ function AddIssue() {
                   variant="contained"
                   color="primary"
                   width="25%"
-                  sx={{ py: 1 , mr:3}}
+                  sx={{ py: 1, mr: 3 }}
                   type="submit"
                 >
                   Add
                 </Button>
-                 <Button
-                           
+                <Button
                   variant="contained"
                   color="primary"
-                  width="25%"F
+                  width="25%"
+                  F
                   sx={{ py: 1 }}
                   type="submit"
                 >
@@ -253,3 +270,41 @@ function AddIssue() {
 }
 
 export default AddIssue;
+
+
+const IconTextField = ({
+  iconStart,
+  iconEnd,
+  InputProps,
+  showPassword,
+  setShowPassword,
+  ...props
+}) => {
+  // const [showPassword, setShowPassword] = useState(false);
+  const passIconToggle = () => {
+    console.log("clicked");
+  };
+  console.log(props);
+  return (
+    <TextField
+      type={showPassword ? "text" : "password"}
+      {...props}
+      InputProps={{
+        ...InputProps,
+        startAdornment: iconStart ? (
+          <InputAdornment position="start">{iconStart}</InputAdornment>
+        ) : null,
+        endAdornment: iconEnd ? (
+          <InputAdornment
+            style={{ cursor: "pointer" }}
+            onClick={() => setShowPassword(!showPassword)}
+            setShowPassword
+            position="end"
+          >
+            {iconEnd}
+          </InputAdornment>
+        ) : null,
+      }}
+    />
+  );
+};
