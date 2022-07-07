@@ -18,40 +18,35 @@ import { ExpandLess, ExpandMore } from "@material-ui/icons";
 import { BiCircle } from "react-icons/bi";
 
 const listItemNav = [
- 
   {
     title: "Issue",
     icon: <HiHome />,
     to: "/issue",
-    nested: false
-  
+    nested: false,
   },
   {
     title: "Section",
     icon: <MdDashboard />,
     to: "/section",
     nested: false,
-   
   },
   {
     title: "Writer",
     icon: <FaRegEnvelope />,
     to: "/writer",
     nested: false,
- 
   },
   {
     title: "Menu",
     to: "/menu",
     icon: <GoProject />,
     nested: false,
-
   },
   {
     title: "Article",
     icon: <MdDashboard />,
     to: "/article",
-    nested: false
+    nested: false,
   },
 
   {
@@ -59,7 +54,6 @@ const listItemNav = [
     to: "/add_page",
     icon: <GoProject />,
     nested: false,
-    
   },
   {
     title: "Orders",
@@ -77,7 +71,7 @@ const listItemNav = [
     title: "Payment",
     to: "/payment",
     icon: <GoProject />,
-    nested: false
+    nested: false,
   },
   {
     title: "Messages",
@@ -89,7 +83,7 @@ const listItemNav = [
     title: "Users",
     to: "/users",
     icon: <GoProject />,
-    nested: false
+    nested: false,
   },
 
   {
@@ -100,16 +94,16 @@ const listItemNav = [
     submenu: [
       {
         title: "Others1",
-        to: "/new_contact",
+        to: "/others",
         icon: <BiCircle />,
       },
       {
-        title: "Others2",
+        title: "Others1",
         to: "/contact_group",
         icon: <BiCircle />,
       },
     ],
-  }
+  },
 ];
 
 const MainRoutes = () => {

@@ -87,142 +87,144 @@ const Writer = () => {
 
           {show && <AddWriter></AddWriter>}
         </div>
-        <div>
-          <Paper mt={2} pt={3} sx={{ width: "100%", mt: "40px" }}>
-            <TableContainer sx={{ maxHeight: 440 }}>
-              <Table stickyHeader aria-label="sticky table">
-                <TableHead>
-                  <TableRow sx={{ borderColor: "text.primary" }}>
-                    <TableCell align="center" colSpan={12}>
-                      Writer Table
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    {columns.map((column) => (
-                      <TableCell
-                        key={column.id}
-                        align={column.align}
-                        style={{
-                          top: 57,
-                          minWidth: column.minWidth,
-                          fontWeight: "bold",
-                        }}
-                      >
-                        {column.label}
+        {!show && (
+          <div>
+            <Paper mt={2} pt={3} sx={{ width: "100%", mt: "40px" }}>
+              <TableContainer sx={{ maxHeight: 440 }}>
+                <Table stickyHeader aria-label="sticky table">
+                  <TableHead>
+                    <TableRow sx={{ borderColor: "text.primary" }}>
+                      <TableCell align="center" colSpan={12}>
+                        Writer Table
                       </TableCell>
-                    ))}
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {/* {defaultTd.map((item) => { */}
-                  {/* return ( */}
-                  <TableRow>
-                    <TableCell align="left">0</TableCell>
-                    <TableCell align="left">aa</TableCell>
-                    <TableCell align="left">bb</TableCell>
-                    <TableCell align="left">cc</TableCell>
-                    <TableCell align="left">
-                      <Box
-                        sx={{
-                          mt: 1,
-                          mb: 1,
-                        }}
-                      >
-                        <Box
-                          sx={[
-                            {
-                              display: "flex",
-                              justifyContent: "flex-start",
-                              alignItems: "start",
-                              mt: 2,
-                              flexWrap: "wrap",
-                            },
-                          ]}
+                    </TableRow>
+                    <TableRow>
+                      {columns.map((column) => (
+                        <TableCell
+                          key={column.id}
+                          align={column.align}
+                          style={{
+                            top: 57,
+                            minWidth: column.minWidth,
+                            fontWeight: "bold",
+                          }}
                         >
-                          <div className="btn_prb">
-                            <ButtonComp
-                              // title="Edit"
-                              color="warning"
-                              edit
-                              // refreshIco
-                            />
-                          </div>
-
-                          <div className="btn_prb">
-                            <ButtonComp
-                              // title="Publish"
-                              color="primary"
-                              publish
-                            />
-                          </div>
-                          <div className="btn_prb">
-                            <ButtonComp
-                              // title="Delete"
-                              color="info"
-                              deleteIco
-                            ></ButtonComp>
-                          </div>
-                        </Box>
-                      </Box>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell align="left">1</TableCell>
-                    <TableCell align="left">aa</TableCell>
-                    <TableCell align="left">bb</TableCell>
-                    <TableCell align="left">cc</TableCell>
-                    <TableCell align="left">
-                      <Box
-                        sx={{
-                          mt: 1,
-                          mb: 1,
-                        }}
-                      >
+                          {column.label}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {/* {defaultTd.map((item) => { */}
+                    {/* return ( */}
+                    <TableRow>
+                      <TableCell align="left">0</TableCell>
+                      <TableCell align="left">aa</TableCell>
+                      <TableCell align="left">bb</TableCell>
+                      <TableCell align="left">cc</TableCell>
+                      <TableCell align="left">
                         <Box
-                          sx={[
-                            {
-                              display: "flex",
-                              justifyContent: "flex-start",
-                              alignItems: "start",
-                              mt: 2,
-                              flexWrap: "wrap",
-                            },
-                          ]}
+                          sx={{
+                            mt: 1,
+                            mb: 1,
+                          }}
                         >
-                          <div className="btn_prb">
-                            <ButtonComp
-                              // title="Edit"
-                              color="warning"
-                              edit
-                              // refreshIco
-                            />
-                          </div>
+                          <Box
+                            sx={[
+                              {
+                                display: "flex",
+                                justifyContent: "flex-start",
+                                alignItems: "start",
+                                mt: 2,
+                                flexWrap: "wrap",
+                              },
+                            ]}
+                          >
+                            <div className="btn_prb">
+                              <ButtonComp
+                                // title="Edit"
+                                color="warning"
+                                edit
+                                // refreshIco
+                              />
+                            </div>
 
-                          <div className="btn_prb">
-                            <ButtonComp
-                              // title="Publish"
-                              color="primary"
-                              publish
-                            />
-                          </div>
-                          <div className="btn_prb">
-                            <ButtonComp
-                              // title="Delete"
-                              color="info"
-                              deleteIco
-                            ></ButtonComp>
-                          </div>
+                            <div className="btn_prb">
+                              <ButtonComp
+                                // title="Publish"
+                                color="primary"
+                                publish
+                              />
+                            </div>
+                            <div className="btn_prb">
+                              <ButtonComp
+                                // title="Delete"
+                                color="info"
+                                deleteIco
+                              ></ButtonComp>
+                            </div>
+                          </Box>
                         </Box>
-                      </Box>
-                    </TableCell>
-                  </TableRow>
-                  {/* );
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell align="left">1</TableCell>
+                      <TableCell align="left">aa</TableCell>
+                      <TableCell align="left">bb</TableCell>
+                      <TableCell align="left">cc</TableCell>
+                      <TableCell align="left">
+                        <Box
+                          sx={{
+                            mt: 1,
+                            mb: 1,
+                          }}
+                        >
+                          <Box
+                            sx={[
+                              {
+                                display: "flex",
+                                justifyContent: "flex-start",
+                                alignItems: "start",
+                                mt: 2,
+                                flexWrap: "wrap",
+                              },
+                            ]}
+                          >
+                            <div className="btn_prb">
+                              <ButtonComp
+                                // title="Edit"
+                                color="warning"
+                                edit
+                                // refreshIco
+                              />
+                            </div>
+
+                            <div className="btn_prb">
+                              <ButtonComp
+                                // title="Publish"
+                                color="primary"
+                                publish
+                              />
+                            </div>
+                            <div className="btn_prb">
+                              <ButtonComp
+                                // title="Delete"
+                                color="info"
+                                deleteIco
+                              ></ButtonComp>
+                            </div>
+                          </Box>
+                        </Box>
+                      </TableCell>
+                    </TableRow>
+                    {/* );
                 })} */}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Paper>
-        </div>
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Paper>
+          </div>
+        )}
       </div>
     );
 };
