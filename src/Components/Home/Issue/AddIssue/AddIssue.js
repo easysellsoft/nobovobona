@@ -281,10 +281,7 @@ const IconTextField = ({
   ...props
 }) => {
   // const [showPassword, setShowPassword] = useState(false);
-  const passIconToggle = () => {
-    console.log("clicked");
-  };
-  console.log(props);
+
   return (
     <TextField
       type={showPassword ? "text" : "password"}

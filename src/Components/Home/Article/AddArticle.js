@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core";
 import PeopleOutlineTwoToneIcon from "@material-ui/icons/PeopleOutlineTwoTone";
 
 // import PageHeader from "../components/PageHeader";
-import { Grid, TextareaAutosize } from "@mui/material";
+import { Grid, InputAdornment, TextareaAutosize } from "@mui/material";
 import { FormLabel } from "@mui/material";
 import { TextField } from "@mui/material";
 import { Box } from "@mui/material";
@@ -12,6 +12,7 @@ import { FormGroup } from "@mui/material/";
 import { Button } from "@mui/material";
 import PageHeader from "../Issue/components/PageHeader";
 import { SettingsInputCompositeRounded } from "@material-ui/icons";
+import Visibility from "@mui/icons-material/Visibility";
 const useStyles = makeStyles({
   appMain: {
         paddingLeft: "10px",
@@ -26,7 +27,7 @@ function AddArticle() {
   // const [title_eng, setTitle_eng] = useState("");
   const [userId, setUserId] = useState("");
   const [cn_status, setCn_status] = useState("");
-  // const [sub_title, setSub_title] = useState("");
+     const [showPassword, setShowPassword] = useState(false);
   const [publish_date, setPublish_date] = useState("");
   const [ar_file, setAr_file] = useState(null);
   const formData = new FormData();
@@ -126,13 +127,15 @@ function AddArticle() {
             </Grid>
             <Grid item sm={12} md={6}>
               <FormLabel className="mt-2 ms-2">User Id</FormLabel>
-              <TextField
-                style={{ margin: "7px" }}
+              <IconTextField
                 label={<Box></Box>}
-                name="background"
-                type="Number"
+                // type="number"
+                type={showPassword ? "text" : "password"}
+                // type="text"
+                showPassword={showPassword}
+                setShowPassword={setShowPassword}
                 fullWidth
-                // value={userName}
+                iconEnd={<Visibility />}
                 onChange={(e) => setUserId(e.target.value)}
               />
             </Grid>
@@ -221,3 +224,36 @@ function AddArticle() {
 }
 
 export default AddArticle;
+const IconTextField = ({
+  iconStart,
+  iconEnd,
+  InputProps,
+  showPassword,
+  setShowPassword,
+  ...props
+}) => {
+  // const [showPassword, setShowPassword] = useState(false);
+
+  return (
+    <TextField
+      type={showPassword ? "text" : "password"}
+      {...props}
+      InputProps={{
+        ...InputProps,
+        startAdornment: iconStart ? (
+          <InputAdornment position="start">{iconStart}</InputAdornment>
+        ) : null,
+        endAdornment: iconEnd ? (
+          <InputAdornment
+            style={{ cursor: "pointer" }}
+            onClick={() => setShowPassword(!showPassword)}
+            setShowPassword
+            position="end"
+          >
+            {iconEnd}
+          </InputAdornment>
+        ) : null,
+      }}
+    />
+  );
+};
