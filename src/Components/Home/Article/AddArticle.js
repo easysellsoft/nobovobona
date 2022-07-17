@@ -38,8 +38,14 @@ const useStyles = makeStyles({
 function AddArticle() {
   const [cn_details, setCn_details] = useState("");
   const [writer, setWriter] = useState("");
-  // const [title_eng, setTitle_eng] = useState("");
+  const [article_type, setArticle_type] = useState("");
+  const [article_title, setArticle_title] = useState("");
+  const [hard_file, setHard_file] = useState("");
+  const [text_info, setTextInfo] = useState("");
+  const [page_no, setPageNo] = useState("");
+  const [info_file, setInfoFile] = useState("");
   const [userId, setUserId] = useState("");
+  const [publish_status, setPublish_status] = useState("");
   const [cn_status, setCn_status] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   // const [publish_date, setPublish_date] = useState("");
@@ -48,6 +54,20 @@ function AddArticle() {
   const formData = new FormData();
   const classes = useStyles();
   const currencies = [
+    {
+      value: "0",
+      label: "Select",
+    },
+    {
+      value: "1",
+      label: "Publish",
+    },
+    {
+      value: "2",
+      label: "Unpublish",
+    },
+  ];
+  const publishes = [
     {
       value: "0",
       label: "Select",
@@ -70,6 +90,12 @@ function AddArticle() {
     //    console.log(input);
     setCn_status(e.target.value);
   };
+  const onTextChange1 = (e) => {
+    e.preventDefault();
+    //    let input = e.target.value;
+    //    console.log(input);
+    setPublish_status(e.target.value);
+  };
   //get user information from localStorage
   const user = JSON.parse(localStorage.getItem("user"));
   console.log(user);
@@ -87,14 +113,21 @@ function AddArticle() {
 
   const handelSubmit = (e) => {
     e.preventDefault();
-    console.log(ar_file);
+  
+   
+    formData.append("article_Type", article_type);
+    formData.append("article_title", article_title);
     formData.append("writer", writer);
-    formData.append("cn_details", cn_details);
+    formData.append("hard_file", hard_file);
+    formData.append("text_info", text_info);
+    formData.append("page_no", page_no);
+    formData.append("info_file", info_file);
     formData.append("puser", userId);
-    formData.append("cn_status", cn_status);
-    formData.append("ar_file", ar_file);
+    formData.append("issue", cn_status);
+    formData.append("publish_status", publish_status);
+    // formData.append("ar_file", ar_file);
     //   formData.append(" ", );
-    fetch(`http://nobovabna.com/webapi/writer_new.php`, {
+    fetch(`http://nobovabna.com/webapi/article_new.php`, {
       method: "POST",
       body: formData,
     })
@@ -137,47 +170,7 @@ function AddArticle() {
             spacing={2}
           >
             <Grid item sm={12} md={6}>
-              <FormLabel className="mt-2 ms-2">Writer Name</FormLabel>
-              <TextField
-                style={{ margin: "7px" }}
-                label={<Box></Box>}
-                name="serial"
-                type="text"
-                fullWidth
-                // value={formDate}
-                onChange={(e) => setWriter(e.target.value)}
-              />
-            </Grid>
-            <Grid item sm={12} md={6}>
-              <FormLabel className="mt-2 ms-2">Writer Info</FormLabel>
-              <TextField
-                style={{ margin: "7px" }}
-                label={<Box></Box>}
-                //   variant="outlined"
-                name="issue"
-                type="text"
-                fullWidth
-                // value={toDate}
-                onChange={(e) => setCn_details(e.target.value)}
-              />
-            </Grid>
-            {/* <Grid item sm={12} md={6}>
-              <FormLabel className="mt-2 ms-2">User Id</FormLabel>
-              <IconTextField
-                label={<Box></Box>}
-                // type="number"
-                type={showPassword ? "text" : "password"}
-                // type="text"
-                showPassword={showPassword}
-                setShowPassword={setShowPassword}
-                fullWidth
-                iconEnd={<Visibility />}
-                onChange={(e) => setUserId(e.target.value)}
-              />
-            </Grid> */}
-
-            <Grid item sm={12} md={6}>
-              <FormLabel className="mt-2 ms-2">Publish Status</FormLabel>
+              <FormLabel className="mt-2 ms-2">Issue Select</FormLabel>
               <TextField
                 style={{ margin: "7px" }}
                 //   label="Service Type"
@@ -201,9 +194,107 @@ function AddArticle() {
                 ))}
               </TextField>
             </Grid>
+            <Grid item sm={12} md={6}>
+              <FormLabel className="mt-2 ms-2">Section</FormLabel>
+              <TextField
+                style={{ margin: "7px" }}
+                label={<Box></Box>}
+                name="serial"
+                type="text"
+                fullWidth
+                // value={formDate}
+                onChange={(e) => setArticle_type(e.target.value)}
+              />
+            </Grid>
+            <Grid item sm={12} md={6}>
+              <FormLabel className="mt-2 ms-2">Title</FormLabel>
+              <TextField
+                style={{ margin: "7px" }}
+                label={<Box></Box>}
+                name="serial"
+                type="text"
+                fullWidth
+                // value={formDate}
+                onChange={(e) => setArticle_title(e.target.value)}
+              />
+            </Grid>
+            <Grid item sm={12} md={6}>
+              <FormLabel className="mt-2 ms-2">Writer Select</FormLabel>
+              <TextField
+                style={{ margin: "7px" }}
+                label={<Box></Box>}
+                name="serial"
+                type="text"
+                fullWidth
+                // value={formDate}
+                onChange={(e) => setWriter(e.target.value)}
+              />
+            </Grid>
+            <Grid item sm={12} md={6}>
+              <FormLabel className="mt-2 ms-2">Attach pdf</FormLabel>
+              <TextField
+                style={{ margin: "7px" }}
+                label={<Box></Box>}
+                name="serial"
+                type="file"
+                fullWidth
+                // value={formDate}
+                onChange={(e) => setHard_file(e.target?.files[0])}
+              />
+            </Grid>
+            <Grid item sm={12} md={6}>
+              <FormLabel className="mt-2 ms-2">Soft Info</FormLabel>
+              <TextField
+                style={{ margin: "7px" }}
+                label={<Box></Box>}
+                name="serial"
+                type="text"
+                fullWidth
+                // value={formDate}
+                onChange={(e) => setTextInfo(e.target.value)}
+              />
+            </Grid>
+            <Grid item sm={12} md={6}>
+              <FormLabel className="mt-2 ms-2">Page No</FormLabel>
+              <TextField
+                style={{ margin: "7px" }}
+                label={<Box></Box>}
+                name="serial"
+                type="Number"
+                fullWidth
+                // value={formDate}
+                onChange={(e) => setPageNo(e.target.value)}
+              />
+            </Grid>
 
             <Grid item sm={12} md={6}>
-              <FormLabel className="mt-2 ms-2">Writer Pic</FormLabel>
+              <FormLabel className="mt-2 ms-2">Publish Status</FormLabel>
+              <TextField
+                style={{ margin: "7px" }}
+                //   label="Service Type"
+                label={<Box></Box>}
+                // value={currency}
+                // value={textValue}
+                value={publish_status}
+                fullWidth
+                onChange={onTextChange1}
+                // onChange={(handleChange, onTextChange)}
+                select
+                SelectProps={{
+                  native: true,
+                }}
+                //   helperText="Please select your currency"
+              >
+                {publishes.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </TextField>
+            </Grid>
+
+            <Grid item sm={12} md={6}>
+              <FormLabel className="mt-2 ms-2">Attach Short file</FormLabel>
               <TextField
                 style={{ margin: "7px" }}
                 id="filled-basic"
@@ -213,14 +304,8 @@ function AddArticle() {
                 type="file"
                 fullWidth
                 // value={userName}
-                onChange={(e) => setAr_file(e.target?.files[0])}
+                onChange={(e) => setInfoFile(e.target?.files[0])}
               />
-              {imageUrl && ar_file && (
-                <Box mt={2} textAlign="center">
-                  <div>Image Preview:</div>
-                  <img src={imageUrl} alt={ar_file.name} height="100px" />
-                </Box>
-              )}
             </Grid>
           </Grid>
 
@@ -244,7 +329,6 @@ function AddArticle() {
                   F
                   sx={{ py: 1, mr: 3 }}
                   type="submit"
-                  onClick={handleOpen}
                 >
                   Reset
                 </Button>
@@ -254,7 +338,8 @@ function AddArticle() {
                   width="25%"
                   sx={{ py: 1, mr: 3 }}
                   type="submit"
-                  onChange={(e) => setAr_file(e.target?.files[0])}
+                
+                  onClick={handleOpen}
                 >
                   Save
                 </Button>

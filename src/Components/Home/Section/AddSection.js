@@ -50,6 +50,7 @@ function AddSection() {
   const formData = new FormData();
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
+  const [magazine, setMagazine] = useState([])
   const currencies = [
     {
       value: "0",
@@ -74,6 +75,12 @@ function AddSection() {
     //    console.log(input);
     setCn_status(e.target.value);
   };
+  const onTextChange1= (e) => {
+    e.preventDefault();
+    //    let input = e.target.value;
+    //    console.log(input);
+    setN_issue(e.target.value);
+  };
 
   //get user information from localStorage
   const user = JSON.parse(localStorage.getItem("user"));
@@ -90,6 +97,14 @@ function AddSection() {
     }
   }, [ar_file]);
   
+    useEffect(() => {
+      fetch(`http://nobovabna.com/webapi/nget_all_issue.php`)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setMagazine(data);
+        });
+    }, []);
    const resetForm = (e) => {
      console.log("clicked");
      e.preventDefault();
@@ -218,8 +233,35 @@ function AddSection() {
                 ))}
               </TextField>
             </Grid>
-
             <Grid item sm={12} md={6}>
+              <FormLabel className="mt-2 ms-2">
+                Magazine Issue Dropdown Select
+              </FormLabel>
+              <TextField
+                style={{ margin: "7px" }}
+                //   label="Service Type"
+                label={<Box></Box>}
+                // value={currency}
+                // value={textValue}
+                value={n_issue}
+                fullWidth
+                onChange={onTextChange1}
+                // onChange={(handleChange, onTextChange)}
+                select
+                SelectProps={{
+                  native: true,
+                }}
+                //   helperText="Please select your currency"
+              >
+                {magazine.map((option) => (
+                  <option key={option.id} value={option.issue_refer}>
+                    {option.name}
+                  </option>
+                ))}
+              </TextField>
+            </Grid>
+
+            {/* <Grid item sm={12} md={6}>
               <FormLabel className="mt-2 ms-2">
                 Magazine Issue Dropdown Select
               </FormLabel>
@@ -233,7 +275,7 @@ function AddSection() {
                 // value={toDate}
                 onChange={(e) => setN_issue(e.target.value)}
               />
-            </Grid>
+            </Grid> */}
 
             <Grid item sm={12} md={6}>
               <FormLabel className="mt-2 ms-2">Section Pic</FormLabel>

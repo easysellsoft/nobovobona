@@ -28,6 +28,7 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
+
 const useStyles = makeStyles({
   appMain: {
         paddingLeft: "10px",
@@ -49,6 +50,7 @@ function AddWriter() {
   const formData = new FormData();
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
+  // const [currencies, setCurrencies] = useState([]);
   const currencies = [
     {
       value: "0",
@@ -63,14 +65,16 @@ function AddWriter() {
       label: "Unpublish",
     },
   ];
+   
+
 
    const [open, setOpen] = React.useState(false);
    const handleOpen = () => setOpen(true);
    const handleClose = () => setOpen(false);
   const onTextChange = (e) => {
     e.preventDefault();
-    //    let input = e.target.value;
-    //    console.log(input);
+       let input = e.target.value;
+       console.log(input);
     setCn_status(e.target.value);
   };
   //get user information from localStorage
@@ -88,7 +92,14 @@ function AddWriter() {
     }
   }, [ar_file]);
 
- 
+  //  useEffect(() => {
+  //    fetch(`http://nobovabna.com/webapi/nget_all_issue.php`)
+  //      .then((res) => res.json())
+  //      .then((data) => {
+  //        console.log(data)
+  //        setCurrencies(data)
+  //      });
+  //  }, []);
 
   const handelSubmit = (e) => {
     e.preventDefault();
@@ -221,6 +232,12 @@ function AddWriter() {
                 // value={userName}
                 onChange={(e) => setAr_file(e.target?.files[0])}
               />
+              {imageUrl && ar_file && (
+                <Box mt={2} textAlign="center">
+                  <div>Image Preview:</div>
+                  <img src={imageUrl} alt={ar_file.name} height="100px" />
+                </Box>
+              )}
             </Grid>
           </Grid>
 
@@ -239,17 +256,17 @@ function AddWriter() {
               >
                 <Button
                   variant="contained"
-                  color="primary"
+                  color="warning"
                   width="25%"
-                  F
                   sx={{ py: 1, mr: 3 }}
-                  type="submit"
+                  // type="submit"
+                  // onClick={resetForm}
                 >
                   Reset
                 </Button>
                 <Button
                   variant="contained"
-                  color="primary"
+                  color="success"
                   width="25%"
                   sx={{ py: 1, mr: 3 }}
                   type="submit"
