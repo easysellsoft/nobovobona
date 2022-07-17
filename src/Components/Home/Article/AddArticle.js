@@ -47,12 +47,17 @@ function AddArticle() {
   const [userId, setUserId] = useState("");
   const [publish_status, setPublish_status] = useState("");
   const [cn_status, setCn_status] = useState("");
+  const [cn_status_section, setCn_status_section] = useState("");
+  const [cn_status_writer, setCn_status_writer] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   // const [publish_date, setPublish_date] = useState("");
   const [ar_file, setAr_file] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
   const formData = new FormData();
   const classes = useStyles();
+  const [issues, setIssues] = useState([]);
+  const [sections, setSections] = useState([]);
+  const [writers, setWriters] = useState([]);
   const currencies = [
     {
       value: "0",
@@ -96,6 +101,18 @@ function AddArticle() {
     //    console.log(input);
     setPublish_status(e.target.value);
   };
+  const onTextChangeSection = (e) => {
+    e.preventDefault();
+    //    let input = e.target.value;
+    //    console.log(input);
+    setCn_status_section(e.target.value);
+  };
+  const onTextChangeWriter = (e) => {
+    e.preventDefault();
+    //    let input = e.target.value;
+    //    console.log(input);
+    setCn_status_writer(e.target.value);
+  };
   //get user information from localStorage
   const user = JSON.parse(localStorage.getItem("user"));
   console.log(user);
@@ -111,13 +128,40 @@ function AddArticle() {
     }
   }, [ar_file]);
 
+    useEffect(() => {
+      fetch(`http://nobovabna.com/webapi/nget_all_issue.php`)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setIssues(data);
+        });
+    }, []);
+    useEffect(() => {
+      fetch(`http://nobovabna.com/webapi/nget_all_section.php`)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setSections(data);
+        });
+    }, []);
+    useEffect(() => {
+      fetch(`http://nobovabna.com/webapi/nget_all_writer.php`)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setWriters(data);
+        });
+    }, []);
+
   const handelSubmit = (e) => {
     e.preventDefault();
   
    
-    formData.append("article_Type", article_type);
+    formData.append("article_type", cn_status_section);
     formData.append("article_title", article_title);
-    formData.append("writer", writer);
+    
+  
+    formData.append("writer", cn_status_writer);
     formData.append("hard_file", hard_file);
     formData.append("text_info", text_info);
     formData.append("page_no", page_no);
@@ -187,14 +231,39 @@ function AddArticle() {
                 }}
                 //   helperText="Please select your currency"
               >
-                {currencies.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
+                {issues.map((option) => (
+                  <option key={option.id} value={option.issue_refer}>
+                    {option.name}
                   </option>
                 ))}
               </TextField>
             </Grid>
             <Grid item sm={12} md={6}>
+              <FormLabel className="mt-2 ms-2">Section</FormLabel>
+              <TextField
+                style={{ margin: "7px" }}
+                //   label="Service Type"
+                label={<Box></Box>}
+                // value={currency}
+                // value={textValue}
+                value={cn_status_section}
+                fullWidth
+                onChange={onTextChangeSection}
+                // onChange={(handleChange, onTextChange)}
+                select
+                SelectProps={{
+                  native: true,
+                }}
+                //   helperText="Please select your currency"
+              >
+                {sections.map((option) => (
+                  <option key={option.id} value={option.s_refer}>
+                    {option.s_name}
+                  </option>
+                ))}
+              </TextField>
+            </Grid>
+            {/* <Grid item sm={12} md={6}>
               <FormLabel className="mt-2 ms-2">Section</FormLabel>
               <TextField
                 style={{ margin: "7px" }}
@@ -205,7 +274,7 @@ function AddArticle() {
                 // value={formDate}
                 onChange={(e) => setArticle_type(e.target.value)}
               />
-            </Grid>
+            </Grid> */}
             <Grid item sm={12} md={6}>
               <FormLabel className="mt-2 ms-2">Title</FormLabel>
               <TextField
@@ -222,6 +291,31 @@ function AddArticle() {
               <FormLabel className="mt-2 ms-2">Writer Select</FormLabel>
               <TextField
                 style={{ margin: "7px" }}
+                //   label="Service Type"
+                label={<Box></Box>}
+                // value={currency}
+                // value={textValue}
+                value={cn_status_writer}
+                fullWidth
+                onChange={onTextChangeWriter}
+                // onChange={(handleChange, onTextChange)}
+                select
+                SelectProps={{
+                  native: true,
+                }}
+                //   helperText="Please select your currency"
+              >
+                {writers.map((option) => (
+                  <option key={option.id} value={option.w_refer}>
+                    {option.w_name}
+                  </option>
+                ))}
+              </TextField>
+            </Grid>
+            {/* <Grid item sm={12} md={6}>
+              <FormLabel className="mt-2 ms-2">Writer Select</FormLabel>
+              <TextField
+                style={{ margin: "7px" }}
                 label={<Box></Box>}
                 name="serial"
                 type="text"
@@ -229,7 +323,7 @@ function AddArticle() {
                 // value={formDate}
                 onChange={(e) => setWriter(e.target.value)}
               />
-            </Grid>
+            </Grid> */}
             <Grid item sm={12} md={6}>
               <FormLabel className="mt-2 ms-2">Attach pdf</FormLabel>
               <TextField
@@ -338,7 +432,6 @@ function AddArticle() {
                   width="25%"
                   sx={{ py: 1, mr: 3 }}
                   type="submit"
-                
                   onClick={handleOpen}
                 >
                   Save
