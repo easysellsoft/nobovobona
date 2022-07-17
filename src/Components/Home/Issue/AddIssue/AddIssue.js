@@ -36,25 +36,31 @@ const useStyles = makeStyles({
   },
 });
 function AddIssue() {
+  const [updateTable, setUpdateTable] = useState([]);
   const [textValue, setTextValue] = useState("");
   const [title, setTitle] = useState("");
   const [title_eng, setTitle_eng] = useState("");
   const [userId, setUserId] = useState("");
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState(null);
   const [sub_title, setSub_title] = useState("");
   const [publish_date, setPublish_date] = useState("");
   const [ar_file, setAr_file] = useState(null);
+   const [imageUrl, setImageUrl] = useState(null);
   const formData = new FormData();
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
   const currencies = [
     {
       value: "0",
-      label: "Unpublish",
+      label: "Select",
     },
     {
       value: "1",
       label: "Publish",
+    },
+    {
+      value: "2",
+      label: "UnPublish",
     },
   ];
 
@@ -65,8 +71,8 @@ function AddIssue() {
 
   const onTextChange = (e) => {
     e.preventDefault();
-    //    let input = e.target.value;
-    //    console.log(input);
+      //  let input = e.target.value;
+      //  console.log(input);
     setStatus(e.target.value);
   };
 
@@ -78,6 +84,23 @@ function AddIssue() {
     setUserId(user.sopnoid);
   }, [])
   console.log(userId);
+
+    useEffect(() => {
+      if (ar_file) {
+        setImageUrl(URL.createObjectURL(ar_file));
+      }
+    }, [ar_file]);
+
+    const resetForm = (e) => {
+      console.log("clicked");
+      e.preventDefault();
+      // setTitle("");
+      //  setTitle_eng("");
+      //  setStatus("");
+      //  setPublish_date("");
+      //  setAr_file("");
+      //  setSub_title("");
+    };
   const handelSubmit = (e) => {
     e.preventDefault();
     console.log(ar_file);
@@ -94,20 +117,27 @@ function AddIssue() {
       body: formData,
     })
       //  console.log(formData),
-      .then((res) => {
-        console.log(res)
-        res.json()
-      })
+      .then((res) => res.json())
+      // .then((res) => {
+      //   console.log(res)
+      //   res.json()
+      // })
       .then((data) => {
-        console.log(data);
-        // setUpdateTable(data);
-        // setFormDate("");
+         console.log(data);
+            setTitle("");
+            setTitle_eng("");
+            setStatus("");
+            setPublish_date("");
+            setAr_file("");
+            setSub_title("");
       });
 
     //   };
-    console.log(e.target.serial.value);
-    console.log(e.target.issue.value);
-    console.log(e.target.background.value);
+    // console.log(updateTable)
+    // console.log(e.target.serial.value);
+    // console.log(e.target.issue.value);
+    // console.log(e.target.background.value);
+    
   };
   return (
     <>
@@ -199,6 +229,7 @@ function AddIssue() {
                 // value={textValue}
                 value={status}
                 fullWidth
+            
                 onChange={onTextChange}
                 // onChange={(handleChange, onTextChange)}
                 select
@@ -231,6 +262,7 @@ function AddIssue() {
               <FormLabel className="mt-2 ms-2">Cover Pic</FormLabel>
               {/* <FormLabel className="mt-2 ms-2">File</FormLabel> */}
               <TextField
+                // accept="image/*"
                 style={{ margin: "7px" }}
                 id="filled-basic"
                 label={<Box></Box>}
@@ -239,8 +271,15 @@ function AddIssue() {
                 type="file"
                 fullWidth
                 // value={userName}
+
                 onChange={(e) => setAr_file(e.target?.files[0])}
               />
+              {imageUrl && ar_file && (
+                <Box mt={2} textAlign="center">
+                  <div>Image Preview:</div>
+                  <img src={imageUrl} alt={ar_file.name} height="100px" />
+                </Box>
+              )}
             </Grid>
             <Grid item sm={12} md={6}>
               <FormLabel className="mt-2 ms-2">Cover-info</FormLabel>
@@ -265,13 +304,7 @@ function AddIssue() {
                 placeholder=""
                 style={{ display: "block", margin: "7px", width: "100%" }}
               />
-              {/* <TextareaAutosize
-                style={{ margin: "7px", width: 200 }}
-                label={<Box></Box>}
-                aria-label="minimum height"
-                minRows={3}
-                // placeholder="Minimum 3 rows"
-              /> */}
+            
             </Grid>
           </Grid>
 
@@ -293,7 +326,8 @@ function AddIssue() {
                   color="warning"
                   width="25%"
                   sx={{ py: 1, mr: 3 }}
-                  type="submit"
+                  // type="submit"
+                  onClick={resetForm}
                 >
                   Reset
                 </Button>

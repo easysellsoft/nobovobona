@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core";
 import PeopleOutlineTwoToneIcon from "@material-ui/icons/PeopleOutlineTwoTone";
 
@@ -13,6 +13,19 @@ import { Button } from "@mui/material";
 import PageHeader from "../Issue/components/PageHeader";
 import { SettingsInputCompositeRounded } from "@material-ui/icons";
 import Visibility from "@mui/icons-material/Visibility";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 const useStyles = makeStyles({
   appMain: {
         paddingLeft: "10px",
@@ -33,19 +46,28 @@ function AddSection() {
   // const [sub_title, setSub_title] = useState("");
   // const [publish_date, setPublish_date] = useState("");
   const [ar_file, setAr_file] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
   const formData = new FormData();
   const classes = useStyles();
-   const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const currencies = [
     {
       value: "0",
-      label: "Unpublish",
+      label: "Select",
     },
     {
       value: "1",
       label: "Publish",
     },
+    {
+      value: "2",
+      label: "UnPublish",
+    },
   ];
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const onTextChange = (e) => {
     e.preventDefault();
     //    let input = e.target.value;
@@ -53,6 +75,31 @@ function AddSection() {
     setCn_status(e.target.value);
   };
 
+  //get user information from localStorage
+  const user = JSON.parse(localStorage.getItem("user"));
+  console.log(user);
+  console.log(user.sopnoid);
+  useEffect(() => {
+    setUserId(user.sopnoid);
+  }, []);
+  console.log(userId);
+
+  useEffect(() => {
+    if (ar_file) {
+      setImageUrl(URL.createObjectURL(ar_file));
+    }
+  }, [ar_file]);
+  
+   const resetForm = (e) => {
+     console.log("clicked");
+     e.preventDefault();
+    //  setTitle("");
+     //  setTitle_eng("");
+     //  setStatus("");
+     //  setPublish_date("");
+     //  setAr_file("");
+     //  setSub_title("");
+   };
   const handelSubmit = (e) => {
     e.preventDefault();
     console.log(ar_file);
@@ -76,9 +123,9 @@ function AddSection() {
       });
 
     //   };
-    console.log(e.target.serial.value);
-    console.log(e.target.issue.value);
-    console.log(e.target.background.value);
+    // console.log(e.target.serial.value);
+    // console.log(e.target.issue.value);
+    // console.log(e.target.background.value);
   };
   return (
     <>
@@ -130,19 +177,8 @@ function AddSection() {
                 onChange={(e) => setSection_eng(e.target.value)}
               />
             </Grid>
+
             {/* <Grid item sm={12} md={6}>
-              <FormLabel className="mt-2 ms-2">User Id</FormLabel>
-              <TextField
-                style={{ margin: "7px" }}
-                label={<Box></Box>}
-                name="background"
-                type="Number"
-                fullWidth
-                // value={userName}
-                onChange={(e) => setUserId(e.target.value)}
-              />
-            </Grid> */}
-            <Grid item sm={12} md={6}>
               <FormLabel className="mt-2 ms-2">User Id</FormLabel>
               <IconTextField
                 label={<Box></Box>}
@@ -155,7 +191,7 @@ function AddSection() {
                 iconEnd={<Visibility />}
                 onChange={(e) => setUserId(e.target.value)}
               />
-            </Grid>
+            </Grid> */}
 
             <Grid item sm={12} md={6}>
               <FormLabel className="mt-2 ms-2">Publish Status</FormLabel>
@@ -212,6 +248,12 @@ function AddSection() {
                 // value={userName}
                 onChange={(e) => setAr_file(e.target?.files[0])}
               />
+              {imageUrl && ar_file && (
+                <Box mt={2} textAlign="center">
+                  <div>Image Preview:</div>
+                  <img src={imageUrl} alt={ar_file.name} height="100px" />
+                </Box>
+              )}
             </Grid>
           </Grid>
 
@@ -230,27 +272,44 @@ function AddSection() {
               >
                 <Button
                   variant="contained"
-                  color="primary"
+                  color="warning"
                   width="25%"
                   sx={{ py: 1, mr: 3 }}
-                  type="submit"
+                  // type="submit"
+                  onClick={resetForm}
                 >
-                  Add
+                  Reset
                 </Button>
                 <Button
                   variant="contained"
-                  color="primary"
+                  color="success"
                   width="25%"
-                  F
-                  sx={{ py: 1 }}
+                  sx={{ py: 1, mr: 3 }}
                   type="submit"
+                  onClick={handleOpen}
                 >
-                  Reset
+                  Save
                 </Button>
               </Box>
             </FormGroup>
           </FormControl>
         </form>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              {/* Data in Response */}
+              Successfully Added Data.
+            </Typography>
+            {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              Successfully Added Data.
+            </Typography> */}
+          </Box>
+        </Modal>
       </div>
     </>
   );
