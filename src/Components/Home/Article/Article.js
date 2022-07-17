@@ -110,7 +110,7 @@ const Article = () => {
             </Box>
           </Box>
 
-          {show && <AddArticle></AddArticle>}
+        
         </div>
         {/* <AdminHome
           // setPrevToggle={setPrevToggle}

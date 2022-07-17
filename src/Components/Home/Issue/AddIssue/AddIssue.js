@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core";
 import PeopleOutlineTwoToneIcon from "@material-ui/icons/PeopleOutlineTwoTone";
 
@@ -11,12 +11,28 @@ import { FormControl } from "@mui/material/";
 import { FormGroup } from "@mui/material/";
 import { Button } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
+// import { Modal } from '@mui/material/Modal';
+
+
+// import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 const useStyles = makeStyles({
   appMain: {
-        paddingLeft: "10px",
-      paddingRight: "20px",
-        width: "100%",
-    
+    paddingLeft: "10px",
+    paddingRight: "20px",
+    width: "100%",
   },
 });
 function AddIssue() {
@@ -30,7 +46,7 @@ function AddIssue() {
   const [ar_file, setAr_file] = useState(null);
   const formData = new FormData();
   const classes = useStyles();
-   const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const currencies = [
     {
       value: "0",
@@ -41,6 +57,12 @@ function AddIssue() {
       label: "Publish",
     },
   ];
+
+
+ const [open, setOpen] = React.useState(false);
+ const handleOpen = () => setOpen(true);
+ const handleClose = () => setOpen(false);
+
   const onTextChange = (e) => {
     e.preventDefault();
     //    let input = e.target.value;
@@ -48,6 +70,14 @@ function AddIssue() {
     setStatus(e.target.value);
   };
 
+  //get user information from localStorage
+  const user = JSON.parse(localStorage.getItem("user"));
+  console.log(user)
+  console.log(user.sopnoid);
+  useEffect(() => {
+    setUserId(user.sopnoid);
+  }, [])
+  console.log(userId);
   const handelSubmit = (e) => {
     e.preventDefault();
     console.log(ar_file);
@@ -64,7 +94,10 @@ function AddIssue() {
       body: formData,
     })
       //  console.log(formData),
-      .then((res) => res.json())
+      .then((res) => {
+        console.log(res)
+        res.json()
+      })
       .then((data) => {
         console.log(data);
         // setUpdateTable(data);
@@ -102,7 +135,7 @@ function AddIssue() {
             spacing={2}
           >
             <Grid item sm={12} md={6}>
-              <FormLabel className="mt-2 ms-2">Bangla Name</FormLabel>
+              <FormLabel className="mt-2 ms-2"> Issue Name (Bangla)</FormLabel>
               <TextField
                 style={{ margin: "7px" }}
                 label={<Box></Box>}
@@ -114,7 +147,7 @@ function AddIssue() {
               />
             </Grid>
             <Grid item sm={12} md={6}>
-              <FormLabel className="mt-2 ms-2">English Name</FormLabel>
+              <FormLabel className="mt-2 ms-2">Issue Name( English) </FormLabel>
               <TextField
                 style={{ margin: "7px" }}
                 label={<Box></Box>}
@@ -141,7 +174,7 @@ function AddIssue() {
               </div>
               <Button>Visible</Button>
             </Grid> */}
-            <Grid item sm={12} md={6}>
+            {/* <Grid item sm={12} md={6}>
               <FormLabel className="mt-2 ms-2">User Id</FormLabel>
               <IconTextField
                 label={<Box></Box>}
@@ -154,7 +187,7 @@ function AddIssue() {
                 iconEnd={<Visibility />}
                 onChange={(e) => setUserId(e.target.value)}
               />
-            </Grid>
+            </Grid> */}
 
             <Grid item sm={12} md={6}>
               <FormLabel className="mt-2 ms-2">Publish Status</FormLabel>
@@ -181,27 +214,9 @@ function AddIssue() {
                 ))}
               </TextField>
             </Grid>
+
             <Grid item sm={12} md={6}>
-              <FormLabel className="mt-2 ms-2">Text</FormLabel>
-              <TextField
-                style={{ margin: "7px" }}
-                label={<Box></Box>}
-                name="background"
-                type="text"
-                fullWidth
-                // value={userName}
-                onChange={(e) => setSub_title(e.target.value)}
-              />
-              {/* <TextareaAutosize
-                style={{ margin: "7px", width: 200 }}
-                label={<Box></Box>}
-                aria-label="minimum height"
-                minRows={3}
-                // placeholder="Minimum 3 rows"
-              /> */}
-            </Grid>
-            <Grid item sm={12} md={6}>
-              <FormLabel className="mt-2 ms-2">Date</FormLabel>
+              <FormLabel className="mt-2 ms-2">Publish Date</FormLabel>
               <TextField
                 style={{ margin: "7px" }}
                 label={<Box></Box>}
@@ -213,6 +228,7 @@ function AddIssue() {
               />
             </Grid>
             <Grid item sm={12} md={6}>
+              <FormLabel className="mt-2 ms-2">Cover Pic</FormLabel>
               {/* <FormLabel className="mt-2 ms-2">File</FormLabel> */}
               <TextField
                 style={{ margin: "7px" }}
@@ -225,6 +241,37 @@ function AddIssue() {
                 // value={userName}
                 onChange={(e) => setAr_file(e.target?.files[0])}
               />
+            </Grid>
+            <Grid item sm={12} md={6}>
+              <FormLabel className="mt-2 ms-2">Cover-info</FormLabel>
+              {/* <TextField
+                style={{ margin: "7px" }}
+                label={<Box></Box>}
+                name="background"
+                type="text"
+                fullWidth
+                // value={userName}
+                onChange={(e) => setSub_title(e.target.value)}
+              /> */}
+              <TextareaAutosize
+                aria-label="minimum height"
+                minRows={2}
+                label={<Box></Box>}
+                name="background"
+                type="text"
+                fullWidth
+                // value={userName}
+                onChange={(e) => setSub_title(e.target.value)}
+                placeholder=""
+                style={{ display: "block", margin: "7px", width: "100%" }}
+              />
+              {/* <TextareaAutosize
+                style={{ margin: "7px", width: 200 }}
+                label={<Box></Box>}
+                aria-label="minimum height"
+                minRows={3}
+                // placeholder="Minimum 3 rows"
+              /> */}
             </Grid>
           </Grid>
 
@@ -243,34 +290,69 @@ function AddIssue() {
               >
                 <Button
                   variant="contained"
-                  color="primary"
+                  color="warning"
                   width="25%"
                   sx={{ py: 1, mr: 3 }}
                   type="submit"
                 >
-                  Add
+                  Reset
                 </Button>
                 <Button
                   variant="contained"
-                  color="primary"
+                  color="success"
                   width="25%"
-                  F
-                  sx={{ py: 1 }}
+                  sx={{ py: 1, mr: 3 }}
                   type="submit"
+                  onClick={handleOpen}
                 >
-                  Reset
+                  Save
                 </Button>
+                {/* <Modal
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="modal-modal-title"
+                  aria-describedby="modal-modal-description"
+                >
+                  <Box sx={style}>
+                    <Typography
+                      id="modal-modal-title"
+                      variant="h6"
+                      component="h2"
+                    >
+                      Text in a modal
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                      Duis mollis, est non commodo luctus, nisi erat porttitor
+                      ligula.
+                    </Typography>
+                  </Box>
+                </Modal> */}
               </Box>
             </FormGroup>
           </FormControl>
         </form>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              {/* Data in Response */}
+              Successfully Added Data.
+            </Typography>
+            {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              Successfully Added Data.
+            </Typography> */}
+          </Box>
+        </Modal>
       </div>
     </>
   );
 }
 
 export default AddIssue;
-
 
 const IconTextField = ({
   iconStart,
