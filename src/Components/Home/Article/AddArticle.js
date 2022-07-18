@@ -160,7 +160,7 @@ function AddArticle() {
     e.preventDefault();
 
     formData.append("article_type", cn_status_section);
-    formData.append("article_title", article_title);
+    formData.append("ar_name", article_title);
 
     formData.append("writer", cn_status_writer);
     formData.append("hard_file", hard_file);

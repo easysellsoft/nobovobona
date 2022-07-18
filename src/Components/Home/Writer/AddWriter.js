@@ -46,7 +46,8 @@ function AddWriter() {
   // const [sub_title, setSub_title] = useState("");
   const [publish_date, setPublish_date] = useState("");
   const [ar_file, setAr_file] = useState(null);
-   const [imageUrl, setImageUrl] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
+ 
   const formData = new FormData();
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
@@ -92,14 +93,7 @@ function AddWriter() {
     }
   }, [ar_file]);
 
-  //  useEffect(() => {
-  //    fetch(`http://nobovabna.com/webapi/nget_all_issue.php`)
-  //      .then((res) => res.json())
-  //      .then((data) => {
-  //        console.log(data)
-  //        setCurrencies(data)
-  //      });
-  //  }, []);
+ 
 
   const handelSubmit = (e) => {
     e.preventDefault();
@@ -127,6 +121,8 @@ function AddWriter() {
     // console.log(e.target.issue.value);
     // console.log(e.target.background.value);
   };
+
+  
   return (
     <>
       <PageHeader

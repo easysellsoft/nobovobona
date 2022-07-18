@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import AdminHome from '../AdminHome/AdminHome';
 import TableDefault from './../Home/Hook/TableDefault';
 import Paper from "@mui/material/Paper";
@@ -18,59 +18,40 @@ const Article = () => {
   //  const [prevToggle, setPrevToggle] = useState();
   // const [refreshToggle, setRefreshToggle] = useState();
     const [show, setShow] = useState(false);
-    const [refresh, setRefresh] = useState(false);
+  const [refresh, setRefresh] = useState(false);
+    const [defaultTd, setDefaultTd] = useState([]);
     const columns = [
-      
-        { id: 0, label: "Serial", minWidth: 60 },
-        { id: 1, label: "Issue Select", minWidth: 60 },
-        { id: 2, label: "Title", minWidth: 60 },
-        {
-          id: 3,
-          label: "Article Type",
-          minWidth: 60,
-        },
-        {
-          id: 4,
-          label: "Article Title",
-          minWidth: 60,
-        },
-        {
-          id: 5,
-          label: "Writer Name",
-          minWidth: 60,
-        },
-        {
-          id: 6,
-          label: "Attachment",
-          minWidth: 60,
-        },
-        {
-          id: 7,
-          label: "Soft Details",
-          minWidth: 60,
-        },
-        {
-          id: 8,
-          label: "Page No.",
-          minWidth: 60,
-        },
-        {
-          id: 9,
-          label: "Short Info",
-          minWidth: 60,
-        },
-        {
-          id: 10,
-          label: "Status",
-          minWidth: 60,
-        },
-      ];
+      { id: 0, label: "Serial", minWidth: 60 },
+      { id: 1, label: "Title", minWidth: 60 },
+      { id: 2, label: "Article Type", minWidth: 60 },
+      { id: 3, label: "Refer", minWidth: 60 },
+      { id: 4, label: "Issue Name", minWidth: 60 },
+      { id: 5, label: "Page No.", minWidth: 60 },
+      { id: 6, label: "Writer.", minWidth: 60 },
+      { id: 7, label: "Publish Date", minWidth: 60 },
+
+      { id: 8, label: "File", minWidth: 60 },
+      { id: 10, label: "Status", minWidth: 60 },
+      { id: 11, label: "Post By", minWidth: 60 },
+
+      { id: 12, label: "Action", minWidth: 60 },
+
+     
+    ];
+    useEffect(() => {
+      fetch("http://nobovabna.com/webapi/tbl_article.php")
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setDefaultTd(data);
+        });
+    }, []);
     return (
       <div>
-        <div style={{ width: "100%" }} className="mb-5 mt-5">
+        <div style={{ width: "100%" }} className="mb-5 ">
           <Box
             sx={{
-              mt: 5,
+    
               mb: 5,
             }}
           >
@@ -109,8 +90,6 @@ const Article = () => {
               </div>
             </Box>
           </Box>
-
-        
         </div>
         {/* <AdminHome
           // setPrevToggle={setPrevToggle}
@@ -122,7 +101,7 @@ const Article = () => {
         {!show && (
           <div>
             <Paper mt={2} pt={3} sx={{ width: "100%", mt: "40px" }}>
-              <TableContainer sx={{ maxHeight: 440 }}>
+              <TableContainer sx={{ maxHeight: 540 }}>
                 <Table stickyHeader aria-label="sticky table">
                   <TableHead>
                     <TableRow sx={{ borderColor: "text.primary" }}>
@@ -147,123 +126,86 @@ const Article = () => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {/* {defaultTd.map((item) => { */}
-                    {/* return ( */}
-                    <TableRow>
-                      <TableCell align="left">0</TableCell>
-                      <TableCell align="left">aa</TableCell>
-                      <TableCell align="left">bb</TableCell>
-                      <TableCell align="left">cc</TableCell>
-                      <TableCell align="left">dd</TableCell>
-                      <TableCell align="left">ee</TableCell>
-                      <TableCell align="left">ff</TableCell>
-                      <TableCell align="left">gg</TableCell>
-                      <TableCell align="left">hh</TableCell>
-                      <TableCell align="left">ii</TableCell>
-                      <TableCell align="left">
-                        <Box
-                          sx={{
-                            mt: 1,
-                            mb: 1,
-                          }}
-                        >
-                          <Box
-                            sx={[
-                              {
-                                display: "flex",
-                                justifyContent: "flex-start",
-                                alignItems: "start",
-                                mt: 2,
-                                flexWrap: "wrap",
-                              },
-                            ]}
-                          >
-                            <div className="btn_prb">
-                              <ButtonComp
-                                // title="Edit"
-                                color="warning"
-                                edit
-                                // refreshIco
-                              />
-                            </div>
+                    {defaultTd.map((item,i) => {
+                      return (
+                        <TableRow key={item.id}>
+                          <TableCell align="left">{i}</TableCell>
+                          <TableCell align="left">{item.ar_title}</TableCell>
+                          {/* <TableCell align="left">{item.deliver}</TableCell> */}
+                          <TableCell align="left">
+                            {item.article_type}
+                          </TableCell>
+                          {/* <TableCell align="left">
+                            <img
+                              style={{ height: "70px", width: "70px" }}
+                              src={item?.image_url}
+                              alt="img"
+                            />
+                          </TableCell> */}
+                          <TableCell align="left">{item.issue_refer}</TableCell>
+                          <TableCell align="left">{item.issue_name}</TableCell>
+                          <TableCell align="left">{item.page_no}</TableCell>
+                          <TableCell align="left">{item.writer}</TableCell>
+                          <TableCell align="left">
+                            {item.issue_publish_date}
+                          </TableCell>
+                          <TableCell align="left">{item.file_url}</TableCell>
 
-                            <div className="btn_prb">
-                              <ButtonComp
-                                // title="Publish"
-                                color="primary"
-                                publish
-                              />
-                            </div>
-                            <div className="btn_prb">
-                              <ButtonComp
-                                // title="Delete"
-                                color="info"
-                                deleteIco
-                              ></ButtonComp>
-                            </div>
-                          </Box>
-                        </Box>
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell align="left">1</TableCell>
-                      <TableCell align="left">aa</TableCell>
-                      <TableCell align="left">bb</TableCell>
-                      <TableCell align="left">cc</TableCell>
-                      <TableCell align="left">dd</TableCell>
-                      <TableCell align="left">ee</TableCell>
-                      <TableCell align="left">ff</TableCell>
-                      <TableCell align="left">gg</TableCell>
-                      <TableCell align="left">hh</TableCell>
-                      <TableCell align="left">ii</TableCell>
-                      <TableCell align="left">
-                        <Box
-                          sx={{
-                            mt: 1,
-                            mb: 1,
-                          }}
-                        >
-                          <Box
-                            sx={[
-                              {
-                                display: "flex",
-                                justifyContent: "flex-start",
-                                alignItems: "start",
-                                mt: 2,
-                                flexWrap: "wrap",
-                              },
-                            ]}
-                          >
-                            <div className="btn_prb">
-                              <ButtonComp
-                                // title="Edit"
-                                color="warning"
-                                edit
-                                // refreshIco
-                              />
-                            </div>
+                          <TableCell align="left">
+                            {item.status == 1 ? "Active" : "InActive"}
+                          </TableCell>
+                          <TableCell align="left">{item.poster_name}</TableCell>
+                          <TableCell align="left">
+                            <Box
+                              sx={{
+                                mt: 1,
+                                mb: 1,
+                              }}
+                            >
+                              <Box
+                                sx={[
+                                  {
+                                    display: "flex",
+                                    justifyContent: "flex-start",
+                                    alignItems: "start",
+                                    mt: 2,
+                                    flexWrap: "wrap",
+                                  },
+                                ]}
+                              >
+                                <div className="btn_prb">
+                                  <ButtonComp
+                                    // title="Edit"
+                                    color="warning"
+                                    className="mb-2"
+                                    edit
+                                    // refreshIco
+                                  />
+                                </div>
 
-                            <div className="btn_prb">
-                              <ButtonComp
-                                // title="Publish"
-                                color="primary"
-                                publish
-                              />
-                            </div>
-                            <div className="btn_prb">
-                              <ButtonComp
-                                // title="Delete"
-                                color="info"
-                                deleteIco
-                              ></ButtonComp>
-                            </div>
-                          </Box>
-                        </Box>
-                      </TableCell>
-                    </TableRow>
-                    {/* );
-                })} */}
+                                <div className="btn_prb">
+                                  <ButtonComp
+                                    // title="Publish"
+                                    color="primary"
+                                    className="mb-2"
+                                    publish
+                                  />
+                                </div>
+                                <div className="btn_prb">
+                                  <ButtonComp
+                                    // title="Delete"
+                                    color="info"
+                                    deleteIco
+                                  ></ButtonComp>
+                                </div>
+                              </Box>
+                            </Box>
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
                   </TableBody>
+             
                 </Table>
               </TableContainer>
             </Paper>

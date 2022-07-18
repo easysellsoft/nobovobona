@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import AdminHome from '../AdminHome/AdminHome';
 import TableDefault from './../Home/Hook/TableDefault';
 import Paper from "@mui/material/Paper";
@@ -19,14 +19,31 @@ const Section = () => {
   // const [refreshToggle, setRefreshToggle] = useState();
     const [show, setShow] = useState(false);
   const [refresh, setRefresh] = useState(false);
+    const [defaultTd, setDefaultTd] = useState([]);
       const columns = [
-        { id: 0, label: "Id", minWidth: 60 },
+        { id: 0, label: "Serial", minWidth: 60 },
         { id: 1, label: "Title", minWidth: 60 },
         {
           id: 2,
-          label: "Title English",
+          label: "Poster",
           minWidth: 60,
         },
+        {
+          id: 2,
+          label: "Cover Pic",
+          minWidth: 60,
+        },
+        {
+          id: 2,
+          label: "Issue",
+          minWidth: 60,
+        },
+        {
+          id: 3,
+          label: "Posting Time",
+          minWidth: 60,
+        },
+      
         {
           id: 3,
           label: "Status",
@@ -37,7 +54,16 @@ const Section = () => {
           label: "Action",
           minWidth: 60,
         },
-      ];
+  ];
+  
+   useEffect(() => {
+     fetch("http://nobovabna.com/webapi/tbl_section.php")
+       .then((res) => res.json())
+       .then((data) => {
+         console.log(data);
+         setDefaultTd(data);
+       });
+   }, []);
     return (
       <div>
         {/* <AdminHome
@@ -46,10 +72,10 @@ const Section = () => {
         ></AdminHome> */}
 
         {/* {prevToggle && <SearchTable />} */}
-        <div style={{ width: "100%" }} className="mb-5 mt-5">
+        <div style={{ width: "100%" }} className="mb-5 mt-2">
           <Box
             sx={{
-              mt: 5,
+              mt: 2,
               mb: 5,
             }}
           >
@@ -119,113 +145,80 @@ const Section = () => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {/* {defaultTd.map((item) => { */}
-                    {/* return ( */}
-                    <TableRow>
-                      <TableCell align="left">0</TableCell>
-                      <TableCell align="left">aa</TableCell>
-                      <TableCell align="left">bb</TableCell>
-                      <TableCell align="left">cc</TableCell>
-                      <TableCell align="left">
-                        <Box
-                          sx={
-                            {
-                              // mt: 1,
-                              // mb: 1,
-                            }
-                          }
-                        >
-                          <Box
-                            sx={[
-                              {
-                                display: "flex",
-                                justifyContent: "flex-start",
-                                alignItems: "start",
-                                // mt: 2,
-                                flexWrap: "wrap",
-                              },
-                            ]}
-                          >
-                            <div className="btn_prb">
-                              <ButtonComp
-                                // title="Edit"
-                                color="warning"
-                                edit
-                                // refreshIco
+                    {defaultTd.map((item) => {
+                        return (
+                          <TableRow key={item.id}>
+                            <TableCell align="left">{item.id}</TableCell>
+                            <TableCell align="left">
+                              {item.noti_title}
+                            </TableCell>
+                            {/* <TableCell align="left">{item.deliver}</TableCell> */}
+                            <TableCell align="left">{item.poster_name}</TableCell>
+                            <TableCell align="left">
+                              <img
+                                style={{ height: "70px", width: "70px" }}
+                                src={item?.image_url }
+                                alt="img"
                               />
-                            </div>
+                            </TableCell>
+                            <TableCell align="left">
+                              {item.n_issue}
+                            </TableCell>
+                            <TableCell align="left">{item.time_stamp}</TableCell>
+                            <TableCell align="left">
+                              {item.stat == 1 ? "Active" : "InActive"}
+                            </TableCell>
+                            <TableCell align="left">
+                              <Box
+                                sx={{
+                                  mt: 1,
+                                  mb: 1,
+                                }}
+                              >
+                                <Box
+                                  sx={[
+                                    {
+                                      display: "flex",
+                                      justifyContent: "flex-start",
+                                      alignItems: "start",
+                                      mt: 2,
+                                      flexWrap: "wrap",
+                                    },
+                                  ]}
+                                >
+                                  <div className="btn_prb">
+                                    <ButtonComp
+                                      // title="Edit"
+                                      color="warning"
+                                      className="mb-2"
+                                      edit
+                                      // refreshIco
+                                    />
+                                  </div>
 
-                            <div className="btn_prb">
-                              <ButtonComp
-                                // title="Publish"
-                                color="primary"
-                                publish
-                              />
-                            </div>
-                            <div className="btn_prb">
-                              <ButtonComp
-                                // title="Delete"
-                                color="info"
-                                deleteIco
-                              ></ButtonComp>
-                            </div>
-                          </Box>
-                        </Box>
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell align="left">1</TableCell>
-                      <TableCell align="left">aa</TableCell>
-                      <TableCell align="left">bb</TableCell>
-                      <TableCell align="left">cc</TableCell>
-                      <TableCell align="left">
-                        <Box
-                        // sx={{
-                        //   mt: 1,
-                        //   mb: 1,
-                        // }}
-                        >
-                          <Box
-                            sx={[
-                              {
-                                display: "flex",
-                                justifyContent: "flex-start",
-                                alignItems: "start",
-                                // mt: 2,
-                                flexWrap: "wrap",
-                              },
-                            ]}
-                          >
-                            <div className="btn_prb">
-                              <ButtonComp
-                                // title="Edit"
-                                color="warning"
-                                edit
-                                // refreshIco
-                              />
-                            </div>
-
-                            <div className="btn_prb">
-                              <ButtonComp
-                                // title="Publish"
-                                color="primary"
-                                publish
-                              />
-                            </div>
-                            <div className="btn_prb">
-                              <ButtonComp
-                                // title="Delete"
-                                color="info"
-                                deleteIco
-                              ></ButtonComp>
-                            </div>
-                          </Box>
-                        </Box>
-                      </TableCell>
-                    </TableRow>
-                    {/* );
-                })} */}
+                                  <div className="btn_prb">
+                                    <ButtonComp
+                                      // title="Publish"
+                                      color="primary"
+                                      className="mb-2"
+                                      publish
+                                    />
+                                  </div>
+                                  <div className="btn_prb">
+                                    <ButtonComp
+                                      // title="Delete"
+                                      color="info"
+                                      deleteIco
+                                    ></ButtonComp>
+                                  </div>
+                                </Box>
+                              </Box>
+                            </TableCell>
+                          </TableRow>
+                        );
+                      })}
                   </TableBody>
+               
                 </Table>
               </TableContainer>
             </Paper>
