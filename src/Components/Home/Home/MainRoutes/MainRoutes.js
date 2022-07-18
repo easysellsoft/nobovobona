@@ -36,16 +36,17 @@ const listItemNav = [
     to: "/writer",
     nested: false,
   },
-  {
-    title: "Menu",
-    to: "/menu",
-    icon: <GoProject />,
-    nested: false,
-  },
+
   {
     title: "Article",
     icon: <MdDashboard />,
     to: "/article",
+    nested: false,
+  },
+  {
+    title: "Menu",
+    to: "/menu",
+    icon: <GoProject />,
     nested: false,
   },
 

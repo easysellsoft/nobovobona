@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core";
 import PeopleOutlineTwoToneIcon from "@material-ui/icons/PeopleOutlineTwoTone";
 
 // import PageHeader from "../components/PageHeader";
-import { Grid, InputAdornment, TextareaAutosize } from "@mui/material";
+import { Grid, InputAdornment, Select, TextareaAutosize } from "@mui/material";
 import { FormLabel } from "@mui/material";
 import { TextField } from "@mui/material";
 import { Box } from "@mui/material";
@@ -29,10 +29,9 @@ const style = {
 };
 const useStyles = makeStyles({
   appMain: {
-        paddingLeft: "10px",
-      paddingRight: "20px",
-        width: "100%",
-    
+    paddingLeft: "10px",
+    paddingRight: "20px",
+    width: "100%",
   },
 });
 function AddArticle() {
@@ -46,11 +45,11 @@ function AddArticle() {
   const [info_file, setInfoFile] = useState("");
   const [userId, setUserId] = useState("");
   const [publish_status, setPublish_status] = useState("");
-  const [cn_status, setCn_status] = useState("");
-  const [cn_status_section, setCn_status_section] =
-    useState("37306e7670336b6c");
-  const [cn_status_writer, setCn_status_writer] = useState("7079366c73773279");
-  const [showPassword, setShowPassword] = useState(false);
+  const [cn_status, setCn_status] = useState(null);
+  const [cn_status_section, setCn_status_section] = useState(null);
+  // const [cn_status_writer, setCn_status_writer] = useState("7079366c73773279");
+  const [cn_status_writer, setCn_status_writer] = useState(null);
+  // const [showPassword, setShowPassword] = useState(false);
   // const [publish_date, setPublish_date] = useState("");
   const [ar_file, setAr_file] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
@@ -59,20 +58,20 @@ function AddArticle() {
   const [issues, setIssues] = useState([]);
   const [sections, setSections] = useState([]);
   const [writers, setWriters] = useState([]);
-  const currencies = [
-    {
-      value: "0",
-      label: "Select",
-    },
-    {
-      value: "1",
-      label: "Publish",
-    },
-    {
-      value: "2",
-      label: "Unpublish",
-    },
-  ];
+  // const currencies = [
+  //   {
+  //     value: "0",
+  //     label: "Select",
+  //   },
+  //   {
+  //     value: "1",
+  //     label: "Publish",
+  //   },
+  //   {
+  //     value: "2",
+  //     label: "Unpublish",
+  //   },
+  // ];
   const publishes = [
     {
       value: "0",
@@ -87,9 +86,9 @@ function AddArticle() {
       label: "Unpublish",
     },
   ];
-   const [open, setOpen] = React.useState(false);
-   const handleOpen = () => setOpen(true);
-   const handleClose = () => setOpen(false);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const onTextChange = (e) => {
     e.preventDefault();
     //    let input = e.target.value;
@@ -129,39 +128,40 @@ function AddArticle() {
     }
   }, [ar_file]);
 
-    useEffect(() => {
-      fetch(`http://nobovabna.com/webapi/nget_all_issue.php`)
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          setIssues(data);
-        });
-    }, []);
-    useEffect(() => {
-      fetch(`http://nobovabna.com/webapi/nget_all_section.php`)
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          setSections(data);
-        });
-    }, []);
-    useEffect(() => {
-      fetch(`http://nobovabna.com/webapi/nget_all_writer.php`)
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          setWriters(data);
-        });
-    }, []);
+  useEffect(() => {
+    fetch(`http://nobovabna.com/webapi/nget_all_issue.php`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setIssues(data);
+        setCn_status(data[0]?.issue_refer);
+      });
+  }, []);
+  useEffect(() => {
+    fetch(`http://nobovabna.com/webapi/nget_all_section.php`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setSections(data);
+        setCn_status_section(data[0]?.s_refer);
+      });
+  }, []);
+  useEffect(() => {
+    fetch(`http://nobovabna.com/webapi/nget_all_writer.php`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setWriters(data);
+        setCn_status_writer(data[0]?.w_refer);
+      });
+  }, []);
 
   const handelSubmit = (e) => {
     e.preventDefault();
-  
-   
+
     formData.append("article_type", cn_status_section);
     formData.append("article_title", article_title);
-    
-  
+
     formData.append("writer", cn_status_writer);
     formData.append("hard_file", hard_file);
     formData.append("text_info", text_info);
@@ -218,22 +218,26 @@ function AddArticle() {
               <FormLabel className="mt-2 ms-2">Issue Select</FormLabel>
               <TextField
                 style={{ margin: "7px" }}
-                //   label="Service Type"
+                // label="Select"
                 label={<Box></Box>}
                 // value={currency}
                 // value={textValue}
                 value={cn_status}
                 fullWidth
                 onChange={onTextChange}
-                // onChange={(handleChange, onTextChange)}
+                disabled={issues.length === 0 ? true : false}
                 select
                 SelectProps={{
                   native: true,
                 }}
-                //   helperText="Please select your currency"
               >
                 {issues.map((option) => (
-                  <option key={option.id} cn_status={option.issue_refer} value={option.issue_refer}>
+                  <option
+                    key={option.id}
+                    cn_status={option.issue_refer}
+                    value={option.issue_refer}
+                  >
+                    {/* <em>None</em> */}
                     {option.name}
                   </option>
                 ))}
@@ -251,6 +255,7 @@ function AddArticle() {
                 fullWidth
                 onChange={onTextChangeSection}
                 // onChange={(handleChange, onTextChange)}
+                disabled={sections.length === 0 ? true : false}
                 select
                 SelectProps={{
                   native: true,
@@ -300,6 +305,7 @@ function AddArticle() {
                 fullWidth
                 onChange={onTextChangeWriter}
                 // onChange={(handleChange, onTextChange)}
+                disabled={writers.length === 0 ? true : false}
                 select
                 SelectProps={{
                   native: true,

@@ -96,13 +96,14 @@ function AddSection() {
       setImageUrl(URL.createObjectURL(ar_file));
     }
   }, [ar_file]);
-  
+
     useEffect(() => {
       fetch(`http://nobovabna.com/webapi/nget_all_issue.php`)
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
           setMagazine(data);
+          setN_issue(data[0]?.issue_refer);
         });
     }, []);
    const resetForm = (e) => {
@@ -247,6 +248,7 @@ function AddSection() {
                 fullWidth
                 onChange={onTextChange1}
                 // onChange={(handleChange, onTextChange)}
+                disabled={magazine.length === 0 ? true : false}
                 select
                 SelectProps={{
                   native: true,

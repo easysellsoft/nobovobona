@@ -178,21 +178,6 @@ function AddWriter() {
               />
             </Grid>
 
-            {/* <Grid item sm={12} md={6}>
-              <FormLabel className="mt-2 ms-2">User Id</FormLabel>
-              <IconTextField
-                label={<Box></Box>}
-                // type="number"
-                type={showPassword ? "text" : "password"}
-                // type="text"
-                showPassword={showPassword}
-                setShowPassword={setShowPassword}
-                fullWidth
-                iconEnd={<Visibility />}
-                onChange={(e) => setUserId(e.target.value)}
-              />
-            </Grid> */}
-
             <Grid item sm={12} md={6}>
               <FormLabel className="mt-2 ms-2">Publish Status</FormLabel>
               <TextField
@@ -204,7 +189,6 @@ function AddWriter() {
                 value={cn_status}
                 fullWidth
                 onChange={onTextChange}
-                // onChange={(handleChange, onTextChange)}
                 select
                 SelectProps={{
                   native: true,
