@@ -47,8 +47,9 @@ function AddArticle() {
   const [userId, setUserId] = useState("");
   const [publish_status, setPublish_status] = useState("");
   const [cn_status, setCn_status] = useState("");
-  const [cn_status_section, setCn_status_section] = useState("");
-  const [cn_status_writer, setCn_status_writer] = useState("");
+  const [cn_status_section, setCn_status_section] =
+    useState("37306e7670336b6c");
+  const [cn_status_writer, setCn_status_writer] = useState("7079366c73773279");
   const [showPassword, setShowPassword] = useState(false);
   // const [publish_date, setPublish_date] = useState("");
   const [ar_file, setAr_file] = useState(null);
@@ -232,7 +233,7 @@ function AddArticle() {
                 //   helperText="Please select your currency"
               >
                 {issues.map((option) => (
-                  <option key={option.id} value={option.issue_refer}>
+                  <option key={option.id} cn_status={option.issue_refer} value={option.issue_refer}>
                     {option.name}
                   </option>
                 ))}
