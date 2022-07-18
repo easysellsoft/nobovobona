@@ -73,10 +73,10 @@ const Writer = () => {
         /> */}
 
         {/* {prevToggle && <SearchWriter />} */}
-        <div style={{ width: "100%" }} className="mb-5 mt-5">
+        <div style={{ width: "100%" }} className="mb-5 ">
           <Box
             sx={{
-              mt: 5,
+          
               mb: 5,
             }}
           >
@@ -121,7 +121,7 @@ const Writer = () => {
         {!show && (
           <div>
             <Paper mt={2} pt={3} sx={{ width: "100%", mt: "40px" }}>
-              <TableContainer sx={{ maxHeight: 440 }}>
+              <TableContainer sx={{ maxHeight: 560 }}>
                 <Table stickyHeader aria-label="sticky table">
                   <TableHead>
                     <TableRow sx={{ borderColor: "text.primary" }}>

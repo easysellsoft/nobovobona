@@ -101,7 +101,7 @@ const Article = () => {
         {!show && (
           <div>
             <Paper mt={2} pt={3} sx={{ width: "100%", mt: "40px" }}>
-              <TableContainer sx={{ maxHeight: 540 }}>
+              <TableContainer sx={{ maxHeight: 560 }}>
                 <Table stickyHeader aria-label="sticky table">
                   <TableHead>
                     <TableRow sx={{ borderColor: "text.primary" }}>
