@@ -21,17 +21,21 @@ import MTable from './components/MTable';
 const Issue = () => {
   const [show, setShow] = useState(false);
   const [refresh, setRefresh] = useState(false);
-  const [defaultTd, setDefaultTd] = useState([]);
- const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
-   const handleChangePage = (event, newPage) => {
-     setPage(newPage);
-   };
+  //pagination start
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(4);
 
-   const handleChangeRowsPerPage = (event) => {
-     setRowsPerPage(+event.target.value);
-     setPage(0);
-   };
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+  //pagination end
+  const [defaultTd, setDefaultTd] = useState([]);
+ 
   const columns = [
     {
       id: 0,
@@ -71,9 +75,6 @@ const Issue = () => {
       minWidth: 60,
     },
   ];
-
-
-
 
   useEffect(() => {
     fetch("http://nobovabna.com/webapi/tbl_issue.php")
@@ -235,19 +236,17 @@ const Issue = () => {
                       );
                     })}
                 </TableBody>
-                <TableFooter>
-                  <TablePagination
-                    rowsPerPageOptions={[5, 10, 15]}
-                    component="div"
-                    count={defaultTd.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onChangePage={handleChangePage}
-                    onChangeRowsPerPage={handleChangeRowsPerPage}
-                  />
-                </TableFooter>
               </Table>
             </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[4, 8, 12]}
+              component="div"
+              count={defaultTd.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
           </Paper>
         </div>
       )}
