@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import AdminHome from '../AdminHome/AdminHome';
-import TableDefault from './../Home/Hook/TableDefault';
+import React, { useEffect } from "react";
+import AdminHome from "../AdminHome/AdminHome";
+import TableDefault from "./../Home/Hook/TableDefault";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -12,8 +12,8 @@ import TableRow from "@mui/material/TableRow";
 import { useState } from "react";
 import { Box } from "@mui/material";
 import ButtonComp from "./../../Shared/Button/Button";
-import SearchTable from './../Home/Hook/SearchTable';
-import AddSection from './AddSection';
+import SearchTable from "./../Home/Hook/SearchTable";
+import AddSection from "./AddSection";
 const Section = () => {
   //  const [prevToggle, setPrevToggle] = useState();
   // const [refreshToggle, setRefreshToggle] = useState();
@@ -130,7 +130,7 @@ const Section = () => {
 
         {show && <AddSection></AddSection>}
       </div>
-      {!show && (
+      {!show && refresh && (
         <div>
           <Paper mt={2} pt={3} sx={{ width: "100%", mt: "40px" }}>
             <TableContainer sx={{ maxHeight: 440 }}>

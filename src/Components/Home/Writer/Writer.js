@@ -160,6 +160,7 @@ const Writer = () => {
                   {defaultTd
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((item) => {
+                   
                       return (
                         <TableRow key={item.id}>
                           <TableCell align="left">{item.id}</TableCell>
@@ -167,13 +168,18 @@ const Writer = () => {
                           {/* <TableCell align="left">{item.deliver}</TableCell> */}
                           <TableCell align="left">{item.poster_name}</TableCell>
                           <TableCell align="left">
-                            <img
-                              style={{ height: "70px", width: "70px" }}
-                              src={item?.image_url}
-                              alt="img"
-                            />
+                          
+                            {item.image_url == "" ? (
+                              "-"
+                            ) : (
+                              <img
+                                style={{ height: "70px", width: "70px" }}
+                                src={item.image_url }
+                                alt="img"
+                              />
+                            )}
                           </TableCell>
-                          <TableCell align="left">{item.n_issue}</TableCell>
+                          <TableCell align="left">{item.n_issue == null ? "-": item.n_issue}</TableCell>
                           <TableCell align="left">{item.time_stamp}</TableCell>
                           <TableCell align="left">
                             {item.stat == 1 ? "Active" : "InActive"}
